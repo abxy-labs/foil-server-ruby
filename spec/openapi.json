@@ -103,6 +103,7 @@
                         "object": "session",
                         "id": "sid_87wfetm98myh9awj0dpt28a3kc",
                         "created_at": "2026-03-24T20:00:00.000Z",
+                        "client_user_id": "user_123",
                         "latest_decision": {
                           "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                           "verdict": "human",
@@ -279,6 +280,7 @@
                       "object": "session",
                       "id": "sid_87wfetm98myh9awj0dpt28a3kc",
                       "created_at": "2026-03-24T20:00:00.000Z",
+                      "client_user_id": "user_123",
                       "decision": {
                         "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                         "automation_status": "automated",
@@ -908,6 +910,87 @@
           }
         },
         "description": "Requires the `sessions:read` secret-key scope."
+      },
+      "patch": {
+        "tags": [
+          "Sessions"
+        ],
+        "operationId": "updateSession",
+        "summary": "Update a session",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SessionId",
+              "example": "sid_87wfetm98myh9awj0dpt28a3kc"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated session detail response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDetailResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Secret key missing the required `sessions:update` scope.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Session not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid update payload.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "description": "Set or clear the customer-supplied `client_user_id` for a session. Requires the `sessions:update` secret-key scope."
       }
     },
     "/v1/fingerprints": {
@@ -2139,6 +2222,7 @@
                   "environment": "live",
                   "scopes": [
                     "sessions:read",
+                    "sessions:update",
                     "fingerprints:read"
                   ]
                 }
@@ -7292,6 +7376,7 @@
                     "*",
                     "sessions:list",
                     "sessions:read",
+                    "sessions:update",
                     "fingerprints:list",
                     "fingerprints:read",
                     "organizations:create",
@@ -7674,6 +7759,7 @@
                 "*",
                 "sessions:list",
                 "sessions:read",
+                "sessions:update",
                 "fingerprints:list",
                 "fingerprints:read",
                 "organizations:create",
@@ -7703,6 +7789,7 @@
           "environment": "live",
           "scopes": [
             "sessions:read",
+            "sessions:update",
             "fingerprints:read"
           ]
         },
@@ -10343,6 +10430,7 @@
                     "*",
                     "sessions:list",
                     "sessions:read",
+                    "sessions:update",
                     "fingerprints:list",
                     "fingerprints:read",
                     "organizations:create",
@@ -11725,7 +11813,8 @@
           "device",
           "analysis_coverage",
           "signals_fired",
-          "client_telemetry"
+          "client_telemetry",
+          "client_user_id"
         ],
         "properties": {
           "object": {
@@ -11743,6 +11832,15 @@
             ],
             "format": "date-time",
             "example": "2026-03-24T20:00:00.000Z"
+          },
+          "client_user_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 256,
+            "description": "Customer-supplied identifier for the end user associated with this Foil session. Set with PATCH /v1/sessions/{sessionId}.",
+            "example": "user_123"
           },
           "decision": {
             "$ref": "#/components/schemas/SessionDetailDecision",
@@ -12647,6 +12745,7 @@
           "object": "session",
           "id": "sid_87wfetm98myh9awj0dpt28a3kc",
           "created_at": "2026-03-24T20:00:00.000Z",
+          "client_user_id": "user_123",
           "decision": {
             "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
             "automation_status": "automated",
@@ -13379,6 +13478,7 @@
               "object": "session",
               "id": "sid_87wfetm98myh9awj0dpt28a3kc",
               "created_at": "2026-03-24T20:00:00.000Z",
+              "client_user_id": "user_123",
               "decision": {
                 "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                 "automation_status": "automated",
@@ -13903,6 +14003,7 @@
             "object": "session",
             "id": "sid_87wfetm98myh9awj0dpt28a3kc",
             "created_at": "2026-03-24T20:00:00.000Z",
+            "client_user_id": "user_123",
             "decision": {
               "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
               "automation_status": "automated",
@@ -15263,6 +15364,7 @@
                 "object": "session",
                 "id": "sid_87wfetm98myh9awj0dpt28a3kc",
                 "created_at": "2026-03-24T20:00:00.000Z",
+                "client_user_id": "user_123",
                 "latest_decision": {
                   "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                   "verdict": "human",
@@ -15289,6 +15391,7 @@
                 "object": "session",
                 "id": "sid_87wfetm98myh9awj0dpt28a3kc",
                 "created_at": "2026-03-24T20:00:00.000Z",
+                "client_user_id": "user_123",
                 "latest_decision": {
                   "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                   "verdict": "human",
@@ -15332,6 +15435,7 @@
               "object": "session",
               "id": "sid_87wfetm98myh9awj0dpt28a3kc",
               "created_at": "2026-03-24T20:00:00.000Z",
+              "client_user_id": "user_123",
               "latest_decision": {
                 "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                 "verdict": "human",
@@ -18169,7 +18273,8 @@
           "id",
           "created_at",
           "latest_decision",
-          "visitor_fingerprint"
+          "visitor_fingerprint",
+          "client_user_id"
         ],
         "properties": {
           "object": {
@@ -18187,6 +18292,15 @@
             ],
             "format": "date-time",
             "example": "2026-03-24T20:00:00.000Z"
+          },
+          "client_user_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 256,
+            "description": "Customer-supplied identifier for the end user associated with this Foil session. Set with PATCH /v1/sessions/{sessionId}.",
+            "example": "user_123"
           },
           "latest_decision": {
             "$ref": "#/components/schemas/Decision",
@@ -18232,6 +18346,7 @@
           "object": "session",
           "id": "sid_87wfetm98myh9awj0dpt28a3kc",
           "created_at": "2026-03-24T20:00:00.000Z",
+          "client_user_id": "user_123",
           "latest_decision": {
             "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
             "verdict": "human",
@@ -18314,6 +18429,7 @@
                 "*",
                 "sessions:list",
                 "sessions:read",
+                "sessions:update",
                 "fingerprints:list",
                 "fingerprints:read",
                 "organizations:create",
@@ -18493,6 +18609,27 @@
         "example": {
           "name": "Acme Growth Workspace",
           "status": "active"
+        }
+      },
+      "UpdateSessionRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "client_user_id"
+        ],
+        "properties": {
+          "client_user_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 256,
+            "description": "Customer-supplied identifier for the end user associated with this Foil session. Set with PATCH /v1/sessions/{sessionId}.",
+            "example": "user_123"
+          }
+        },
+        "example": {
+          "client_user_id": "user_123"
         }
       },
       "UpdateWebhookEndpointRequest": {
