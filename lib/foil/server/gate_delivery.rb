@@ -69,6 +69,13 @@ module Foil
       end
 
       def raw_x25519_public_key_from_key_object(public_key)
+        if public_key.respond_to?(:raw_public_key)
+          raw_public_key = public_key.raw_public_key
+          raise ArgumentError, "X25519 public key must be 32 bytes" unless raw_public_key.bytesize == 32
+
+          return raw_public_key
+        end
+
         der = public_key.public_to_der
         raise ArgumentError, "Unexpected X25519 public key encoding" unless der.bytesize == X25519_SPKI_PREFIX.bytesize + 32
         raise ArgumentError, "Unexpected X25519 public key prefix" unless der.byteslice(0, X25519_SPKI_PREFIX.bytesize) == X25519_SPKI_PREFIX
@@ -85,7 +92,7 @@ module Foil
       def create_delivery_key_pair
         CryptoSupport.ensure_supported_runtime!
         private_key = OpenSSL::PKey.generate_key("X25519")
-        raw_public_key = raw_x25519_public_key_from_key_object(private_key.public_key)
+        raw_public_key = raw_x25519_public_key_from_key_object(private_key)
         {
           delivery: {
             version: GATE_DELIVERY_VERSION,
@@ -181,7 +188,7 @@ module Foil
           version: GATE_DELIVERY_VERSION,
           algorithm: GATE_DELIVERY_ALGORITHM,
           key_id: validated_delivery[:key_id],
-          ephemeral_public_key: Base64.urlsafe_encode64(raw_x25519_public_key_from_key_object(ephemeral_private_key.public_key), padding: false),
+          ephemeral_public_key: Base64.urlsafe_encode64(raw_x25519_public_key_from_key_object(ephemeral_private_key), padding: false),
           salt: Base64.urlsafe_encode64(salt, padding: false),
           iv: Base64.urlsafe_encode64(iv, padding: false),
           ciphertext: Base64.urlsafe_encode64(ciphertext, padding: false),
