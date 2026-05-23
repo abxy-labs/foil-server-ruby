@@ -42,6 +42,8 @@ client = Foil::Server::Client.new(secret_key: "sk_live_...")
 
 page = client.sessions.list(verdict: "bot", limit: 25)
 session = client.sessions.get("sid_0123456789abcdefghjkmnpqrs")
+client.sessions.attach_client_user("sid_0123456789abcdefghjkmnpqrs", "user_123")
+client.sessions.clear_client_user("sid_0123456789abcdefghjkmnpqrs")
 
 puts "#{session[:decision][:automation_status]} #{session[:highlights].first&.fetch(:summary, nil)}"
 ```

@@ -177,6 +177,18 @@ module Foil
         @client.request_json("GET", "/v1/sessions/#{CGI.escape(session_id)}")[:data]
       end
 
+      def attach_client_user(session_id, client_user_id)
+        @client.request_json("PATCH", "/v1/sessions/#{CGI.escape(session_id)}", body: {
+          client_user_id: client_user_id
+        })[:data]
+      end
+
+      def clear_client_user(session_id)
+        @client.request_json("PATCH", "/v1/sessions/#{CGI.escape(session_id)}", body: {
+          client_user_id: nil
+        })[:data]
+      end
+
       def iter(limit: nil, verdict: nil, search: nil)
         Enumerator.new do |yielder|
           cursor = nil

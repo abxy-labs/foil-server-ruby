@@ -37,6 +37,12 @@
       "status": "200"
     },
     {
+      "file": "api/sessions/detail.json",
+      "path": "/v1/sessions/{sessionId}",
+      "method": "patch",
+      "status": "200"
+    },
+    {
       "file": "api/fingerprints/list.json",
       "path": "/v1/fingerprints",
       "method": "get",

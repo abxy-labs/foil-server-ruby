@@ -76,6 +76,7 @@ class ClientTest < Minitest::Test
     api_key_list = load_fixture("api/organizations/api-key-list.json")
     api_key_update = load_fixture("api/organizations/api-key-update.json")
     api_key_rotate = load_fixture("api/organizations/api-key-rotate.json")
+    client_user_patch_bodies = []
 
     client = Foil::Server::Client.new(
       secret_key: "sk_live_test",
@@ -105,6 +106,9 @@ class ClientTest < Minitest::Test
           [200, {}, JSON.dump(second_page)]
         when ["GET", "https://api.usefoil.com/v1/sessions/sid_0123456789abcdefghjkmnpqrs"]
           [200, {}, JSON.dump(session_detail)]
+        when ["PATCH", "https://api.usefoil.com/v1/sessions/sid_0123456789abcdefghjkmnpqrs"]
+          client_user_patch_bodies << JSON.parse(request[:body])
+          [200, {}, JSON.dump(session_detail)]
         when ["GET", "https://api.usefoil.com/v1/fingerprints"]
           [200, {}, JSON.dump(fingerprint_list)]
         when ["GET", "https://api.usefoil.com/v1/fingerprints/vid_456789abcdefghjkmnpqrstvwx"]
@@ -132,6 +136,10 @@ class ClientTest < Minitest::Test
     )
 
     assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.get("sid_0123456789abcdefghjkmnpqrs")[:id]
+    assert_equal "user_123", client.sessions.get("sid_0123456789abcdefghjkmnpqrs")[:client_user_id]
+    assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.attach_client_user("sid_0123456789abcdefghjkmnpqrs", "user_123")[:id]
+    assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.clear_client_user("sid_0123456789abcdefghjkmnpqrs")[:id]
+    assert_equal [{ "client_user_id" => "user_123" }, { "client_user_id" => nil }], client_user_patch_bodies
     assert_equal ["sid_0123456789abcdefghjkmnpqrs", "sid_123456789abcdefghjkmnpqrst"], client.sessions.iter.map { |item| item[:id] }
     assert_equal "vid_456789abcdefghjkmnpqrstvwx", client.fingerprints.get("vid_456789abcdefghjkmnpqrstvwx")[:id]
     assert_equal "org_56789abcdefghjkmnpqrstvwxy", client.organizations.get("org_56789abcdefghjkmnpqrstvwxy")[:id]
