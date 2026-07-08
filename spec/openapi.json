@@ -14,11 +14,11 @@
   "tags": [
     {
       "name": "Sessions",
-      "description": "Durable session readback endpoints."
+      "description": "Session readback endpoints."
     },
     {
       "name": "Visitor fingerprints",
-      "description": "Durable visitor fingerprint readback endpoints."
+      "description": "Visitor fingerprint readback endpoints."
     },
     {
       "name": "Organizations",
