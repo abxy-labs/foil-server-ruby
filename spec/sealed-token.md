@@ -20,11 +20,29 @@ After base64 decoding, the byte layout is:
 - `ciphertext` - variable length
 - `tag` - 16 bytes
 
-Current version:
+Supported versions:
 
-- `0x01`
+- `0x01` - legacy single-recipient token
+- `0x02` - multi-recipient envelope used for independently issued and rotating secret keys
 
-Reject any token whose version byte is not `0x01`.
+Version `0x02` uses this byte layout:
+
+- `version` - 1 byte (`0x02`)
+- `recipient_count` - unsigned 16-bit big-endian integer, 1 through 256
+- `payload_nonce` - 12 bytes
+- `payload_ciphertext_length` - unsigned 32-bit big-endian integer
+- `payload_ciphertext` - zlib-compressed JSON encrypted with a random 32-byte content key
+- `payload_tag` - 16 bytes
+- one fixed-size recipient entry per recipient:
+  - `recipient_id` - `sha256(normalized_secret + "\\0sealed-results-recipient-id")`; this domain-separated identifier must never expose `normalized_secret`
+  - `wrap_nonce` - 12 bytes
+  - `wrapped_content_key` - 32 bytes
+  - `wrap_tag` - 16 bytes
+
+The payload cipher authenticates `foil-sealed-results-v2\\0payload\\0 + header + ordered_recipient_ids` as AAD, binding the complete recipient set to the payload.
+Each content-key wrapper uses the existing derived token key and authenticates
+`foil-sealed-results-v2\\0recipient\\0 + recipient_id` as AAD. Verifiers must
+retain `0x01` support and reject all other versions.
 
 ## Secret normalization
 
