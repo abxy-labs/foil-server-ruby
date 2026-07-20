@@ -1,0 +1,59 @@
+{
+  "secretKeys": [
+    "sk_live_fixture_secret",
+    "sk_live_fixture_secondary"
+  ],
+  "secretHashes": [
+    "c173e2c1467e446744e3b6aba8fc07e639008fdf3c4b82e32dceef9b41217dc3",
+    "7b7f1904e9f78f93fdaf5cb739b84a549f379774dce8e48d2e7318a38a71619d"
+  ],
+  "token": "AgACkGnTY6/gdAPOSejTAAABueItTz8WCgMBzOUeaG8XiLTGYNZ6/n+XKodAEavsB4nr/HXdLMPNin6k99VSMt4pm7xQDgq00NHf4pcUX98bVtrD9McjaPVhN0PQOcbwBncRqEXPQDLvdevFp6SvNcThP7F0LNnCN4WikARAYD/5hoJcfi3qpehcDRxIkFWXy9Rn5D7WnSAY1Ef2/2v3wT/aP2D89xjs9xIGmavfGNJaUq3eXRMdddQYaB1V5wtmRBZIkgePubsbcCptBtgma3ZObp5A8cdb9PQFvNxBR/B2ttKupMQ/uiVN05/RNPHziKm+aada8+gPwRJR8PDNbNy/TEA8L82iB8LgCMmPnqyVefqm+VoNYa/AmDefcWrBogQ7lIB49KezbRiXIbZ5RiAPq2VgqUTHq2cRAN6BprH89g2FajBs5I7wj7nTQwtPu74FRu3BRHF9k8Vgf4A4jdocn4sU/GCH5Gm1x7d1Rxd8T4OkyQtJ1YaRLwksf/lkttqoOD+fZ3twJxXtYKVKt0wmavVlMUl5+IP3Yrl8SdfmGENMyfkjjuhfPq/TpA00PDoB4RXf2MAh6fTVF+sVw7vXndQ8tYMLFjBgLx2y++W6LT+glvHhROf3LWnk3EgrhhB6FxEpmfuogp2y3pZ8fkMaKplOFFfw0AnVDRbCqx+0u6P9JiQmV0hUl4LHn7rqPNPbtv7adX778RptvMjWG87rwFiU/whhVWbIoF4P0W8081lVDTEe9V3LRNd9t7U9Ca/pIowEzXe5X5rWrlqm/CtCYLzT6apTMLXuacGYBJY7VfY+8uXG0WymZ8GfcMUrFpvF8bwPMs0nPaq3i1Jm+zVy9QMz9pl6xTKwN2CwfIFeHOp8",
+  "payload": {
+    "object": "session_verification",
+    "session_id": "sid_0123456789abcdefghjkmnpqrs",
+    "decision": {
+      "event_id": "evt_0123456789abcdefghjkmnpqrs",
+      "verdict": "human",
+      "risk_score": 7,
+      "phase": "behavioral",
+      "is_provisional": false,
+      "manipulation": {
+        "score": 0,
+        "verdict": "none"
+      },
+      "evaluation_duration_ms": 123,
+      "evaluated_at": "2026-03-24T20:00:00.000Z"
+    },
+    "request": {
+      "user_agent": "Mozilla/5.0",
+      "url": "https://example.com/signup",
+      "screen_size": "1440x900",
+      "is_touch_capable": false,
+      "ip_address": "203.0.113.9"
+    },
+    "visitor_fingerprint": {
+      "object": "visitor_fingerprint",
+      "id": "vid_0123456789abcdefghjkmnpqrs",
+      "confidence": 94,
+      "identified_at": "2026-03-24T19:59:59.000Z"
+    },
+    "signals": [
+      {
+        "id": "E6",
+        "category": "environment",
+        "confidence": "strong",
+        "score": 20
+      }
+    ],
+    "score_breakdown": {
+      "categories": {
+        "behavioral": 9,
+        "environment": 20
+      }
+    },
+    "attribution": {
+      "bot": null
+    },
+    "embed": null
+  }
+}

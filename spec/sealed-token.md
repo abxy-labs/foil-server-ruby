@@ -11,20 +11,44 @@ This document is the language-agnostic contract for verifying those tokens in pu
 - Confidentiality and integrity: AES-256-GCM
 - Compression: zlib deflate/inflate
 
-## Payload format
+## Payload formats
 
-After base64 decoding, the byte layout is:
+After base64 decoding, use the first byte to select the token version. Reject
+any version other than `0x01` or `0x02`.
+
+### Version `0x01`
+
+The legacy single-recipient byte layout is:
 
 - `version` - 1 byte
 - `nonce` - 12 bytes
 - `ciphertext` - variable length
 - `tag` - 16 bytes
 
-Current version:
+### Version `0x02`
 
-- `0x01`
+The multi-recipient envelope used for independently issued and rotating secret
+keys has this byte layout:
 
-Reject any token whose version byte is not `0x01`.
+- `version` - 1 byte (`0x02`)
+- `recipient_count` - unsigned 16-bit big-endian integer, 1 through 256
+- `payload_nonce` - 12 bytes
+- `payload_ciphertext_length` - unsigned 32-bit big-endian integer
+- `payload_ciphertext` - zlib-compressed JSON encrypted with a random 32-byte content key
+- `payload_tag` - 16 bytes
+- one fixed-size recipient entry per recipient:
+  - `recipient_id` - `sha256(UTF8(normalized_secret) || 0x00 || UTF8("sealed-results-recipient-id"))`; `0x00` is one NUL byte, and this domain-separated identifier must never expose `normalized_secret`
+  - `wrap_nonce` - 12 bytes
+  - `wrapped_content_key` - 32 bytes
+  - `wrap_tag` - 16 bytes
+
+The payload cipher authenticates
+`UTF8("foil-sealed-results-v2") || 0x00 || UTF8("payload") || 0x00 || header || ordered_recipient_ids`
+as AAD, where each `0x00` is one NUL byte. This binds the complete recipient
+set to the payload. Each content-key wrapper uses the existing derived token key
+and authenticates
+`UTF8("foil-sealed-results-v2") || 0x00 || UTF8("recipient") || 0x00 || recipient_id`
+as AAD.
 
 ## Secret normalization
 
@@ -42,22 +66,27 @@ Normalization rules:
 
 Derive the AES key as:
 
-- `sha256(normalized_secret + "\0sealed-results")`
+- `sha256(UTF8(normalized_secret) || 0x00 || UTF8("sealed-results"))`, where `0x00` is one NUL byte
 
 Use the raw 32-byte digest as the AES-256-GCM key.
 
 ## Verification steps
 
-1. Base64 decode the token
-2. Parse the version byte, nonce, ciphertext, and tag
-3. Normalize the caller's secret material
-4. Derive the AES-256-GCM key
-5. Decrypt using:
-   - algorithm: `aes-256-gcm`
-   - nonce: parsed 12-byte nonce
-   - tag: parsed 16-byte authentication tag
-6. Inflate the decrypted bytes with zlib
-7. Parse the inflated UTF-8 JSON payload
+1. Base64 decode the token.
+2. Parse the version byte.
+3. Normalize the caller's secret material and derive the AES-256-GCM token key.
+4. For version `0x01`:
+   - parse the 12-byte nonce, ciphertext, and 16-byte authentication tag
+   - decrypt the ciphertext with the derived token key, parsed nonce, and tag
+5. For version `0x02`:
+   - parse and bounds-check the header, payload ciphertext, payload tag, and exactly `recipient_count` fixed-size recipient entries
+   - compute the caller's `recipient_id` and select its matching entry; reject the token if no entry matches
+   - build the wrapper AAD from the fixed prefix, NUL separators, and matching `recipient_id`
+   - decrypt `wrapped_content_key` with the derived token key, matching `wrap_nonce`, `wrap_tag`, and wrapper AAD
+   - concatenate every recipient entry's `recipient_id` in encoded order and build the payload AAD from the fixed prefix, NUL separators, encoded header, and ordered IDs
+   - decrypt `payload_ciphertext` with the unwrapped 32-byte content key, `payload_nonce`, `payload_tag`, and payload AAD
+6. Inflate the decrypted payload bytes with zlib.
+7. Parse the inflated UTF-8 JSON payload.
 
 Any failure in decoding, parsing, authentication, decompression, or JSON parsing must be treated as verification failure.
 

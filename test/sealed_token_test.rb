@@ -20,6 +20,15 @@ class SealedTokenTest < Minitest::Test
     assert_equal fixture.fetch(:payload).fetch(:decision).fetch(:risk_score), verified.fetch(:decision).fetch(:risk_score)
   end
 
+  def test_verify_multi_recipient_token_with_every_active_key
+    fixture = load_fixture("sealed-token/vector.v2.json")
+
+    (fixture.fetch(:secretKeys) + fixture.fetch(:secretHashes)).each do |secret|
+      verified = Foil::Server.verify_foil_token(fixture.fetch(:token), secret)
+      assert_equal fixture.fetch(:payload).fetch(:session_id), verified.fetch(:session_id)
+    end
+  end
+
   def test_safe_verify_foil_token_invalid_fixture
     fixture = load_fixture("sealed-token/invalid.json")
     result = Foil::Server.safe_verify_foil_token(fixture.fetch(:token), "sk_live_fixture_secret")
