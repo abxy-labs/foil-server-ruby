@@ -557,6 +557,10 @@
                         "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
                         "confidence": 1,
                         "identified_at": "2026-03-24T20:00:05.000Z",
+                        "resolution": {
+                          "method": "continuity",
+                          "basis": "deterministic"
+                        },
                         "lifecycle": {
                           "first_seen_at": "2026-03-01T18:22:11.000Z",
                           "last_seen_at": "2026-03-24T20:00:05.000Z",
@@ -12408,6 +12412,10 @@
                   "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
                   "confidence": 1,
                   "identified_at": "2026-03-24T20:00:05.000Z",
+                  "resolution": {
+                    "method": "continuity",
+                    "basis": "deterministic"
+                  },
                   "lifecycle": {
                     "first_seen_at": "2026-03-01T18:22:11.000Z",
                     "last_seen_at": "2026-03-24T20:00:05.000Z",
@@ -12425,6 +12433,10 @@
               "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
               "confidence": 1,
               "identified_at": "2026-03-24T20:00:05.000Z",
+              "resolution": {
+                "method": "continuity",
+                "basis": "deterministic"
+              },
               "lifecycle": {
                 "first_seen_at": "2026-03-01T18:22:11.000Z",
                 "last_seen_at": "2026-03-24T20:00:05.000Z",
@@ -13022,6 +13034,10 @@
             "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
             "confidence": 1,
             "identified_at": "2026-03-24T20:00:05.000Z",
+            "resolution": {
+              "method": "continuity",
+              "basis": "deterministic"
+            },
             "lifecycle": {
               "first_seen_at": "2026-03-01T18:22:11.000Z",
               "last_seen_at": "2026-03-24T20:00:05.000Z",
@@ -13755,6 +13771,10 @@
                 "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
                 "confidence": 1,
                 "identified_at": "2026-03-24T20:00:05.000Z",
+                "resolution": {
+                  "method": "continuity",
+                  "basis": "deterministic"
+                },
                 "lifecycle": {
                   "first_seen_at": "2026-03-01T18:22:11.000Z",
                   "last_seen_at": "2026-03-24T20:00:05.000Z",
@@ -14280,6 +14300,10 @@
               "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
               "confidence": 1,
               "identified_at": "2026-03-24T20:00:05.000Z",
+              "resolution": {
+                "method": "continuity",
+                "basis": "deterministic"
+              },
               "lifecycle": {
                 "first_seen_at": "2026-03-01T18:22:11.000Z",
                 "last_seen_at": "2026-03-24T20:00:05.000Z",
@@ -14528,6 +14552,7 @@
           "id",
           "confidence",
           "identified_at",
+          "resolution",
           "lifecycle"
         ],
         "properties": {
@@ -14562,6 +14587,53 @@
             "format": "date-time",
             "example": "2026-03-24T20:00:05.000Z"
           },
+          "resolution": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "How this session was tied to the visitor ID.",
+            "required": [
+              "method",
+              "basis"
+            ],
+            "properties": {
+              "method": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "continuity",
+                  "fingerprint",
+                  "fingerprint_evolution",
+                  "new",
+                  "native_persistent",
+                  "native_new",
+                  "existing",
+                  "unknown",
+                  null
+                ],
+                "description": "The evidence that resolved this session to the visitor ID. Null when the session predates resolution tracking.",
+                "example": "continuity"
+              },
+              "basis": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "deterministic",
+                  "probabilistic",
+                  null
+                ],
+                "description": "Deterministic means an exact identifier saved in an earlier session (continuity token or device anchor). Probabilistic means a statistical fingerprint match. Null for new visitors.",
+                "example": "deterministic"
+              }
+            },
+            "example": {
+              "method": "continuity",
+              "basis": "deterministic"
+            }
+          },
           "lifecycle": {
             "$ref": "#/components/schemas/SessionDetailVisitorFingerprintLifecycle",
             "example": {
@@ -14576,6 +14648,10 @@
           "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
           "confidence": 1,
           "identified_at": "2026-03-24T20:00:05.000Z",
+          "resolution": {
+            "method": "continuity",
+            "basis": "deterministic"
+          },
           "lifecycle": {
             "first_seen_at": "2026-03-01T18:22:11.000Z",
             "last_seen_at": "2026-03-24T20:00:05.000Z",
