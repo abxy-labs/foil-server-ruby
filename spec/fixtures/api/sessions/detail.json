@@ -198,6 +198,10 @@
       "id": "vid_456789abcdefghjkmnpqrstvwx",
       "confidence": 93,
       "identified_at": "2026-03-24T20:00:01.000Z",
+      "resolution": {
+        "method": "continuity",
+        "basis": "deterministic"
+      },
       "lifecycle": {
         "first_seen_at": "2026-03-01T18:22:11.000Z",
         "last_seen_at": "2026-03-24T20:00:05.000Z",
@@ -257,7 +261,8 @@
       "name": "Chromium",
       "version": "123.0.0.0",
       "major_version": "123",
-      "engine": "blink"
+      "engine": "blink",
+      "app_name": null
     },
     "device": {
       "form_factor": "desktop",
