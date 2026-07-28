@@ -312,58 +312,133 @@
                         "ip_version": "ipv4",
                         "status": "ready",
                         "summary": "Browser is being driven by automation",
+                        "matched_network": "matched_network",
                         "location": {
                           "city": "San Francisco",
                           "region": "California",
+                          "region_code": "California",
                           "country": "United States",
                           "country_code": "US",
+                          "continent": "continent",
+                          "continent_code": "request.validation_failed",
                           "latitude": 37.7749,
                           "longitude": -122.4194,
                           "timezone": "America/Los_Angeles",
                           "postal_code": "94103",
-                          "accuracy_radius_km": 10
+                          "dma_code": "request.validation_failed",
+                          "geoname_id": "Acme Workspace",
+                          "accuracy_radius_km": 10,
+                          "last_changed": "2026-03-24T20:00:05.000Z"
                         },
-                        "routing": {
-                          "asn": "64512",
-                          "organization": "SPECTRANET LIMITED"
+                        "autonomous_system": {
+                          "number": 1,
+                          "name": "Acme Growth Workspace",
+                          "domain": "browserless.io",
+                          "type": "type",
+                          "last_changed": "2026-03-24T20:00:05.000Z"
                         },
-                        "anonymity": {
-                          "vpn": true,
-                          "proxy": false,
-                          "tor": false,
-                          "relay": false,
+                        "carrier": {
+                          "name": "Acme Growth Workspace",
+                          "mcc": "mcc",
+                          "mnc": "mnc"
+                        },
+                        "traits": {
+                          "anycast": true,
                           "hosting": false,
-                          "residential_proxy": false,
-                          "callback_proxy": false,
-                          "provider": "Mullvad VPN"
+                          "mobile": true,
+                          "satellite": true
                         },
-                        "reputation": {
-                          "listed": true,
-                          "categories": [
-                            "vpn"
+                        "privacy": {
+                          "status": "detected",
+                          "classifications": [
+                            "classifications"
                           ],
-                          "suspicious_network": false
+                          "service": {
+                            "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                            "name": "Acme Growth Workspace",
+                            "type": "type"
+                          },
+                          "location_obscured": true,
+                          "location_precision": "city"
                         },
-                        "evidence": {
-                          "risk_signals": [
-                            "vpn"
-                          ],
-                          "operator_tags": [
-                            "vpn"
-                          ],
-                          "client_types": [
-                            "consumer"
-                          ],
-                          "client_count": 1
+                        "proxy_activity": {
+                          "current_status": "match",
+                          "history_status": "match",
+                          "activity": "active",
+                          "confidence": "strong",
+                          "most_recent_last_seen_at": "2026-03-24T20:00:05.000Z",
+                          "providers": [
+                            {
+                              "provider": "Mullvad VPN",
+                              "type": "type",
+                              "first_seen_at": "2026-03-01T18:22:11.000Z",
+                              "last_seen_at": "2026-03-24T20:00:05.000Z",
+                              "days_seen": 1,
+                              "country_code": "US",
+                              "asn": 1,
+                              "sources": [
+                                "firehose"
+                              ]
+                            }
+                          ]
                         },
-                        "evaluated_at": "2026-03-24T20:00:05.000Z"
+                        "anonymizer": {
+                          "status": "match",
+                          "matched_ranges": [
+                            {
+                              "range_start": "range_start",
+                              "range_end": "range_end"
+                            }
+                          ],
+                          "providers": [
+                            {
+                              "provider": "Mullvad VPN",
+                              "type": "type",
+                              "first_seen_at": "2026-03-01T18:22:11.000Z",
+                              "last_seen_at": "2026-03-24T20:00:05.000Z",
+                              "days_seen": 1,
+                              "country_code": "US",
+                              "asn": 1,
+                              "sources": [
+                                "firehose"
+                              ]
+                            }
+                          ]
+                        },
+                        "provenance": {
+                          "evaluated_at": "2026-03-24T20:00:05.000Z",
+                          "lookup_source": "service",
+                          "proxy_realtime_coverage": "proxy_realtime_coverage",
+                          "datasets": {
+                            "proxy_history": {
+                              "generation": "generation",
+                              "source_through": "2026-03-24T20:00:05.000Z",
+                              "stale": true
+                            },
+                            "anonymizer": {
+                              "generation": "generation",
+                              "source_through": "2026-03-24T20:00:05.000Z",
+                              "stale": true
+                            },
+                            "ipinfo": {
+                              "generation": "generation",
+                              "source_through": "2026-03-24T20:00:05.000Z",
+                              "stale": true
+                            },
+                            "apple_private_relay": {
+                              "generation": "generation",
+                              "source_through": "2026-03-24T20:00:05.000Z",
+                              "stale": true
+                            }
+                          }
+                        }
                       },
                       "runtime_integrity": {
-                        "tampering": "high_risk",
-                        "developer_tools": "high_risk",
+                        "tampering": "clean",
+                        "developer_tools": "clean",
                         "emulation": "clean",
-                        "virtualization": "high_risk",
-                        "privacy_hardening": "notice",
+                        "virtualization": "clean",
+                        "privacy_hardening": "clean",
                         "identity_spoofing": "clean",
                         "replay": "clean",
                         "outdated_environment": "clean"
@@ -621,7 +696,7 @@
                         "version": "123.0.0.0",
                         "major_version": "123",
                         "engine": "blink",
-                        "app_name": null
+                        "app_name": "Acme Workspace"
                       },
                       "device": {
                         "form_factor": "desktop",
@@ -777,22 +852,16 @@
                           {
                             "kind": "actor",
                             "value": "automation",
-                            "label": "Automation",
-                            "confidence": 98
-                          },
-                          {
-                            "kind": "tool",
-                            "value": "selenium",
-                            "label": "Selenium",
-                            "confidence": 88
+                            "label": "Chrome",
+                            "confidence": 93
                           }
                         ],
                         "behaviors": [
                           {
                             "channel": "typing",
-                            "value": "synthetic-typing",
-                            "label": "Synthetic Typing",
-                            "confidence": 86
+                            "value": "automation",
+                            "label": "Chrome",
+                            "confidence": 93
                           }
                         ]
                       }
@@ -938,7 +1007,10 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateSessionRequest"
+                "$ref": "#/components/schemas/UpdateSessionRequest",
+                "example": {
+                  "client_user_id": "user_123"
+                }
               }
             }
           }
@@ -949,7 +1021,602 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SessionDetailResponse"
+                  "$ref": "#/components/schemas/SessionDetailResponse",
+                  "example": {
+                    "data": {
+                      "object": "session",
+                      "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                      "created_at": "2026-03-24T20:00:00.000Z",
+                      "client_user_id": "user_123",
+                      "decision": {
+                        "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
+                        "automation_status": "automated",
+                        "risk_score": 94,
+                        "evaluation_phase": "snapshot",
+                        "decision_status": "preliminary",
+                        "evaluated_at": "2026-03-24T20:00:05.000Z"
+                      },
+                      "highlights": [
+                        {
+                          "key": "browser_automation",
+                          "effect": "increases_risk",
+                          "importance": "high",
+                          "summary": "Browser is being driven by automation",
+                          "evidence": [
+                            {
+                              "signal": "webdriver_detected",
+                              "name": "Acme Growth Workspace"
+                            }
+                          ]
+                        }
+                      ],
+                      "web_bot_auth": {
+                        "status": "verified",
+                        "domain": "browserless.io"
+                      },
+                      "network": {
+                        "ip_address": "203.0.113.10",
+                        "ip_version": "ipv4",
+                        "status": "ready",
+                        "summary": "Browser is being driven by automation",
+                        "matched_network": "matched_network",
+                        "location": {
+                          "city": "San Francisco",
+                          "region": "California",
+                          "region_code": "California",
+                          "country": "United States",
+                          "country_code": "US",
+                          "continent": "continent",
+                          "continent_code": "request.validation_failed",
+                          "latitude": 37.7749,
+                          "longitude": -122.4194,
+                          "timezone": "America/Los_Angeles",
+                          "postal_code": "94103",
+                          "dma_code": "request.validation_failed",
+                          "geoname_id": "Acme Workspace",
+                          "accuracy_radius_km": 10,
+                          "last_changed": "2026-03-24T20:00:05.000Z"
+                        },
+                        "autonomous_system": {
+                          "number": 1,
+                          "name": "Acme Growth Workspace",
+                          "domain": "browserless.io",
+                          "type": "type",
+                          "last_changed": "2026-03-24T20:00:05.000Z"
+                        },
+                        "carrier": {
+                          "name": "Acme Growth Workspace",
+                          "mcc": "mcc",
+                          "mnc": "mnc"
+                        },
+                        "traits": {
+                          "anycast": true,
+                          "hosting": false,
+                          "mobile": true,
+                          "satellite": true
+                        },
+                        "privacy": {
+                          "status": "detected",
+                          "classifications": [
+                            "classifications"
+                          ],
+                          "service": {
+                            "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                            "name": "Acme Growth Workspace",
+                            "type": "type"
+                          },
+                          "location_obscured": true,
+                          "location_precision": "city"
+                        },
+                        "proxy_activity": {
+                          "current_status": "match",
+                          "history_status": "match",
+                          "activity": "active",
+                          "confidence": "strong",
+                          "most_recent_last_seen_at": "2026-03-24T20:00:05.000Z",
+                          "providers": [
+                            {
+                              "provider": "Mullvad VPN",
+                              "type": "type",
+                              "first_seen_at": "2026-03-01T18:22:11.000Z",
+                              "last_seen_at": "2026-03-24T20:00:05.000Z",
+                              "days_seen": 1,
+                              "country_code": "US",
+                              "asn": 1,
+                              "sources": [
+                                "firehose"
+                              ]
+                            }
+                          ]
+                        },
+                        "anonymizer": {
+                          "status": "match",
+                          "matched_ranges": [
+                            {
+                              "range_start": "range_start",
+                              "range_end": "range_end"
+                            }
+                          ],
+                          "providers": [
+                            {
+                              "provider": "Mullvad VPN",
+                              "type": "type",
+                              "first_seen_at": "2026-03-01T18:22:11.000Z",
+                              "last_seen_at": "2026-03-24T20:00:05.000Z",
+                              "days_seen": 1,
+                              "country_code": "US",
+                              "asn": 1,
+                              "sources": [
+                                "firehose"
+                              ]
+                            }
+                          ]
+                        },
+                        "provenance": {
+                          "evaluated_at": "2026-03-24T20:00:05.000Z",
+                          "lookup_source": "service",
+                          "proxy_realtime_coverage": "proxy_realtime_coverage",
+                          "datasets": {
+                            "proxy_history": {
+                              "generation": "generation",
+                              "source_through": "2026-03-24T20:00:05.000Z",
+                              "stale": true
+                            },
+                            "anonymizer": {
+                              "generation": "generation",
+                              "source_through": "2026-03-24T20:00:05.000Z",
+                              "stale": true
+                            },
+                            "ipinfo": {
+                              "generation": "generation",
+                              "source_through": "2026-03-24T20:00:05.000Z",
+                              "stale": true
+                            },
+                            "apple_private_relay": {
+                              "generation": "generation",
+                              "source_through": "2026-03-24T20:00:05.000Z",
+                              "stale": true
+                            }
+                          }
+                        }
+                      },
+                      "runtime_integrity": {
+                        "tampering": "clean",
+                        "developer_tools": "clean",
+                        "emulation": "clean",
+                        "virtualization": "clean",
+                        "privacy_hardening": "clean",
+                        "identity_spoofing": "clean",
+                        "replay": "clean",
+                        "outdated_environment": "clean"
+                      },
+                      "native_runtime_integrity": {
+                        "platform": "ios",
+                        "jailbreak_or_root": {
+                          "detected": true,
+                          "signals": [
+                            "webdriver_detected"
+                          ],
+                          "present_paths": [
+                            "present_paths"
+                          ],
+                          "dyld_insert_libraries": [
+                            "dyld_insert_libraries"
+                          ],
+                          "verified_boot_state": "verified_boot_state",
+                          "magisk_mount_present": true,
+                          "su_on_path": true
+                        },
+                        "hooks": {
+                          "detected": true,
+                          "frida_ports": [
+                            1.5
+                          ],
+                          "frida_thread_names": [
+                            "Acme Workspace"
+                          ],
+                          "hooked_symbols": [
+                            "hooked_symbols"
+                          ],
+                          "self_hooked_symbols": [
+                            "self_hooked_symbols"
+                          ],
+                          "prologue_anomaly_count": 3,
+                          "unexpected_dyld_images": [
+                            "string"
+                          ],
+                          "xposed_packages": [
+                            "xposed_packages"
+                          ]
+                        },
+                        "debugger": {
+                          "attached": true,
+                          "tracer_pid": 1.5,
+                          "breakpoint_count": 3,
+                          "watchpoint_thread_count": 3
+                        },
+                        "code_signing": {
+                          "invalid": true,
+                          "code_sign_valid": true,
+                          "text_integrity_ok": true,
+                          "application_debuggable": true,
+                          "dyld_insert_libraries": [
+                            "dyld_insert_libraries"
+                          ]
+                        },
+                        "simulator_or_emulator": {
+                          "detected": true,
+                          "is_ios_app_on_mac": true,
+                          "qemu_files": [
+                            "qemu_files"
+                          ],
+                          "ro_hardware": "ro_hardware",
+                          "ro_product_model": "chrome",
+                          "simulator_env_keys": [
+                            "FOIL_SAMPLE_KEY"
+                          ]
+                        },
+                        "hardware_claims_mismatch": {
+                          "detected": true,
+                          "signals": [
+                            "webdriver_detected"
+                          ]
+                        },
+                        "sim_posture": {
+                          "detected": true,
+                          "signals": [
+                            "webdriver_detected"
+                          ]
+                        },
+                        "app_provenance": {
+                          "detected": true,
+                          "signals": [
+                            "webdriver_detected"
+                          ]
+                        },
+                        "debug_posture": {
+                          "detected": true,
+                          "adb_enabled": true,
+                          "developer_options_enabled": true,
+                          "app_debuggable": true,
+                          "app_profileable": true,
+                          "app_test_only": true,
+                          "debugger_attached": true,
+                          "get_task_allow": true,
+                          "embedded_provisioning_profile_present": true,
+                          "receipt_is_sandbox": true,
+                          "receipt_is_testflight": true,
+                          "development_bundle": true,
+                          "active_debugger_attached": true,
+                          "breakpoint_count": 3,
+                          "exception_port_count": 3,
+                          "watchpoint_thread_count": 3,
+                          "tracer_pid": 1.5,
+                          "direct_syscall_tracer_pid": 1.5,
+                          "risk_signals": [
+                            "vpn"
+                          ]
+                        }
+                      },
+                      "native_app": {
+                        "bundle_id": "bundle_id",
+                        "app_version": "123.0.0.0",
+                        "app_build": "app_build",
+                        "install_time_epoch_ms": 1.5,
+                        "provisioning_team": "provisioning_team"
+                      },
+                      "native_carrier": {
+                        "platform": "ios",
+                        "carrier_name": "Acme Workspace",
+                        "country_iso": "United States",
+                        "mcc": "mcc",
+                        "mnc": "mnc",
+                        "phone_type": "phone_type",
+                        "network_type": "network_type",
+                        "radio_access": [
+                          "radio_access"
+                        ]
+                      },
+                      "native_motion_print": {
+                        "platform": "ios",
+                        "sample_count": 3,
+                        "gyro": {
+                          "bias": [
+                            1.5,
+                            2.5,
+                            3.5
+                          ],
+                          "noise": [
+                            1.5,
+                            2.5,
+                            3.5
+                          ]
+                        },
+                        "accel": {
+                          "bias": [
+                            1.5,
+                            2.5,
+                            3.5
+                          ],
+                          "noise": [
+                            1.5,
+                            2.5,
+                            3.5
+                          ]
+                        },
+                        "mag": {
+                          "bias": [
+                            1.5,
+                            2.5,
+                            3.5
+                          ],
+                          "noise": [
+                            1.5,
+                            2.5,
+                            3.5
+                          ]
+                        }
+                      },
+                      "device_identity": {
+                        "object": "device_identity",
+                        "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                        "confidence": 93,
+                        "source": "attested",
+                        "platform": "ios",
+                        "identified_at": "2026-03-24T20:00:05.000Z",
+                        "lifecycle": {
+                          "first_seen_at": "2026-03-01T18:22:11.000Z",
+                          "last_seen_at": "2026-03-24T20:00:05.000Z",
+                          "seen_count": 14
+                        },
+                        "matched_anchors": [
+                          "matched_anchors"
+                        ]
+                      },
+                      "install_id": "install_id",
+                      "visitor_fingerprint": {
+                        "object": "visitor_fingerprint",
+                        "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
+                        "confidence": 1,
+                        "identified_at": "2026-03-24T20:00:05.000Z",
+                        "resolution": {
+                          "method": "continuity",
+                          "basis": "deterministic"
+                        },
+                        "lifecycle": {
+                          "first_seen_at": "2026-03-01T18:22:11.000Z",
+                          "last_seen_at": "2026-03-24T20:00:05.000Z",
+                          "seen_count": 1
+                        }
+                      },
+                      "connection_fingerprint": {
+                        "ja4": {
+                          "hash": "t13d1516h2_0123456789ab_fedcba987654",
+                          "profile": "chrome",
+                          "family": "chromium",
+                          "product": "chrome",
+                          "confidence": "exact",
+                          "match_source": "full_ja4",
+                          "deterministic": true,
+                          "reference": {
+                            "label": "Chrome",
+                            "source": "master_db",
+                            "protocol": "t",
+                            "tls_version": "13",
+                            "sni": "d",
+                            "alpn": "h2",
+                            "cipher_count": {
+                              "min": 15,
+                              "max": 16
+                            },
+                            "ext_count": {
+                              "min": 15,
+                              "max": 16
+                            },
+                            "sample_size": 63,
+                            "verified": true
+                          }
+                        },
+                        "http2": {
+                          "akamai_fingerprint": "1:65536;4:131072;5:16384|12517377|0|m,p,a,s",
+                          "profile": "chrome"
+                        },
+                        "user_agent_alignment": "match"
+                      },
+                      "previous_decisions": [
+                        {
+                          "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
+                          "automation_status": "automated",
+                          "risk_score": 94,
+                          "evaluation_phase": "snapshot",
+                          "decision_status": "preliminary",
+                          "evaluated_at": "2026-03-24T20:00:05.000Z"
+                        }
+                      ],
+                      "request": {
+                        "url": "https://app.acme.co/signup",
+                        "referrer": "https://app.acme.co/",
+                        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+                      },
+                      "browser": {
+                        "name": "Chromium",
+                        "version": "123.0.0.0",
+                        "major_version": "123",
+                        "engine": "blink",
+                        "app_name": "Acme Workspace"
+                      },
+                      "device": {
+                        "form_factor": "desktop",
+                        "operating_system": {
+                          "name": "macOS",
+                          "version": "123.0.0.0"
+                        },
+                        "architecture": "arm",
+                        "screen": {
+                          "size": "1440x900",
+                          "color_depth": 1,
+                          "pixel_ratio": 1.5,
+                          "orientation_type": "landscape-primary"
+                        },
+                        "locale": {
+                          "timezone": "America/Los_Angeles",
+                          "primary_language": "en-US",
+                          "languages": [
+                            "en-US",
+                            "en"
+                          ]
+                        },
+                        "capabilities": {
+                          "touch": {
+                            "available": true,
+                            "max_touch_points": 1
+                          },
+                          "storage": {
+                            "cookies": true,
+                            "local_storage": true,
+                            "indexed_db": true,
+                            "service_worker": true,
+                            "window_name": true
+                          },
+                          "webgpu": {
+                            "available": true
+                          },
+                          "platform_authenticator": {
+                            "available": true,
+                            "conditional_mediation": true
+                          },
+                          "media_devices": {
+                            "available": true
+                          },
+                          "speech_synthesis": {
+                            "available": true
+                          }
+                        }
+                      },
+                      "analysis_coverage": {
+                        "browser": true,
+                        "device": true,
+                        "network": true,
+                        "runtime": true,
+                        "behavioral": true,
+                        "visitor_identity": true
+                      },
+                      "signals_fired": [
+                        {
+                          "signal": "webdriver_detected",
+                          "role": "owner",
+                          "category": "environment",
+                          "strength": "definitive",
+                          "signal_score": 100
+                        }
+                      ],
+                      "client_telemetry": {
+                        "navigator": {
+                          "platform": "macOS",
+                          "vendor": "Google Inc.",
+                          "hardware_concurrency": 8,
+                          "device_memory": 8,
+                          "max_touch_points": 0,
+                          "pdf_viewer_enabled": true,
+                          "cookie_enabled": true,
+                          "product_sub": "20030107",
+                          "primary_language": "en-US",
+                          "languages": [
+                            "en-US",
+                            "en"
+                          ],
+                          "mime_types_count": 3,
+                          "plugins": [
+                            "PDF Viewer"
+                          ]
+                        },
+                        "storage": {
+                          "cookies": true,
+                          "local_storage": true,
+                          "session_storage": true,
+                          "indexed_db": true,
+                          "service_worker": true,
+                          "window_name": true
+                        },
+                        "canvas": {
+                          "hash": 1234567890,
+                          "geometry_hash": 1234567890,
+                          "text_hash": 1234567890,
+                          "winding": true,
+                          "noise_detected": true,
+                          "offscreen_consistent": true
+                        },
+                        "graphics": {
+                          "webgl": {
+                            "vendor": "Google Inc.",
+                            "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+                            "version": "WebGL 1.0",
+                            "shading_language_version": "WebGL GLSL ES 1.0",
+                            "parameters_hash": "01234567",
+                            "extensions_hash": 1234567890,
+                            "extension_parameters_hash": "01234567",
+                            "shader_precision_hash": 1234567890
+                          },
+                          "webgpu": {
+                            "available": true,
+                            "adapter_vendor": "Google Inc.",
+                            "adapter_architecture": "arm",
+                            "fallback_adapter": true,
+                            "features_hash": 1234567890,
+                            "limits_hash": 1234567890
+                          }
+                        },
+                        "audio": {
+                          "hash": 1.23456e-7,
+                          "sample_rate": 1.5,
+                          "channel_count": 3,
+                          "voice_count": 22,
+                          "local_voice_count": 20,
+                          "default_voice_lang": "en-US",
+                          "noise_detected": true
+                        },
+                        "fonts": {
+                          "detected_count": 3,
+                          "tested_count": 3,
+                          "enumeration_hash": 1234567890,
+                          "metrics_hash": 1234567890,
+                          "preferences_hash": 1234567890,
+                          "emoji_hash": 1234567890
+                        },
+                        "media": {
+                          "device_count": 3,
+                          "counts_by_kind": {
+                            "audioinput": 1,
+                            "audiooutput": 1,
+                            "videoinput": 1
+                          },
+                          "blank_label_count": 3,
+                          "topology_hash": 1234567890
+                        }
+                      },
+                      "attribution": {
+                        "labels": [
+                          {
+                            "kind": "actor",
+                            "value": "automation",
+                            "label": "Chrome",
+                            "confidence": 93
+                          }
+                        ],
+                        "behaviors": [
+                          {
+                            "channel": "typing",
+                            "value": "automation",
+                            "label": "Chrome",
+                            "confidence": 93
+                          }
+                        ]
+                      }
+                    },
+                    "meta": {
+                      "request_id": "req_cf147349a4134208aebb8c70e25fb7e1"
+                    }
+                  }
                 }
               }
             }
@@ -959,7 +1626,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                  "$ref": "#/components/schemas/ApiErrorEnvelope",
+                  "example": {
+                    "error": {
+                      "code": "request.validation_failed",
+                      "message": "Observation payload failed validation.",
+                      "status": 1,
+                      "retryable": true,
+                      "request_id": "req_cf147349a4134208aebb8c70e25fb7e1",
+                      "docs_url": "https://app.acme.co/signup",
+                      "details": {
+                        "fields": [
+                          {
+                            "name": "Acme Growth Workspace",
+                            "issue": "required",
+                            "expected": "string",
+                            "received": "any_of"
+                          }
+                        ],
+                        "allowed_values": [
+                          "verified"
+                        ],
+                        "header_name": "x-forwarded-for",
+                        "parameter_set": "browser_fingerprint",
+                        "next_action": "retry"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -969,7 +1662,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                  "$ref": "#/components/schemas/ApiErrorEnvelope",
+                  "example": {
+                    "error": {
+                      "code": "request.validation_failed",
+                      "message": "Observation payload failed validation.",
+                      "status": 1,
+                      "retryable": true,
+                      "request_id": "req_cf147349a4134208aebb8c70e25fb7e1",
+                      "docs_url": "https://app.acme.co/signup",
+                      "details": {
+                        "fields": [
+                          {
+                            "name": "Acme Growth Workspace",
+                            "issue": "required",
+                            "expected": "string",
+                            "received": "any_of"
+                          }
+                        ],
+                        "allowed_values": [
+                          "verified"
+                        ],
+                        "header_name": "x-forwarded-for",
+                        "parameter_set": "browser_fingerprint",
+                        "next_action": "retry"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -979,7 +1698,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                  "$ref": "#/components/schemas/ApiErrorEnvelope",
+                  "example": {
+                    "error": {
+                      "code": "request.validation_failed",
+                      "message": "Observation payload failed validation.",
+                      "status": 1,
+                      "retryable": true,
+                      "request_id": "req_cf147349a4134208aebb8c70e25fb7e1",
+                      "docs_url": "https://app.acme.co/signup",
+                      "details": {
+                        "fields": [
+                          {
+                            "name": "Acme Growth Workspace",
+                            "issue": "required",
+                            "expected": "string",
+                            "received": "any_of"
+                          }
+                        ],
+                        "allowed_values": [
+                          "verified"
+                        ],
+                        "header_name": "x-forwarded-for",
+                        "parameter_set": "browser_fingerprint",
+                        "next_action": "retry"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -989,7 +1734,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                  "$ref": "#/components/schemas/ApiErrorEnvelope",
+                  "example": {
+                    "error": {
+                      "code": "request.validation_failed",
+                      "message": "Observation payload failed validation.",
+                      "status": 1,
+                      "retryable": true,
+                      "request_id": "req_cf147349a4134208aebb8c70e25fb7e1",
+                      "docs_url": "https://app.acme.co/signup",
+                      "details": {
+                        "fields": [
+                          {
+                            "name": "Acme Growth Workspace",
+                            "issue": "required",
+                            "expected": "string",
+                            "received": "any_of"
+                          }
+                        ],
+                        "allowed_values": [
+                          "verified"
+                        ],
+                        "header_name": "x-forwarded-for",
+                        "parameter_set": "browser_fingerprint",
+                        "next_action": "retry"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11073,34 +11844,40 @@
           "labels": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SessionAttributionLabel"
+              "$ref": "#/components/schemas/SessionAttributionLabel",
+              "example": {
+                "kind": "actor",
+                "value": "automation",
+                "label": "Chrome",
+                "confidence": 93
+              }
             },
             "example": [
               {
                 "kind": "actor",
                 "value": "automation",
-                "label": "Automation",
-                "confidence": 98
-              },
-              {
-                "kind": "tool",
-                "value": "selenium",
-                "label": "Selenium",
-                "confidence": 88
+                "label": "Chrome",
+                "confidence": 93
               }
             ]
           },
           "behaviors": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SessionAttributionBehavior"
+              "$ref": "#/components/schemas/SessionAttributionBehavior",
+              "example": {
+                "channel": "typing",
+                "value": "automation",
+                "label": "Chrome",
+                "confidence": 93
+              }
             },
             "example": [
               {
                 "channel": "typing",
-                "value": "synthetic-typing",
-                "label": "Synthetic Typing",
-                "confidence": 86
+                "value": "automation",
+                "label": "Chrome",
+                "confidence": 93
               }
             ]
           }
@@ -11110,22 +11887,16 @@
             {
               "kind": "actor",
               "value": "automation",
-              "label": "Automation",
-              "confidence": 98
-            },
-            {
-              "kind": "tool",
-              "value": "selenium",
-              "label": "Selenium",
-              "confidence": 88
+              "label": "Chrome",
+              "confidence": 93
             }
           ],
           "behaviors": [
             {
               "channel": "typing",
-              "value": "synthetic-typing",
-              "label": "Synthetic Typing",
-              "confidence": 86
+              "value": "automation",
+              "label": "Chrome",
+              "confidence": 93
             }
           ]
         }
@@ -11154,24 +11925,24 @@
           },
           "value": {
             "type": "string",
-            "example": "synthetic-typing"
+            "example": "automation"
           },
           "label": {
             "type": "string",
-            "example": "Synthetic Typing"
+            "example": "Chrome"
           },
           "confidence": {
             "type": "integer",
             "minimum": 0,
             "maximum": 100,
-            "example": 86
+            "example": 93
           }
         },
         "example": {
           "channel": "typing",
-          "value": "synthetic-typing",
-          "label": "Synthetic Typing",
-          "confidence": 86
+          "value": "automation",
+          "label": "Chrome",
+          "confidence": 93
         }
       },
       "SessionAttributionLabel": {
@@ -11205,20 +11976,20 @@
           },
           "label": {
             "type": "string",
-            "example": "Automation"
+            "example": "Chrome"
           },
           "confidence": {
             "type": "integer",
             "minimum": 0,
             "maximum": 100,
-            "example": 98
+            "example": 93
           }
         },
         "example": {
           "kind": "actor",
           "value": "automation",
-          "label": "Automation",
-          "confidence": 98
+          "label": "Chrome",
+          "confidence": 93
         }
       },
       "SessionBrowser": {
@@ -11263,7 +12034,7 @@
               "null"
             ],
             "description": "Host application when the session runs inside an embedded webview (for example \"Instagram\" or \"Facebook\"). Null for ordinary browsers.",
-            "example": null
+            "example": "Acme Workspace"
           }
         },
         "example": {
@@ -11271,7 +12042,7 @@
           "version": "123.0.0.0",
           "major_version": "123",
           "engine": "blink",
-          "app_name": null
+          "app_name": "Acme Workspace"
         }
       },
       "SessionClientTelemetry": {
@@ -11926,61 +12697,136 @@
               "ip_version": "ipv4",
               "status": "ready",
               "summary": "Browser is being driven by automation",
+              "matched_network": "matched_network",
               "location": {
                 "city": "San Francisco",
                 "region": "California",
+                "region_code": "California",
                 "country": "United States",
                 "country_code": "US",
+                "continent": "continent",
+                "continent_code": "request.validation_failed",
                 "latitude": 37.7749,
                 "longitude": -122.4194,
                 "timezone": "America/Los_Angeles",
                 "postal_code": "94103",
-                "accuracy_radius_km": 10
+                "dma_code": "request.validation_failed",
+                "geoname_id": "Acme Workspace",
+                "accuracy_radius_km": 10,
+                "last_changed": "2026-03-24T20:00:05.000Z"
               },
-              "routing": {
-                "asn": "64512",
-                "organization": "SPECTRANET LIMITED"
+              "autonomous_system": {
+                "number": 1,
+                "name": "Acme Growth Workspace",
+                "domain": "browserless.io",
+                "type": "type",
+                "last_changed": "2026-03-24T20:00:05.000Z"
               },
-              "anonymity": {
-                "vpn": true,
-                "proxy": false,
-                "tor": false,
-                "relay": false,
+              "carrier": {
+                "name": "Acme Growth Workspace",
+                "mcc": "mcc",
+                "mnc": "mnc"
+              },
+              "traits": {
+                "anycast": true,
                 "hosting": false,
-                "residential_proxy": false,
-                "callback_proxy": false,
-                "provider": "Mullvad VPN"
+                "mobile": true,
+                "satellite": true
               },
-              "reputation": {
-                "listed": true,
-                "categories": [
-                  "vpn"
+              "privacy": {
+                "status": "detected",
+                "classifications": [
+                  "classifications"
                 ],
-                "suspicious_network": false
+                "service": {
+                  "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                  "name": "Acme Growth Workspace",
+                  "type": "type"
+                },
+                "location_obscured": true,
+                "location_precision": "city"
               },
-              "evidence": {
-                "risk_signals": [
-                  "vpn"
-                ],
-                "operator_tags": [
-                  "vpn"
-                ],
-                "client_types": [
-                  "consumer"
-                ],
-                "client_count": 1
+              "proxy_activity": {
+                "current_status": "match",
+                "history_status": "match",
+                "activity": "active",
+                "confidence": "strong",
+                "most_recent_last_seen_at": "2026-03-24T20:00:05.000Z",
+                "providers": [
+                  {
+                    "provider": "Mullvad VPN",
+                    "type": "type",
+                    "first_seen_at": "2026-03-01T18:22:11.000Z",
+                    "last_seen_at": "2026-03-24T20:00:05.000Z",
+                    "days_seen": 1,
+                    "country_code": "US",
+                    "asn": 1,
+                    "sources": [
+                      "firehose"
+                    ]
+                  }
+                ]
               },
-              "evaluated_at": "2026-03-24T20:00:05.000Z"
+              "anonymizer": {
+                "status": "match",
+                "matched_ranges": [
+                  {
+                    "range_start": "range_start",
+                    "range_end": "range_end"
+                  }
+                ],
+                "providers": [
+                  {
+                    "provider": "Mullvad VPN",
+                    "type": "type",
+                    "first_seen_at": "2026-03-01T18:22:11.000Z",
+                    "last_seen_at": "2026-03-24T20:00:05.000Z",
+                    "days_seen": 1,
+                    "country_code": "US",
+                    "asn": 1,
+                    "sources": [
+                      "firehose"
+                    ]
+                  }
+                ]
+              },
+              "provenance": {
+                "evaluated_at": "2026-03-24T20:00:05.000Z",
+                "lookup_source": "service",
+                "proxy_realtime_coverage": "proxy_realtime_coverage",
+                "datasets": {
+                  "proxy_history": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  },
+                  "anonymizer": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  },
+                  "ipinfo": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  },
+                  "apple_private_relay": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  }
+                }
+              }
             }
           },
           "runtime_integrity": {
             "$ref": "#/components/schemas/SessionRuntimeIntegrity",
             "example": {
-              "tampering": "high_risk",
-              "developer_tools": "high_risk",
+              "tampering": "clean",
+              "developer_tools": "clean",
               "emulation": "clean",
-              "virtualization": "high_risk",
-              "privacy_hardening": "notice",
+              "virtualization": "clean",
+              "privacy_hardening": "clean",
               "identity_spoofing": "clean",
               "replay": "clean",
               "outdated_environment": "clean"
@@ -12531,7 +13377,7 @@
               "version": "123.0.0.0",
               "major_version": "123",
               "engine": "blink",
-              "app_name": null
+              "app_name": "Acme Workspace"
             }
           },
           "device": {
@@ -12714,22 +13560,16 @@
                     {
                       "kind": "actor",
                       "value": "automation",
-                      "label": "Automation",
-                      "confidence": 98
-                    },
-                    {
-                      "kind": "tool",
-                      "value": "selenium",
-                      "label": "Selenium",
-                      "confidence": 88
+                      "label": "Chrome",
+                      "confidence": 93
                     }
                   ],
                   "behaviors": [
                     {
                       "channel": "typing",
-                      "value": "synthetic-typing",
-                      "label": "Synthetic Typing",
-                      "confidence": 86
+                      "value": "automation",
+                      "label": "Chrome",
+                      "confidence": 93
                     }
                   ]
                 }
@@ -12744,22 +13584,16 @@
                 {
                   "kind": "actor",
                   "value": "automation",
-                  "label": "Automation",
-                  "confidence": 98
-                },
-                {
-                  "kind": "tool",
-                  "value": "selenium",
-                  "label": "Selenium",
-                  "confidence": 88
+                  "label": "Chrome",
+                  "confidence": 93
                 }
               ],
               "behaviors": [
                 {
                   "channel": "typing",
-                  "value": "synthetic-typing",
-                  "label": "Synthetic Typing",
-                  "confidence": 86
+                  "value": "automation",
+                  "label": "Chrome",
+                  "confidence": 93
                 }
               ]
             }
@@ -12801,58 +13635,133 @@
             "ip_version": "ipv4",
             "status": "ready",
             "summary": "Browser is being driven by automation",
+            "matched_network": "matched_network",
             "location": {
               "city": "San Francisco",
               "region": "California",
+              "region_code": "California",
               "country": "United States",
               "country_code": "US",
+              "continent": "continent",
+              "continent_code": "request.validation_failed",
               "latitude": 37.7749,
               "longitude": -122.4194,
               "timezone": "America/Los_Angeles",
               "postal_code": "94103",
-              "accuracy_radius_km": 10
+              "dma_code": "request.validation_failed",
+              "geoname_id": "Acme Workspace",
+              "accuracy_radius_km": 10,
+              "last_changed": "2026-03-24T20:00:05.000Z"
             },
-            "routing": {
-              "asn": "64512",
-              "organization": "SPECTRANET LIMITED"
+            "autonomous_system": {
+              "number": 1,
+              "name": "Acme Growth Workspace",
+              "domain": "browserless.io",
+              "type": "type",
+              "last_changed": "2026-03-24T20:00:05.000Z"
             },
-            "anonymity": {
-              "vpn": true,
-              "proxy": false,
-              "tor": false,
-              "relay": false,
+            "carrier": {
+              "name": "Acme Growth Workspace",
+              "mcc": "mcc",
+              "mnc": "mnc"
+            },
+            "traits": {
+              "anycast": true,
               "hosting": false,
-              "residential_proxy": false,
-              "callback_proxy": false,
-              "provider": "Mullvad VPN"
+              "mobile": true,
+              "satellite": true
             },
-            "reputation": {
-              "listed": true,
-              "categories": [
-                "vpn"
+            "privacy": {
+              "status": "detected",
+              "classifications": [
+                "classifications"
               ],
-              "suspicious_network": false
+              "service": {
+                "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                "name": "Acme Growth Workspace",
+                "type": "type"
+              },
+              "location_obscured": true,
+              "location_precision": "city"
             },
-            "evidence": {
-              "risk_signals": [
-                "vpn"
-              ],
-              "operator_tags": [
-                "vpn"
-              ],
-              "client_types": [
-                "consumer"
-              ],
-              "client_count": 1
+            "proxy_activity": {
+              "current_status": "match",
+              "history_status": "match",
+              "activity": "active",
+              "confidence": "strong",
+              "most_recent_last_seen_at": "2026-03-24T20:00:05.000Z",
+              "providers": [
+                {
+                  "provider": "Mullvad VPN",
+                  "type": "type",
+                  "first_seen_at": "2026-03-01T18:22:11.000Z",
+                  "last_seen_at": "2026-03-24T20:00:05.000Z",
+                  "days_seen": 1,
+                  "country_code": "US",
+                  "asn": 1,
+                  "sources": [
+                    "firehose"
+                  ]
+                }
+              ]
             },
-            "evaluated_at": "2026-03-24T20:00:05.000Z"
+            "anonymizer": {
+              "status": "match",
+              "matched_ranges": [
+                {
+                  "range_start": "range_start",
+                  "range_end": "range_end"
+                }
+              ],
+              "providers": [
+                {
+                  "provider": "Mullvad VPN",
+                  "type": "type",
+                  "first_seen_at": "2026-03-01T18:22:11.000Z",
+                  "last_seen_at": "2026-03-24T20:00:05.000Z",
+                  "days_seen": 1,
+                  "country_code": "US",
+                  "asn": 1,
+                  "sources": [
+                    "firehose"
+                  ]
+                }
+              ]
+            },
+            "provenance": {
+              "evaluated_at": "2026-03-24T20:00:05.000Z",
+              "lookup_source": "service",
+              "proxy_realtime_coverage": "proxy_realtime_coverage",
+              "datasets": {
+                "proxy_history": {
+                  "generation": "generation",
+                  "source_through": "2026-03-24T20:00:05.000Z",
+                  "stale": true
+                },
+                "anonymizer": {
+                  "generation": "generation",
+                  "source_through": "2026-03-24T20:00:05.000Z",
+                  "stale": true
+                },
+                "ipinfo": {
+                  "generation": "generation",
+                  "source_through": "2026-03-24T20:00:05.000Z",
+                  "stale": true
+                },
+                "apple_private_relay": {
+                  "generation": "generation",
+                  "source_through": "2026-03-24T20:00:05.000Z",
+                  "stale": true
+                }
+              }
+            }
           },
           "runtime_integrity": {
-            "tampering": "high_risk",
-            "developer_tools": "high_risk",
+            "tampering": "clean",
+            "developer_tools": "clean",
             "emulation": "clean",
-            "virtualization": "high_risk",
-            "privacy_hardening": "notice",
+            "virtualization": "clean",
+            "privacy_hardening": "clean",
             "identity_spoofing": "clean",
             "replay": "clean",
             "outdated_environment": "clean"
@@ -13110,7 +14019,7 @@
             "version": "123.0.0.0",
             "major_version": "123",
             "engine": "blink",
-            "app_name": null
+            "app_name": "Acme Workspace"
           },
           "device": {
             "form_factor": "desktop",
@@ -13266,22 +14175,16 @@
               {
                 "kind": "actor",
                 "value": "automation",
-                "label": "Automation",
-                "confidence": 98
-              },
-              {
-                "kind": "tool",
-                "value": "selenium",
-                "label": "Selenium",
-                "confidence": 88
+                "label": "Chrome",
+                "confidence": 93
               }
             ],
             "behaviors": [
               {
                 "channel": "typing",
-                "value": "synthetic-typing",
-                "label": "Synthetic Typing",
-                "confidence": 86
+                "value": "automation",
+                "label": "Chrome",
+                "confidence": 93
               }
             ]
           }
@@ -13539,58 +14442,133 @@
                 "ip_version": "ipv4",
                 "status": "ready",
                 "summary": "Browser is being driven by automation",
+                "matched_network": "matched_network",
                 "location": {
                   "city": "San Francisco",
                   "region": "California",
+                  "region_code": "California",
                   "country": "United States",
                   "country_code": "US",
+                  "continent": "continent",
+                  "continent_code": "request.validation_failed",
                   "latitude": 37.7749,
                   "longitude": -122.4194,
                   "timezone": "America/Los_Angeles",
                   "postal_code": "94103",
-                  "accuracy_radius_km": 10
+                  "dma_code": "request.validation_failed",
+                  "geoname_id": "Acme Workspace",
+                  "accuracy_radius_km": 10,
+                  "last_changed": "2026-03-24T20:00:05.000Z"
                 },
-                "routing": {
-                  "asn": "64512",
-                  "organization": "SPECTRANET LIMITED"
+                "autonomous_system": {
+                  "number": 1,
+                  "name": "Acme Growth Workspace",
+                  "domain": "browserless.io",
+                  "type": "type",
+                  "last_changed": "2026-03-24T20:00:05.000Z"
                 },
-                "anonymity": {
-                  "vpn": true,
-                  "proxy": false,
-                  "tor": false,
-                  "relay": false,
+                "carrier": {
+                  "name": "Acme Growth Workspace",
+                  "mcc": "mcc",
+                  "mnc": "mnc"
+                },
+                "traits": {
+                  "anycast": true,
                   "hosting": false,
-                  "residential_proxy": false,
-                  "callback_proxy": false,
-                  "provider": "Mullvad VPN"
+                  "mobile": true,
+                  "satellite": true
                 },
-                "reputation": {
-                  "listed": true,
-                  "categories": [
-                    "vpn"
+                "privacy": {
+                  "status": "detected",
+                  "classifications": [
+                    "classifications"
                   ],
-                  "suspicious_network": false
+                  "service": {
+                    "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                    "name": "Acme Growth Workspace",
+                    "type": "type"
+                  },
+                  "location_obscured": true,
+                  "location_precision": "city"
                 },
-                "evidence": {
-                  "risk_signals": [
-                    "vpn"
-                  ],
-                  "operator_tags": [
-                    "vpn"
-                  ],
-                  "client_types": [
-                    "consumer"
-                  ],
-                  "client_count": 1
+                "proxy_activity": {
+                  "current_status": "match",
+                  "history_status": "match",
+                  "activity": "active",
+                  "confidence": "strong",
+                  "most_recent_last_seen_at": "2026-03-24T20:00:05.000Z",
+                  "providers": [
+                    {
+                      "provider": "Mullvad VPN",
+                      "type": "type",
+                      "first_seen_at": "2026-03-01T18:22:11.000Z",
+                      "last_seen_at": "2026-03-24T20:00:05.000Z",
+                      "days_seen": 1,
+                      "country_code": "US",
+                      "asn": 1,
+                      "sources": [
+                        "firehose"
+                      ]
+                    }
+                  ]
                 },
-                "evaluated_at": "2026-03-24T20:00:05.000Z"
+                "anonymizer": {
+                  "status": "match",
+                  "matched_ranges": [
+                    {
+                      "range_start": "range_start",
+                      "range_end": "range_end"
+                    }
+                  ],
+                  "providers": [
+                    {
+                      "provider": "Mullvad VPN",
+                      "type": "type",
+                      "first_seen_at": "2026-03-01T18:22:11.000Z",
+                      "last_seen_at": "2026-03-24T20:00:05.000Z",
+                      "days_seen": 1,
+                      "country_code": "US",
+                      "asn": 1,
+                      "sources": [
+                        "firehose"
+                      ]
+                    }
+                  ]
+                },
+                "provenance": {
+                  "evaluated_at": "2026-03-24T20:00:05.000Z",
+                  "lookup_source": "service",
+                  "proxy_realtime_coverage": "proxy_realtime_coverage",
+                  "datasets": {
+                    "proxy_history": {
+                      "generation": "generation",
+                      "source_through": "2026-03-24T20:00:05.000Z",
+                      "stale": true
+                    },
+                    "anonymizer": {
+                      "generation": "generation",
+                      "source_through": "2026-03-24T20:00:05.000Z",
+                      "stale": true
+                    },
+                    "ipinfo": {
+                      "generation": "generation",
+                      "source_through": "2026-03-24T20:00:05.000Z",
+                      "stale": true
+                    },
+                    "apple_private_relay": {
+                      "generation": "generation",
+                      "source_through": "2026-03-24T20:00:05.000Z",
+                      "stale": true
+                    }
+                  }
+                }
               },
               "runtime_integrity": {
-                "tampering": "high_risk",
-                "developer_tools": "high_risk",
+                "tampering": "clean",
+                "developer_tools": "clean",
                 "emulation": "clean",
-                "virtualization": "high_risk",
-                "privacy_hardening": "notice",
+                "virtualization": "clean",
+                "privacy_hardening": "clean",
                 "identity_spoofing": "clean",
                 "replay": "clean",
                 "outdated_environment": "clean"
@@ -13848,7 +14826,7 @@
                 "version": "123.0.0.0",
                 "major_version": "123",
                 "engine": "blink",
-                "app_name": null
+                "app_name": "Acme Workspace"
               },
               "device": {
                 "form_factor": "desktop",
@@ -14004,22 +14982,16 @@
                   {
                     "kind": "actor",
                     "value": "automation",
-                    "label": "Automation",
-                    "confidence": 98
-                  },
-                  {
-                    "kind": "tool",
-                    "value": "selenium",
-                    "label": "Selenium",
-                    "confidence": 88
+                    "label": "Chrome",
+                    "confidence": 93
                   }
                 ],
                 "behaviors": [
                   {
                     "channel": "typing",
-                    "value": "synthetic-typing",
-                    "label": "Synthetic Typing",
-                    "confidence": 86
+                    "value": "automation",
+                    "label": "Chrome",
+                    "confidence": 93
                   }
                 ]
               }
@@ -14069,58 +15041,133 @@
               "ip_version": "ipv4",
               "status": "ready",
               "summary": "Browser is being driven by automation",
+              "matched_network": "matched_network",
               "location": {
                 "city": "San Francisco",
                 "region": "California",
+                "region_code": "California",
                 "country": "United States",
                 "country_code": "US",
+                "continent": "continent",
+                "continent_code": "request.validation_failed",
                 "latitude": 37.7749,
                 "longitude": -122.4194,
                 "timezone": "America/Los_Angeles",
                 "postal_code": "94103",
-                "accuracy_radius_km": 10
+                "dma_code": "request.validation_failed",
+                "geoname_id": "Acme Workspace",
+                "accuracy_radius_km": 10,
+                "last_changed": "2026-03-24T20:00:05.000Z"
               },
-              "routing": {
-                "asn": "64512",
-                "organization": "SPECTRANET LIMITED"
+              "autonomous_system": {
+                "number": 1,
+                "name": "Acme Growth Workspace",
+                "domain": "browserless.io",
+                "type": "type",
+                "last_changed": "2026-03-24T20:00:05.000Z"
               },
-              "anonymity": {
-                "vpn": true,
-                "proxy": false,
-                "tor": false,
-                "relay": false,
+              "carrier": {
+                "name": "Acme Growth Workspace",
+                "mcc": "mcc",
+                "mnc": "mnc"
+              },
+              "traits": {
+                "anycast": true,
                 "hosting": false,
-                "residential_proxy": false,
-                "callback_proxy": false,
-                "provider": "Mullvad VPN"
+                "mobile": true,
+                "satellite": true
               },
-              "reputation": {
-                "listed": true,
-                "categories": [
-                  "vpn"
+              "privacy": {
+                "status": "detected",
+                "classifications": [
+                  "classifications"
                 ],
-                "suspicious_network": false
+                "service": {
+                  "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                  "name": "Acme Growth Workspace",
+                  "type": "type"
+                },
+                "location_obscured": true,
+                "location_precision": "city"
               },
-              "evidence": {
-                "risk_signals": [
-                  "vpn"
-                ],
-                "operator_tags": [
-                  "vpn"
-                ],
-                "client_types": [
-                  "consumer"
-                ],
-                "client_count": 1
+              "proxy_activity": {
+                "current_status": "match",
+                "history_status": "match",
+                "activity": "active",
+                "confidence": "strong",
+                "most_recent_last_seen_at": "2026-03-24T20:00:05.000Z",
+                "providers": [
+                  {
+                    "provider": "Mullvad VPN",
+                    "type": "type",
+                    "first_seen_at": "2026-03-01T18:22:11.000Z",
+                    "last_seen_at": "2026-03-24T20:00:05.000Z",
+                    "days_seen": 1,
+                    "country_code": "US",
+                    "asn": 1,
+                    "sources": [
+                      "firehose"
+                    ]
+                  }
+                ]
               },
-              "evaluated_at": "2026-03-24T20:00:05.000Z"
+              "anonymizer": {
+                "status": "match",
+                "matched_ranges": [
+                  {
+                    "range_start": "range_start",
+                    "range_end": "range_end"
+                  }
+                ],
+                "providers": [
+                  {
+                    "provider": "Mullvad VPN",
+                    "type": "type",
+                    "first_seen_at": "2026-03-01T18:22:11.000Z",
+                    "last_seen_at": "2026-03-24T20:00:05.000Z",
+                    "days_seen": 1,
+                    "country_code": "US",
+                    "asn": 1,
+                    "sources": [
+                      "firehose"
+                    ]
+                  }
+                ]
+              },
+              "provenance": {
+                "evaluated_at": "2026-03-24T20:00:05.000Z",
+                "lookup_source": "service",
+                "proxy_realtime_coverage": "proxy_realtime_coverage",
+                "datasets": {
+                  "proxy_history": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  },
+                  "anonymizer": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  },
+                  "ipinfo": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  },
+                  "apple_private_relay": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  }
+                }
+              }
             },
             "runtime_integrity": {
-              "tampering": "high_risk",
-              "developer_tools": "high_risk",
+              "tampering": "clean",
+              "developer_tools": "clean",
               "emulation": "clean",
-              "virtualization": "high_risk",
-              "privacy_hardening": "notice",
+              "virtualization": "clean",
+              "privacy_hardening": "clean",
               "identity_spoofing": "clean",
               "replay": "clean",
               "outdated_environment": "clean"
@@ -14378,7 +15425,7 @@
               "version": "123.0.0.0",
               "major_version": "123",
               "engine": "blink",
-              "app_name": null
+              "app_name": "Acme Workspace"
             },
             "device": {
               "form_factor": "desktop",
@@ -14534,22 +15581,16 @@
                 {
                   "kind": "actor",
                   "value": "automation",
-                  "label": "Automation",
-                  "confidence": 98
-                },
-                {
-                  "kind": "tool",
-                  "value": "selenium",
-                  "label": "Selenium",
-                  "confidence": 88
+                  "label": "Chrome",
+                  "confidence": 93
                 }
               ],
               "behaviors": [
                 {
                   "channel": "typing",
-                  "value": "synthetic-typing",
-                  "label": "Synthetic Typing",
-                  "confidence": 86
+                  "value": "automation",
+                  "label": "Chrome",
+                  "confidence": 93
                 }
               ]
             }
@@ -16659,12 +17700,15 @@
           "ip_version",
           "status",
           "summary",
+          "matched_network",
           "location",
-          "routing",
-          "anonymity",
-          "reputation",
-          "evidence",
-          "evaluated_at"
+          "autonomous_system",
+          "carrier",
+          "traits",
+          "privacy",
+          "proxy_activity",
+          "anonymizer",
+          "provenance"
         ],
         "properties": {
           "ip_address": {
@@ -16694,10 +17738,10 @@
           "status": {
             "type": "string",
             "enum": [
-              "pending",
               "ready",
-              "skipped",
-              "error"
+              "partial",
+              "unavailable",
+              "skipped"
             ],
             "example": "ready"
           },
@@ -16708,20 +17752,159 @@
             ],
             "example": "Browser is being driven by automation"
           },
+          "matched_network": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "matched_network"
+          },
           "location": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/SessionNetworkLocation",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "city",
+                  "region",
+                  "region_code",
+                  "country",
+                  "country_code",
+                  "continent",
+                  "continent_code",
+                  "latitude",
+                  "longitude",
+                  "timezone",
+                  "postal_code",
+                  "dma_code",
+                  "geoname_id",
+                  "accuracy_radius_km",
+                  "last_changed"
+                ],
+                "properties": {
+                  "city": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "San Francisco"
+                  },
+                  "region": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "California"
+                  },
+                  "region_code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "California"
+                  },
+                  "country": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "United States"
+                  },
+                  "country_code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "US"
+                  },
+                  "continent": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "continent"
+                  },
+                  "continent_code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "request.validation_failed"
+                  },
+                  "latitude": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "example": 37.7749
+                  },
+                  "longitude": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "example": -122.4194
+                  },
+                  "timezone": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "America/Los_Angeles"
+                  },
+                  "postal_code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "94103"
+                  },
+                  "dma_code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "request.validation_failed"
+                  },
+                  "geoname_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "Acme Workspace"
+                  },
+                  "accuracy_radius_km": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "example": 10
+                  },
+                  "last_changed": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time",
+                    "example": "2026-03-24T20:00:05.000Z"
+                  }
+                },
                 "example": {
                   "city": "San Francisco",
                   "region": "California",
+                  "region_code": "California",
                   "country": "United States",
                   "country_code": "US",
+                  "continent": "continent",
+                  "continent_code": "request.validation_failed",
                   "latitude": 37.7749,
                   "longitude": -122.4194,
                   "timezone": "America/Los_Angeles",
                   "postal_code": "94103",
-                  "accuracy_radius_km": 10
+                  "dma_code": "request.validation_failed",
+                  "geoname_id": "Acme Workspace",
+                  "accuracy_radius_km": 10,
+                  "last_changed": "2026-03-24T20:00:05.000Z"
                 }
               },
               {
@@ -16732,215 +17915,669 @@
             "example": {
               "city": "San Francisco",
               "region": "California",
+              "region_code": "California",
               "country": "United States",
               "country_code": "US",
+              "continent": "continent",
+              "continent_code": "request.validation_failed",
               "latitude": 37.7749,
               "longitude": -122.4194,
               "timezone": "America/Los_Angeles",
               "postal_code": "94103",
-              "accuracy_radius_km": 10
+              "dma_code": "request.validation_failed",
+              "geoname_id": "Acme Workspace",
+              "accuracy_radius_km": 10,
+              "last_changed": "2026-03-24T20:00:05.000Z"
             }
           },
-          "routing": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "asn",
-              "organization"
-            ],
-            "properties": {
-              "asn": {
-                "type": [
-                  "string",
-                  "null"
+          "autonomous_system": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "number",
+                  "name",
+                  "domain",
+                  "type",
+                  "last_changed"
                 ],
-                "example": "64512"
+                "properties": {
+                  "number": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "example": 1
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "Acme Growth Workspace"
+                  },
+                  "domain": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "browserless.io"
+                  },
+                  "type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "type"
+                  },
+                  "last_changed": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time",
+                    "example": "2026-03-24T20:00:05.000Z"
+                  }
+                },
+                "example": {
+                  "number": 1,
+                  "name": "Acme Growth Workspace",
+                  "domain": "browserless.io",
+                  "type": "type",
+                  "last_changed": "2026-03-24T20:00:05.000Z"
+                }
               },
-              "organization": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "SPECTRANET LIMITED"
+              {
+                "type": "null",
+                "example": null
               }
-            },
+            ],
             "example": {
-              "asn": "64512",
-              "organization": "SPECTRANET LIMITED"
+              "number": 1,
+              "name": "Acme Growth Workspace",
+              "domain": "browserless.io",
+              "type": "type",
+              "last_changed": "2026-03-24T20:00:05.000Z"
             }
           },
-          "anonymity": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "vpn",
-              "proxy",
-              "tor",
-              "relay",
-              "hosting",
-              "residential_proxy",
-              "callback_proxy",
-              "provider"
-            ],
-            "properties": {
-              "vpn": {
-                "type": "boolean",
-                "example": true
-              },
-              "proxy": {
-                "type": "boolean",
-                "example": false
-              },
-              "tor": {
-                "type": "boolean",
-                "example": false
-              },
-              "relay": {
-                "type": "boolean",
-                "example": false
-              },
-              "hosting": {
-                "type": "boolean",
-                "example": false
-              },
-              "residential_proxy": {
-                "type": "boolean",
-                "example": false
-              },
-              "callback_proxy": {
-                "type": "boolean",
-                "example": false
-              },
-              "provider": {
-                "type": [
-                  "string",
-                  "null"
+          "carrier": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "name",
+                  "mcc",
+                  "mnc"
                 ],
-                "example": "Mullvad VPN"
+                "properties": {
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "Acme Growth Workspace"
+                  },
+                  "mcc": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "mcc"
+                  },
+                  "mnc": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "mnc"
+                  }
+                },
+                "example": {
+                  "name": "Acme Growth Workspace",
+                  "mcc": "mcc",
+                  "mnc": "mnc"
+                }
+              },
+              {
+                "type": "null",
+                "example": null
               }
-            },
+            ],
             "example": {
-              "vpn": true,
-              "proxy": false,
-              "tor": false,
-              "relay": false,
+              "name": "Acme Growth Workspace",
+              "mcc": "mcc",
+              "mnc": "mnc"
+            }
+          },
+          "traits": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "anycast",
+                  "hosting",
+                  "mobile",
+                  "satellite"
+                ],
+                "properties": {
+                  "anycast": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "example": true
+                  },
+                  "hosting": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "example": false
+                  },
+                  "mobile": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "example": true
+                  },
+                  "satellite": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "example": true
+                  }
+                },
+                "example": {
+                  "anycast": true,
+                  "hosting": false,
+                  "mobile": true,
+                  "satellite": true
+                }
+              },
+              {
+                "type": "null",
+                "example": null
+              }
+            ],
+            "example": {
+              "anycast": true,
               "hosting": false,
-              "residential_proxy": false,
-              "callback_proxy": false,
-              "provider": "Mullvad VPN"
+              "mobile": true,
+              "satellite": true
             }
           },
-          "reputation": {
+          "privacy": {
             "type": "object",
             "additionalProperties": false,
             "required": [
-              "listed",
-              "categories",
-              "suspicious_network"
+              "status",
+              "classifications",
+              "service",
+              "location_obscured",
+              "location_precision"
             ],
             "properties": {
-              "listed": {
-                "type": "boolean",
-                "example": true
+              "status": {
+                "type": "string",
+                "enum": [
+                  "detected",
+                  "not_detected",
+                  "unknown"
+                ],
+                "example": "detected"
               },
-              "categories": {
+              "classifications": {
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "example": "categories"
+                  "example": "classifications"
                 },
                 "example": [
-                  "vpn"
+                  "classifications"
                 ]
               },
-              "suspicious_network": {
-                "type": "boolean",
-                "example": false
-              }
-            },
-            "example": {
-              "listed": true,
-              "categories": [
-                "vpn"
-              ],
-              "suspicious_network": false
-            }
-          },
-          "evidence": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "risk_signals",
-              "operator_tags",
-              "client_types",
-              "client_count"
-            ],
-            "properties": {
-              "risk_signals": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "example": "vpn"
-                },
-                "example": [
-                  "vpn"
-                ]
-              },
-              "operator_tags": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "example": "vpn"
-                },
-                "example": [
-                  "vpn"
-                ]
-              },
-              "client_types": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "example": "consumer"
-                },
-                "example": [
-                  "consumer"
-                ]
-              },
-              "client_count": {
+              "service": {
                 "anyOf": [
                   {
-                    "type": "integer",
-                    "minimum": 0,
-                    "example": 1
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id",
+                      "name",
+                      "type"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "sid_87wfetm98myh9awj0dpt28a3kc"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Acme Growth Workspace"
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "type"
+                      }
+                    },
+                    "example": {
+                      "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                      "name": "Acme Growth Workspace",
+                      "type": "type"
+                    }
                   },
                   {
                     "type": "null",
                     "example": null
                   }
                 ],
-                "example": 1
+                "example": {
+                  "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                  "name": "Acme Growth Workspace",
+                  "type": "type"
+                }
+              },
+              "location_obscured": {
+                "type": "boolean",
+                "example": true
+              },
+              "location_precision": {
+                "type": "string",
+                "enum": [
+                  "city",
+                  "region",
+                  "country",
+                  "unknown"
+                ],
+                "example": "city"
               }
             },
             "example": {
-              "risk_signals": [
-                "vpn"
+              "status": "detected",
+              "classifications": [
+                "classifications"
               ],
-              "operator_tags": [
-                "vpn"
-              ],
-              "client_types": [
-                "consumer"
-              ],
-              "client_count": 1
+              "service": {
+                "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                "name": "Acme Growth Workspace",
+                "type": "type"
+              },
+              "location_obscured": true,
+              "location_precision": "city"
             }
           },
-          "evaluated_at": {
-            "type": [
-              "string",
-              "null"
+          "proxy_activity": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "current_status",
+              "history_status",
+              "activity",
+              "confidence",
+              "most_recent_last_seen_at",
+              "providers"
             ],
-            "format": "date-time",
-            "example": "2026-03-24T20:00:05.000Z"
+            "properties": {
+              "current_status": {
+                "type": "string",
+                "enum": [
+                  "match",
+                  "no_match",
+                  "unknown"
+                ],
+                "example": "match"
+              },
+              "history_status": {
+                "type": "string",
+                "enum": [
+                  "match",
+                  "no_match",
+                  "unknown"
+                ],
+                "example": "match"
+              },
+              "activity": {
+                "type": "string",
+                "enum": [
+                  "active",
+                  "recently_seen",
+                  "historical",
+                  "not_detected",
+                  "unknown"
+                ],
+                "example": "active"
+              },
+              "confidence": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "strong",
+                      "decaying",
+                      "recent_history",
+                      "historical"
+                    ],
+                    "example": "strong"
+                  },
+                  {
+                    "type": "null",
+                    "example": null
+                  }
+                ],
+                "example": "strong"
+              },
+              "most_recent_last_seen_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time",
+                "example": "2026-03-24T20:00:05.000Z"
+              },
+              "providers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SessionNetworkProviderEvidence",
+                  "example": {
+                    "provider": "Mullvad VPN",
+                    "type": "type",
+                    "first_seen_at": "2026-03-01T18:22:11.000Z",
+                    "last_seen_at": "2026-03-24T20:00:05.000Z",
+                    "days_seen": 1,
+                    "country_code": "US",
+                    "asn": 1,
+                    "sources": [
+                      "firehose"
+                    ]
+                  }
+                },
+                "example": [
+                  {
+                    "provider": "Mullvad VPN",
+                    "type": "type",
+                    "first_seen_at": "2026-03-01T18:22:11.000Z",
+                    "last_seen_at": "2026-03-24T20:00:05.000Z",
+                    "days_seen": 1,
+                    "country_code": "US",
+                    "asn": 1,
+                    "sources": [
+                      "firehose"
+                    ]
+                  }
+                ]
+              }
+            },
+            "example": {
+              "current_status": "match",
+              "history_status": "match",
+              "activity": "active",
+              "confidence": "strong",
+              "most_recent_last_seen_at": "2026-03-24T20:00:05.000Z",
+              "providers": [
+                {
+                  "provider": "Mullvad VPN",
+                  "type": "type",
+                  "first_seen_at": "2026-03-01T18:22:11.000Z",
+                  "last_seen_at": "2026-03-24T20:00:05.000Z",
+                  "days_seen": 1,
+                  "country_code": "US",
+                  "asn": 1,
+                  "sources": [
+                    "firehose"
+                  ]
+                }
+              ]
+            }
+          },
+          "anonymizer": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status",
+              "matched_ranges",
+              "providers"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "match",
+                  "no_match",
+                  "unknown"
+                ],
+                "example": "match"
+              },
+              "matched_ranges": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "range_start",
+                    "range_end"
+                  ],
+                  "properties": {
+                    "range_start": {
+                      "type": "string",
+                      "example": "range_start"
+                    },
+                    "range_end": {
+                      "type": "string",
+                      "example": "range_end"
+                    }
+                  },
+                  "example": {
+                    "range_start": "range_start",
+                    "range_end": "range_end"
+                  }
+                },
+                "example": [
+                  {
+                    "range_start": "range_start",
+                    "range_end": "range_end"
+                  }
+                ]
+              },
+              "providers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SessionNetworkProviderEvidence",
+                  "example": {
+                    "provider": "Mullvad VPN",
+                    "type": "type",
+                    "first_seen_at": "2026-03-01T18:22:11.000Z",
+                    "last_seen_at": "2026-03-24T20:00:05.000Z",
+                    "days_seen": 1,
+                    "country_code": "US",
+                    "asn": 1,
+                    "sources": [
+                      "firehose"
+                    ]
+                  }
+                },
+                "example": [
+                  {
+                    "provider": "Mullvad VPN",
+                    "type": "type",
+                    "first_seen_at": "2026-03-01T18:22:11.000Z",
+                    "last_seen_at": "2026-03-24T20:00:05.000Z",
+                    "days_seen": 1,
+                    "country_code": "US",
+                    "asn": 1,
+                    "sources": [
+                      "firehose"
+                    ]
+                  }
+                ]
+              }
+            },
+            "example": {
+              "status": "match",
+              "matched_ranges": [
+                {
+                  "range_start": "range_start",
+                  "range_end": "range_end"
+                }
+              ],
+              "providers": [
+                {
+                  "provider": "Mullvad VPN",
+                  "type": "type",
+                  "first_seen_at": "2026-03-01T18:22:11.000Z",
+                  "last_seen_at": "2026-03-24T20:00:05.000Z",
+                  "days_seen": 1,
+                  "country_code": "US",
+                  "asn": 1,
+                  "sources": [
+                    "firehose"
+                  ]
+                }
+              ]
+            }
+          },
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "evaluated_at",
+              "lookup_source",
+              "proxy_realtime_coverage",
+              "datasets"
+            ],
+            "properties": {
+              "evaluated_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time",
+                "example": "2026-03-24T20:00:05.000Z"
+              },
+              "lookup_source": {
+                "type": "string",
+                "enum": [
+                  "service",
+                  "last_known",
+                  "legacy"
+                ],
+                "example": "service"
+              },
+              "proxy_realtime_coverage": {
+                "type": "string",
+                "example": "proxy_realtime_coverage"
+              },
+              "datasets": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "proxy_history",
+                  "anonymizer",
+                  "ipinfo",
+                  "apple_private_relay"
+                ],
+                "properties": {
+                  "proxy_history": {
+                    "$ref": "#/components/schemas/SessionNetworkDataset",
+                    "example": {
+                      "generation": "generation",
+                      "source_through": "2026-03-24T20:00:05.000Z",
+                      "stale": true
+                    }
+                  },
+                  "anonymizer": {
+                    "$ref": "#/components/schemas/SessionNetworkDataset",
+                    "example": {
+                      "generation": "generation",
+                      "source_through": "2026-03-24T20:00:05.000Z",
+                      "stale": true
+                    }
+                  },
+                  "ipinfo": {
+                    "$ref": "#/components/schemas/SessionNetworkDataset",
+                    "example": {
+                      "generation": "generation",
+                      "source_through": "2026-03-24T20:00:05.000Z",
+                      "stale": true
+                    }
+                  },
+                  "apple_private_relay": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/SessionNetworkDataset",
+                        "example": {
+                          "generation": "generation",
+                          "source_through": "2026-03-24T20:00:05.000Z",
+                          "stale": true
+                        }
+                      },
+                      {
+                        "type": "null",
+                        "example": null
+                      }
+                    ],
+                    "example": {
+                      "generation": "generation",
+                      "source_through": "2026-03-24T20:00:05.000Z",
+                      "stale": true
+                    }
+                  }
+                },
+                "example": {
+                  "proxy_history": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  },
+                  "anonymizer": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  },
+                  "ipinfo": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  },
+                  "apple_private_relay": {
+                    "generation": "generation",
+                    "source_through": "2026-03-24T20:00:05.000Z",
+                    "stale": true
+                  }
+                }
+              }
+            },
+            "example": {
+              "evaluated_at": "2026-03-24T20:00:05.000Z",
+              "lookup_source": "service",
+              "proxy_realtime_coverage": "proxy_realtime_coverage",
+              "datasets": {
+                "proxy_history": {
+                  "generation": "generation",
+                  "source_through": "2026-03-24T20:00:05.000Z",
+                  "stale": true
+                },
+                "anonymizer": {
+                  "generation": "generation",
+                  "source_through": "2026-03-24T20:00:05.000Z",
+                  "stale": true
+                },
+                "ipinfo": {
+                  "generation": "generation",
+                  "source_through": "2026-03-24T20:00:05.000Z",
+                  "stale": true
+                },
+                "apple_private_relay": {
+                  "generation": "generation",
+                  "source_through": "2026-03-24T20:00:05.000Z",
+                  "stale": true
+                }
+              }
+            }
           }
         },
         "example": {
@@ -16948,162 +18585,241 @@
           "ip_version": "ipv4",
           "status": "ready",
           "summary": "Browser is being driven by automation",
+          "matched_network": "matched_network",
           "location": {
             "city": "San Francisco",
             "region": "California",
+            "region_code": "California",
             "country": "United States",
             "country_code": "US",
+            "continent": "continent",
+            "continent_code": "request.validation_failed",
             "latitude": 37.7749,
             "longitude": -122.4194,
             "timezone": "America/Los_Angeles",
             "postal_code": "94103",
-            "accuracy_radius_km": 10
+            "dma_code": "request.validation_failed",
+            "geoname_id": "Acme Workspace",
+            "accuracy_radius_km": 10,
+            "last_changed": "2026-03-24T20:00:05.000Z"
           },
-          "routing": {
-            "asn": "64512",
-            "organization": "SPECTRANET LIMITED"
+          "autonomous_system": {
+            "number": 1,
+            "name": "Acme Growth Workspace",
+            "domain": "browserless.io",
+            "type": "type",
+            "last_changed": "2026-03-24T20:00:05.000Z"
           },
-          "anonymity": {
-            "vpn": true,
-            "proxy": false,
-            "tor": false,
-            "relay": false,
+          "carrier": {
+            "name": "Acme Growth Workspace",
+            "mcc": "mcc",
+            "mnc": "mnc"
+          },
+          "traits": {
+            "anycast": true,
             "hosting": false,
-            "residential_proxy": false,
-            "callback_proxy": false,
-            "provider": "Mullvad VPN"
+            "mobile": true,
+            "satellite": true
           },
-          "reputation": {
-            "listed": true,
-            "categories": [
-              "vpn"
+          "privacy": {
+            "status": "detected",
+            "classifications": [
+              "classifications"
             ],
-            "suspicious_network": false
+            "service": {
+              "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+              "name": "Acme Growth Workspace",
+              "type": "type"
+            },
+            "location_obscured": true,
+            "location_precision": "city"
           },
-          "evidence": {
-            "risk_signals": [
-              "vpn"
-            ],
-            "operator_tags": [
-              "vpn"
-            ],
-            "client_types": [
-              "consumer"
-            ],
-            "client_count": 1
+          "proxy_activity": {
+            "current_status": "match",
+            "history_status": "match",
+            "activity": "active",
+            "confidence": "strong",
+            "most_recent_last_seen_at": "2026-03-24T20:00:05.000Z",
+            "providers": [
+              {
+                "provider": "Mullvad VPN",
+                "type": "type",
+                "first_seen_at": "2026-03-01T18:22:11.000Z",
+                "last_seen_at": "2026-03-24T20:00:05.000Z",
+                "days_seen": 1,
+                "country_code": "US",
+                "asn": 1,
+                "sources": [
+                  "firehose"
+                ]
+              }
+            ]
           },
-          "evaluated_at": "2026-03-24T20:00:05.000Z"
+          "anonymizer": {
+            "status": "match",
+            "matched_ranges": [
+              {
+                "range_start": "range_start",
+                "range_end": "range_end"
+              }
+            ],
+            "providers": [
+              {
+                "provider": "Mullvad VPN",
+                "type": "type",
+                "first_seen_at": "2026-03-01T18:22:11.000Z",
+                "last_seen_at": "2026-03-24T20:00:05.000Z",
+                "days_seen": 1,
+                "country_code": "US",
+                "asn": 1,
+                "sources": [
+                  "firehose"
+                ]
+              }
+            ]
+          },
+          "provenance": {
+            "evaluated_at": "2026-03-24T20:00:05.000Z",
+            "lookup_source": "service",
+            "proxy_realtime_coverage": "proxy_realtime_coverage",
+            "datasets": {
+              "proxy_history": {
+                "generation": "generation",
+                "source_through": "2026-03-24T20:00:05.000Z",
+                "stale": true
+              },
+              "anonymizer": {
+                "generation": "generation",
+                "source_through": "2026-03-24T20:00:05.000Z",
+                "stale": true
+              },
+              "ipinfo": {
+                "generation": "generation",
+                "source_through": "2026-03-24T20:00:05.000Z",
+                "stale": true
+              },
+              "apple_private_relay": {
+                "generation": "generation",
+                "source_through": "2026-03-24T20:00:05.000Z",
+                "stale": true
+              }
+            }
+          }
         }
       },
-      "SessionNetworkLocation": {
-        "anyOf": [
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "city",
-              "region",
-              "country",
-              "country_code",
-              "latitude",
-              "longitude",
-              "timezone",
-              "postal_code",
-              "accuracy_radius_km"
-            ],
-            "properties": {
-              "city": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "San Francisco"
-              },
-              "region": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "California"
-              },
-              "country": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "United States"
-              },
-              "country_code": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "US"
-              },
-              "latitude": {
-                "type": [
-                  "number",
-                  "null"
-                ],
-                "example": 37.7749
-              },
-              "longitude": {
-                "type": [
-                  "number",
-                  "null"
-                ],
-                "example": -122.4194
-              },
-              "timezone": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "America/Los_Angeles"
-              },
-              "postal_code": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "94103"
-              },
-              "accuracy_radius_km": {
-                "type": [
-                  "number",
-                  "null"
-                ],
-                "minimum": 0,
-                "example": 10
-              }
-            },
-            "example": {
-              "city": "San Francisco",
-              "region": "California",
-              "country": "United States",
-              "country_code": "US",
-              "latitude": 37.7749,
-              "longitude": -122.4194,
-              "timezone": "America/Los_Angeles",
-              "postal_code": "94103",
-              "accuracy_radius_km": 10
-            }
-          },
-          {
-            "type": "null",
-            "example": null
-          }
+      "SessionNetworkDataset": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "generation",
+          "source_through",
+          "stale"
         ],
+        "properties": {
+          "generation": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "generation"
+          },
+          "source_through": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "example": "2026-03-24T20:00:05.000Z"
+          },
+          "stale": {
+            "type": "boolean",
+            "example": true
+          }
+        },
         "example": {
-          "city": "San Francisco",
-          "region": "California",
-          "country": "United States",
+          "generation": "generation",
+          "source_through": "2026-03-24T20:00:05.000Z",
+          "stale": true
+        }
+      },
+      "SessionNetworkProviderEvidence": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "provider",
+          "type",
+          "first_seen_at",
+          "last_seen_at",
+          "days_seen",
+          "country_code",
+          "asn",
+          "sources"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "example": "Mullvad VPN"
+          },
+          "type": {
+            "type": "string",
+            "example": "type"
+          },
+          "first_seen_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-03-01T18:22:11.000Z"
+          },
+          "last_seen_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-03-24T20:00:05.000Z"
+          },
+          "days_seen": {
+            "type": "integer",
+            "minimum": 0,
+            "example": 1
+          },
+          "country_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "US"
+          },
+          "asn": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "example": 1
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "firehose",
+                "hourly",
+                "daily"
+              ],
+              "example": "firehose"
+            },
+            "example": [
+              "firehose"
+            ]
+          }
+        },
+        "example": {
+          "provider": "Mullvad VPN",
+          "type": "type",
+          "first_seen_at": "2026-03-01T18:22:11.000Z",
+          "last_seen_at": "2026-03-24T20:00:05.000Z",
+          "days_seen": 1,
           "country_code": "US",
-          "latitude": 37.7749,
-          "longitude": -122.4194,
-          "timezone": "America/Los_Angeles",
-          "postal_code": "94103",
-          "accuracy_radius_km": 10
+          "asn": 1,
+          "sources": [
+            "firehose"
+          ]
         }
       },
       "SessionRawDeviceAudio": {
@@ -18228,7 +19944,7 @@
               "elevated",
               "high_risk"
             ],
-            "example": "high_risk"
+            "example": "clean"
           },
           "developer_tools": {
             "type": "string",
@@ -18238,7 +19954,7 @@
               "elevated",
               "high_risk"
             ],
-            "example": "high_risk"
+            "example": "clean"
           },
           "emulation": {
             "type": "string",
@@ -18258,7 +19974,7 @@
               "elevated",
               "high_risk"
             ],
-            "example": "high_risk"
+            "example": "clean"
           },
           "privacy_hardening": {
             "type": "string",
@@ -18268,7 +19984,7 @@
               "elevated",
               "high_risk"
             ],
-            "example": "notice"
+            "example": "clean"
           },
           "identity_spoofing": {
             "type": "string",
@@ -18302,11 +20018,11 @@
           }
         },
         "example": {
-          "tampering": "high_risk",
-          "developer_tools": "high_risk",
+          "tampering": "clean",
+          "developer_tools": "clean",
           "emulation": "clean",
-          "virtualization": "high_risk",
-          "privacy_hardening": "notice",
+          "virtualization": "clean",
+          "privacy_hardening": "clean",
           "identity_spoofing": "clean",
           "replay": "clean",
           "outdated_environment": "clean"

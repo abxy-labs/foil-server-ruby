@@ -131,51 +131,105 @@
       "ip_version": "ipv4",
       "status": "ready",
       "summary": "This IP appears associated with VPN traffic.",
+      "matched_network": "203.0.113.0/24",
       "location": {
         "city": "San Francisco",
         "region": "California",
+        "region_code": "CA",
         "country": "United States",
         "country_code": "US",
+        "continent": "North America",
+        "continent_code": "NA",
         "latitude": 37.7749,
         "longitude": -122.4194,
         "timezone": "America/Los_Angeles",
         "postal_code": "94103",
-        "accuracy_radius_km": 10
+        "dma_code": "807",
+        "geoname_id": "5391959",
+        "accuracy_radius_km": 10,
+        "last_changed": "2026-03-24T00:00:00.000Z"
       },
-      "routing": {
-        "asn": "64512",
-        "organization": "Example Networks"
+      "autonomous_system": {
+        "number": 64512,
+        "name": "Example Networks",
+        "domain": "example.net",
+        "type": "hosting",
+        "last_changed": "2026-03-20T00:00:00.000Z"
       },
-      "anonymity": {
-        "vpn": true,
-        "proxy": false,
-        "tor": false,
-        "relay": false,
-        "hosting": false,
-        "residential_proxy": false,
-        "callback_proxy": false,
-        "provider": "Example VPN"
+      "carrier": null,
+      "traits": {
+        "anycast": false,
+        "hosting": true,
+        "mobile": false,
+        "satellite": false
       },
-      "reputation": {
-        "listed": true,
-        "categories": [
+      "privacy": {
+        "status": "detected",
+        "classifications": [
           "vpn"
         ],
-        "suspicious_network": false
+        "service": {
+          "id": "example_vpn",
+          "name": "Example VPN",
+          "type": "vpn"
+        },
+        "location_obscured": true,
+        "location_precision": "city"
       },
-      "evidence": {
-        "risk_signals": [
-          "vpn"
-        ],
-        "operator_tags": [
-          "vpn"
-        ],
-        "client_types": [
-          "consumer"
-        ],
-        "client_count": 3
+      "proxy_activity": {
+        "current_status": "no_match",
+        "history_status": "no_match",
+        "activity": "not_detected",
+        "confidence": null,
+        "most_recent_last_seen_at": null,
+        "providers": []
       },
-      "evaluated_at": "2026-03-24T20:00:05.000Z"
+      "anonymizer": {
+        "status": "match",
+        "matched_ranges": [
+          {
+            "range_start": "203.0.113.0",
+            "range_end": "203.0.113.255"
+          }
+        ],
+        "providers": [
+          {
+            "provider": "Example VPN",
+            "type": "VPN",
+            "first_seen_at": "2026-03-01T00:00:00.000Z",
+            "last_seen_at": "2026-03-24T00:00:00.000Z",
+            "days_seen": 24,
+            "country_code": "US",
+            "asn": 64512,
+            "sources": [
+              "daily"
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "evaluated_at": "2026-03-24T20:00:05.000Z",
+        "lookup_source": "service",
+        "proxy_realtime_coverage": "current",
+        "datasets": {
+          "proxy_history": {
+            "generation": "proxy-2026-03-24",
+            "source_through": "2026-03-24T20:00:00.000Z",
+            "stale": false
+          },
+          "anonymizer": {
+            "generation": "anonymizer-2026-03-24",
+            "source_through": "2026-03-24T00:00:00.000Z",
+            "stale": false
+          },
+          "ipinfo": {
+            "generation": "ipinfo-2026-03-24",
+            "source_through": "2026-03-24T00:00:00.000Z",
+            "stale": false
+          },
+          "apple_private_relay": null
+        }
+      }
     },
     "runtime_integrity": {
       "tampering": "high_risk",
