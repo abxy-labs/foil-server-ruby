@@ -17740,6 +17740,7 @@
             "enum": [
               "ready",
               "partial",
+              "pending",
               "unavailable",
               "skipped"
             ],
