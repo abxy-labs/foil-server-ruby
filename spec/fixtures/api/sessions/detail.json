@@ -352,6 +352,7 @@
     ],
     "client_telemetry": {
       "navigator": {
+        "model": null,
         "platform": "macOS",
         "vendor": "Google Inc.",
         "hardware_concurrency": null,
