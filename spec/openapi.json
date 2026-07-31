@@ -690,6 +690,7 @@
                       ],
                       "client_telemetry": {
                         "navigator": {
+                          "model": null,
                           "platform": "macOS",
                           "vendor": "Google Inc.",
                           "hardware_concurrency": 8,
@@ -11291,6 +11292,7 @@
           "navigator": {
             "$ref": "#/components/schemas/SessionRawDeviceNavigator",
             "example": {
+              "model": null,
               "platform": "macOS",
               "vendor": "Google Inc.",
               "hardware_concurrency": 8,
@@ -11394,6 +11396,7 @@
         },
         "example": {
           "navigator": {
+            "model": null,
             "platform": "macOS",
             "vendor": "Google Inc.",
             "hardware_concurrency": 8,
@@ -12622,6 +12625,7 @@
             "$ref": "#/components/schemas/SessionClientTelemetry",
             "example": {
               "navigator": {
+                "model": null,
                 "platform": "macOS",
                 "vendor": "Google Inc.",
                 "hardware_concurrency": 8,
@@ -13179,6 +13183,7 @@
           ],
           "client_telemetry": {
             "navigator": {
+              "model": null,
               "platform": "macOS",
               "vendor": "Google Inc.",
               "hardware_concurrency": 8,
@@ -13917,6 +13922,7 @@
               ],
               "client_telemetry": {
                 "navigator": {
+                  "model": null,
                   "platform": "macOS",
                   "vendor": "Google Inc.",
                   "hardware_concurrency": 8,
@@ -14447,6 +14453,7 @@
             ],
             "client_telemetry": {
               "navigator": {
+                "model": null,
                 "platform": "macOS",
                 "vendor": "Google Inc.",
                 "hardware_concurrency": 8,
@@ -17530,6 +17537,7 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
+          "model",
           "platform",
           "vendor",
           "hardware_concurrency",
@@ -17544,6 +17552,14 @@
           "plugins"
         ],
         "properties": {
+          "model": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Browser-reported device model from high-entropy User-Agent Client Hints. This identifies a model class, not a unique physical device.",
+            "example": "Pixel 10a"
+          },
           "platform": {
             "type": [
               "string",
@@ -17641,6 +17657,7 @@
           }
         },
         "example": {
+          "model": null,
           "platform": "macOS",
           "vendor": "Google Inc.",
           "hardware_concurrency": 8,
