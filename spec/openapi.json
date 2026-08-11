@@ -796,7 +796,8 @@
                             "confidence": 86
                           }
                         ]
-                      }
+                      },
+                      "behavior": null
                     },
                     "meta": {
                       "request_id": "req_cf147349a4134208aebb8c70e25fb7e1"
@@ -11832,7 +11833,8 @@
           "analysis_coverage",
           "signals_fired",
           "client_telemetry",
-          "client_user_id"
+          "client_user_id",
+          "behavior"
         ],
         "properties": {
           "object": {
@@ -12767,6 +12769,19 @@
                 }
               ]
             }
+          },
+          "behavior": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SessionDetailBehavior"
+              },
+              {
+                "type": "null",
+                "example": null
+              }
+            ],
+            "description": "Per-field behavior-plane ledger: assessment tier and plain-language findings, per-field entry mode/tone/mechanics, and field coverage. Null unless behavior-ledger access is enabled for your organization (off by default).",
+            "example": null
           }
         },
         "example": {
@@ -13289,6 +13304,279 @@
                 "confidence": 86
               }
             ]
+          },
+          "behavior": null
+        }
+      },
+      "SessionDetailBehavior": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assessment",
+          "fields",
+          "coverage"
+        ],
+        "properties": {
+          "assessment": {
+            "$ref": "#/components/schemas/SessionDetailBehaviorAssessment",
+            "example": {
+              "tier": "elevated",
+              "findings": [
+                "Injected field fill"
+              ]
+            }
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionDetailBehaviorField"
+            },
+            "example": [
+              {
+                "field_hash": 1234567890,
+                "display_name": "Phone number",
+                "field_role": "phone",
+                "entry_mode": "changed_without_input",
+                "tone": "risk",
+                "mechanics": {
+                  "input_count": 0,
+                  "typed_chars": 0,
+                  "paste_count": 0,
+                  "correction_count": 0,
+                  "dwell_ms": 0,
+                  "median_interval_ms": null,
+                  "interval_cv": null
+                }
+              }
+            ]
+          },
+          "coverage": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fields_tracked",
+              "fields_dropped",
+              "complete"
+            ],
+            "properties": {
+              "fields_tracked": {
+                "type": "number",
+                "example": 3
+              },
+              "fields_dropped": {
+                "type": "number",
+                "example": 0
+              },
+              "complete": {
+                "type": "boolean",
+                "example": true
+              }
+            },
+            "example": {
+              "fields_tracked": 3,
+              "fields_dropped": 0,
+              "complete": true
+            }
+          }
+        },
+        "example": {
+          "assessment": {
+            "tier": "elevated",
+            "findings": [
+              "Injected field fill"
+            ]
+          },
+          "fields": [
+            {
+              "field_hash": 1234567890,
+              "display_name": "Phone number",
+              "field_role": "phone",
+              "entry_mode": "changed_without_input",
+              "tone": "risk",
+              "mechanics": {
+                "input_count": 0,
+                "typed_chars": 0,
+                "paste_count": 0,
+                "correction_count": 0,
+                "dwell_ms": 0,
+                "median_interval_ms": null,
+                "interval_cv": null
+              }
+            }
+          ],
+          "coverage": {
+            "fields_tracked": 3,
+            "fields_dropped": 0,
+            "complete": true
+          }
+        }
+      },
+      "SessionDetailBehaviorAssessment": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tier",
+          "findings"
+        ],
+        "properties": {
+          "tier": {
+            "type": "string",
+            "enum": [
+              "none",
+              "elevated",
+              "high",
+              "unknown"
+            ],
+            "example": "elevated"
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "Injected field fill"
+            },
+            "example": [
+              "Injected field fill"
+            ]
+          }
+        },
+        "example": {
+          "tier": "elevated",
+          "findings": [
+            "Injected field fill"
+          ]
+        }
+      },
+      "SessionDetailBehaviorField": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field_hash",
+          "display_name",
+          "field_role",
+          "entry_mode",
+          "tone",
+          "mechanics"
+        ],
+        "properties": {
+          "field_hash": {
+            "type": "number",
+            "example": 1234567890
+          },
+          "display_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Phone number"
+          },
+          "field_role": {
+            "type": "string",
+            "example": "phone"
+          },
+          "entry_mode": {
+            "type": "string",
+            "enum": [
+              "typed",
+              "typed_with_edits",
+              "typed_and_pasted",
+              "pasted",
+              "autofilled",
+              "prefilled",
+              "changed_without_input",
+              "machine_speed",
+              "scripted_cadence",
+              "filled_instantly",
+              "changed",
+              "visited_no_entry",
+              "unknown"
+            ],
+            "example": "changed_without_input"
+          },
+          "tone": {
+            "type": "string",
+            "enum": [
+              "manual",
+              "assisted",
+              "notice",
+              "risk",
+              "neutral"
+            ],
+            "example": "risk"
+          },
+          "mechanics": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "input_count",
+              "typed_chars",
+              "paste_count",
+              "correction_count",
+              "dwell_ms",
+              "median_interval_ms",
+              "interval_cv"
+            ],
+            "properties": {
+              "input_count": {
+                "type": "number",
+                "example": 6
+              },
+              "typed_chars": {
+                "type": "number",
+                "example": 6
+              },
+              "paste_count": {
+                "type": "number",
+                "example": 0
+              },
+              "correction_count": {
+                "type": "number",
+                "example": 0
+              },
+              "dwell_ms": {
+                "type": "number",
+                "example": 1400
+              },
+              "median_interval_ms": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 180
+              },
+              "interval_cv": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0.42
+              }
+            },
+            "example": {
+              "input_count": 6,
+              "typed_chars": 6,
+              "paste_count": 0,
+              "correction_count": 0,
+              "dwell_ms": 1400,
+              "median_interval_ms": 180,
+              "interval_cv": 0.42
+            }
+          }
+        },
+        "example": {
+          "field_hash": 1234567890,
+          "display_name": "Phone number",
+          "field_role": "phone",
+          "entry_mode": "changed_without_input",
+          "tone": "risk",
+          "mechanics": {
+            "input_count": 0,
+            "typed_chars": 0,
+            "paste_count": 0,
+            "correction_count": 0,
+            "dwell_ms": 0,
+            "median_interval_ms": null,
+            "interval_cv": null
           }
         }
       },
@@ -14028,7 +14316,8 @@
                     "confidence": 86
                   }
                 ]
-              }
+              },
+              "behavior": null
             }
           },
           "meta": {
@@ -14559,7 +14848,8 @@
                   "confidence": 86
                 }
               ]
-            }
+            },
+            "behavior": null
           },
           "meta": {
             "request_id": "req_cf147349a4134208aebb8c70e25fb7e1"
