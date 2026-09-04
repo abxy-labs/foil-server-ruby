@@ -2037,7 +2037,8 @@
                         "created_at": "2026-03-24T20:00:00.000Z",
                         "rotated_at": "2026-03-24T20:00:05.000Z",
                         "revoked_at": "2026-03-24T20:00:05.000Z",
-                        "grace_expires_at": "2026-03-24T20:00:05.000Z"
+                        "grace_expires_at": "2026-03-24T20:00:05.000Z",
+                        "client_target": "browser"
                       }
                     ],
                     "pagination": {
@@ -2266,7 +2267,8 @@
                       "created_at": "2026-03-24T20:00:00.000Z",
                       "rotated_at": "2026-03-24T20:00:05.000Z",
                       "revoked_at": "2026-03-24T20:00:05.000Z",
-                      "grace_expires_at": "2026-03-24T20:00:05.000Z"
+                      "grace_expires_at": "2026-03-24T20:00:05.000Z",
+                      "client_target": "browser"
                     },
                     "meta": {
                       "request_id": "req_cf147349a4134208aebb8c70e25fb7e1"
@@ -2480,7 +2482,8 @@
                       "created_at": "2026-03-24T20:00:00.000Z",
                       "rotated_at": "2026-03-24T20:00:05.000Z",
                       "revoked_at": "2026-03-24T20:00:05.000Z",
-                      "grace_expires_at": "2026-03-24T20:00:05.000Z"
+                      "grace_expires_at": "2026-03-24T20:00:05.000Z",
+                      "client_target": "browser"
                     },
                     "meta": {
                       "request_id": "req_cf147349a4134208aebb8c70e25fb7e1"
@@ -2676,7 +2679,8 @@
                       "created_at": "2026-03-24T20:00:00.000Z",
                       "rotated_at": "2026-03-24T20:00:05.000Z",
                       "revoked_at": "2026-03-24T20:00:05.000Z",
-                      "grace_expires_at": "2026-03-24T20:00:05.000Z"
+                      "grace_expires_at": "2026-03-24T20:00:05.000Z",
+                      "client_target": "browser"
                     },
                     "meta": {
                       "request_id": "req_cf147349a4134208aebb8c70e25fb7e1"
@@ -2889,7 +2893,8 @@
                       "created_at": "2026-03-24T20:00:00.000Z",
                       "rotated_at": "2026-03-24T20:00:05.000Z",
                       "revoked_at": "2026-03-24T20:00:05.000Z",
-                      "grace_expires_at": "2026-03-24T20:00:05.000Z"
+                      "grace_expires_at": "2026-03-24T20:00:05.000Z",
+                      "client_target": "browser"
                     },
                     "meta": {
                       "request_id": "req_cf147349a4134208aebb8c70e25fb7e1"
@@ -7312,6 +7317,7 @@
           "name",
           "status",
           "allowed_origins",
+          "client_target",
           "scopes",
           "rate_limit",
           "key_preview",
@@ -7371,6 +7377,17 @@
             "example": [
               "https://app.acme.co/signup"
             ]
+          },
+          "client_target": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyClientTarget"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": "browser"
           },
           "scopes": {
             "anyOf": [
@@ -7498,8 +7515,18 @@
           "created_at": "2026-03-24T20:00:00.000Z",
           "rotated_at": "2026-03-24T20:00:05.000Z",
           "revoked_at": "2026-03-24T20:00:05.000Z",
-          "grace_expires_at": "2026-03-24T20:00:05.000Z"
+          "grace_expires_at": "2026-03-24T20:00:05.000Z",
+          "client_target": "browser"
         }
+      },
+      "ApiKeyClientTarget": {
+        "type": "string",
+        "enum": [
+          "browser",
+          "native-ios",
+          "native-android"
+        ],
+        "example": "browser"
       },
       "ApiKeyEnvironment": {
         "type": "string",
@@ -7548,7 +7575,8 @@
                 "created_at": "2026-03-24T20:00:00.000Z",
                 "rotated_at": "2026-03-24T20:00:05.000Z",
                 "revoked_at": "2026-03-24T20:00:05.000Z",
-                "grace_expires_at": "2026-03-24T20:00:05.000Z"
+                "grace_expires_at": "2026-03-24T20:00:05.000Z",
+                "client_target": "browser"
               }
             },
             "example": [
@@ -7573,7 +7601,8 @@
                 "created_at": "2026-03-24T20:00:00.000Z",
                 "rotated_at": "2026-03-24T20:00:05.000Z",
                 "revoked_at": "2026-03-24T20:00:05.000Z",
-                "grace_expires_at": "2026-03-24T20:00:05.000Z"
+                "grace_expires_at": "2026-03-24T20:00:05.000Z",
+                "client_target": "browser"
               }
             ]
           },
@@ -7615,7 +7644,8 @@
               "created_at": "2026-03-24T20:00:00.000Z",
               "rotated_at": "2026-03-24T20:00:05.000Z",
               "revoked_at": "2026-03-24T20:00:05.000Z",
-              "grace_expires_at": "2026-03-24T20:00:05.000Z"
+              "grace_expires_at": "2026-03-24T20:00:05.000Z",
+              "client_target": "browser"
             }
           ],
           "pagination": {
@@ -7659,7 +7689,8 @@
               "created_at": "2026-03-24T20:00:00.000Z",
               "rotated_at": "2026-03-24T20:00:05.000Z",
               "revoked_at": "2026-03-24T20:00:05.000Z",
-              "grace_expires_at": "2026-03-24T20:00:05.000Z"
+              "grace_expires_at": "2026-03-24T20:00:05.000Z",
+              "client_target": "browser"
             }
           },
           "meta": {
@@ -7691,7 +7722,8 @@
             "created_at": "2026-03-24T20:00:00.000Z",
             "rotated_at": "2026-03-24T20:00:05.000Z",
             "revoked_at": "2026-03-24T20:00:05.000Z",
-            "grace_expires_at": "2026-03-24T20:00:05.000Z"
+            "grace_expires_at": "2026-03-24T20:00:05.000Z",
+            "client_target": "browser"
           },
           "meta": {
             "request_id": "req_cf147349a4134208aebb8c70e25fb7e1"
@@ -7745,6 +7777,11 @@
           "environment": {
             "$ref": "#/components/schemas/ApiKeyEnvironment",
             "example": "live"
+          },
+          "client_target": {
+            "$ref": "#/components/schemas/ApiKeyClientTarget",
+            "description": "Required for native publishable keys. Defaults to browser for publishable keys and must be omitted for secret keys.",
+            "example": "browser"
           },
           "allowed_origins": {
             "type": "array",
@@ -10365,6 +10402,7 @@
           "name",
           "status",
           "allowed_origins",
+          "client_target",
           "scopes",
           "rate_limit",
           "key_preview",
@@ -10425,6 +10463,17 @@
             "example": [
               "https://app.acme.co/signup"
             ]
+          },
+          "client_target": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyClientTarget"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": "browser"
           },
           "scopes": {
             "anyOf": [
@@ -10552,7 +10601,8 @@
           "created_at": "2026-03-24T20:00:00.000Z",
           "rotated_at": "2026-03-24T20:00:05.000Z",
           "revoked_at": "2026-03-24T20:00:05.000Z",
-          "grace_expires_at": "2026-03-24T20:00:05.000Z"
+          "grace_expires_at": "2026-03-24T20:00:05.000Z",
+          "client_target": "browser"
         }
       },
       "IssuedApiKeyResponse": {
@@ -10586,7 +10636,8 @@
               "created_at": "2026-03-24T20:00:00.000Z",
               "rotated_at": "2026-03-24T20:00:05.000Z",
               "revoked_at": "2026-03-24T20:00:05.000Z",
-              "grace_expires_at": "2026-03-24T20:00:05.000Z"
+              "grace_expires_at": "2026-03-24T20:00:05.000Z",
+              "client_target": "browser"
             }
           },
           "meta": {
@@ -10618,7 +10669,8 @@
             "created_at": "2026-03-24T20:00:00.000Z",
             "rotated_at": "2026-03-24T20:00:05.000Z",
             "revoked_at": "2026-03-24T20:00:05.000Z",
-            "grace_expires_at": "2026-03-24T20:00:05.000Z"
+            "grace_expires_at": "2026-03-24T20:00:05.000Z",
+            "client_target": "browser"
           },
           "meta": {
             "request_id": "req_cf147349a4134208aebb8c70e25fb7e1"

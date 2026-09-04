@@ -9,6 +9,7 @@
     "allowed_origins": [
       "https://example.com"
     ],
+    "client_target": "browser",
     "scopes": null,
     "rate_limit": null,
     "key_preview": "pk_live_[example]...",
