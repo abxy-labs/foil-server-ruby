@@ -10,6 +10,7 @@
       "https://example.com",
       "https://app.example.com"
     ],
+    "client_target": "browser",
     "scopes": [
       "sessions:list",
       "sessions:read"

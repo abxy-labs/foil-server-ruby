@@ -7,6 +7,7 @@
     "environment": "live",
     "status": "active",
     "allowed_origins": null,
+    "client_target": null,
     "scopes": [
       "sessions:list",
       "sessions:read",
