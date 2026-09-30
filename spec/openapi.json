@@ -3056,7 +3056,7 @@
                         "url": "https://app.acme.co/signup",
                         "status": "active",
                         "event_types": [
-                          "session.fingerprint.calculated"
+                          "session.result.persisted"
                         ],
                         "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
                         "created_at": "2026-03-24T20:00:00.000Z",
@@ -3183,7 +3183,7 @@
                   "name": "Acme Growth Workspace",
                   "url": "https://app.acme.co/signup",
                   "event_types": [
-                    "session.fingerprint.calculated"
+                    "session.result.persisted"
                   ]
                 }
               }
@@ -3205,7 +3205,7 @@
                       "url": "https://app.acme.co/signup",
                       "status": "active",
                       "event_types": [
-                        "session.fingerprint.calculated"
+                        "session.result.persisted"
                       ],
                       "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
                       "created_at": "2026-03-24T20:00:00.000Z",
@@ -3374,7 +3374,7 @@
                   "url": "https://app.acme.co/signup",
                   "status": "active",
                   "event_types": [
-                    "session.fingerprint.calculated"
+                    "session.result.persisted"
                   ]
                 }
               }
@@ -3396,7 +3396,7 @@
                       "url": "https://app.acme.co/signup",
                       "status": "active",
                       "event_types": [
-                        "session.fingerprint.calculated"
+                        "session.result.persisted"
                       ],
                       "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
                       "created_at": "2026-03-24T20:00:00.000Z",
@@ -3603,7 +3603,7 @@
                       "url": "https://app.acme.co/signup",
                       "status": "active",
                       "event_types": [
-                        "session.fingerprint.calculated"
+                        "session.result.persisted"
                       ],
                       "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
                       "created_at": "2026-03-24T20:00:00.000Z",
@@ -3776,7 +3776,7 @@
                       "url": "https://app.acme.co/signup",
                       "status": "active",
                       "event_types": [
-                        "session.fingerprint.calculated"
+                        "session.result.persisted"
                       ],
                       "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
                       "created_at": "2026-03-24T20:00:00.000Z",
@@ -3953,7 +3953,7 @@
                         "id": "wdlv_0123456789abcdef0123456789abcdef",
                         "event_id": "wevt_0123456789abcdef0123456789abcdef",
                         "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                        "event_type": "session.fingerprint.calculated",
+                        "event_type": "session.result.persisted",
                         "status": "pending",
                         "attempts": 1,
                         "response_status": 1,
@@ -4122,7 +4122,7 @@
             "description": "Only return events of this type.",
             "schema": {
               "$ref": "#/components/schemas/WebhookDeliveryEventType",
-              "example": "session.fingerprint.calculated"
+              "example": "session.result.persisted"
             }
           },
           {
@@ -4150,7 +4150,7 @@
                       {
                         "object": "event",
                         "id": "wevt_0123456789abcdef0123456789abcdef",
-                        "type": "session.fingerprint.calculated",
+                        "type": "session.result.persisted",
                         "subject": {
                           "type": "type",
                           "id": "sid_87wfetm98myh9awj0dpt28a3kc"
@@ -4164,7 +4164,7 @@
                             "id": "wdlv_0123456789abcdef0123456789abcdef",
                             "event_id": "wevt_0123456789abcdef0123456789abcdef",
                             "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                            "event_type": "session.fingerprint.calculated",
+                            "event_type": "session.result.persisted",
                             "status": "pending",
                             "attempts": 1,
                             "response_status": 1,
@@ -4345,7 +4345,7 @@
                     "data": {
                       "object": "event",
                       "id": "wevt_0123456789abcdef0123456789abcdef",
-                      "type": "session.fingerprint.calculated",
+                      "type": "session.result.persisted",
                       "subject": {
                         "type": "type",
                         "id": "sid_87wfetm98myh9awj0dpt28a3kc"
@@ -4359,7 +4359,7 @@
                           "id": "wdlv_0123456789abcdef0123456789abcdef",
                           "event_id": "wevt_0123456789abcdef0123456789abcdef",
                           "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                          "event_type": "session.fingerprint.calculated",
+                          "event_type": "session.result.persisted",
                           "status": "pending",
                           "attempts": 1,
                           "response_status": 1,
@@ -8118,10 +8118,10 @@
             "minItems": 1,
             "items": {
               "$ref": "#/components/schemas/WebhookEventType",
-              "example": "session.fingerprint.calculated"
+              "example": "session.result.persisted"
             },
             "example": [
-              "session.fingerprint.calculated"
+              "session.result.persisted"
             ]
           }
         },
@@ -8129,7 +8129,7 @@
           "name": "Acme Growth Workspace",
           "url": "https://app.acme.co/signup",
           "event_types": [
-            "session.fingerprint.calculated"
+            "session.result.persisted"
           ]
         }
       },
@@ -8266,7 +8266,7 @@
           },
           "type": {
             "$ref": "#/components/schemas/WebhookDeliveryEventType",
-            "example": "session.fingerprint.calculated"
+            "example": "session.result.persisted"
           },
           "subject": {
             "$ref": "#/components/schemas/EventSubject",
@@ -8291,7 +8291,7 @@
                 "id": "wdlv_0123456789abcdef0123456789abcdef",
                 "event_id": "wevt_0123456789abcdef0123456789abcdef",
                 "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                "event_type": "session.fingerprint.calculated",
+                "event_type": "session.result.persisted",
                 "status": "pending",
                 "attempts": 1,
                 "response_status": 1,
@@ -8307,7 +8307,7 @@
                 "id": "wdlv_0123456789abcdef0123456789abcdef",
                 "event_id": "wevt_0123456789abcdef0123456789abcdef",
                 "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                "event_type": "session.fingerprint.calculated",
+                "event_type": "session.result.persisted",
                 "status": "pending",
                 "attempts": 1,
                 "response_status": 1,
@@ -8327,7 +8327,7 @@
         "example": {
           "object": "event",
           "id": "wevt_0123456789abcdef0123456789abcdef",
-          "type": "session.fingerprint.calculated",
+          "type": "session.result.persisted",
           "subject": {
             "type": "type",
             "id": "sid_87wfetm98myh9awj0dpt28a3kc"
@@ -8341,7 +8341,7 @@
               "id": "wdlv_0123456789abcdef0123456789abcdef",
               "event_id": "wevt_0123456789abcdef0123456789abcdef",
               "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-              "event_type": "session.fingerprint.calculated",
+              "event_type": "session.result.persisted",
               "status": "pending",
               "attempts": 1,
               "response_status": 1,
@@ -8375,7 +8375,7 @@
               "example": {
                 "object": "event",
                 "id": "wevt_0123456789abcdef0123456789abcdef",
-                "type": "session.fingerprint.calculated",
+                "type": "session.result.persisted",
                 "subject": {
                   "type": "type",
                   "id": "sid_87wfetm98myh9awj0dpt28a3kc"
@@ -8389,7 +8389,7 @@
                     "id": "wdlv_0123456789abcdef0123456789abcdef",
                     "event_id": "wevt_0123456789abcdef0123456789abcdef",
                     "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                    "event_type": "session.fingerprint.calculated",
+                    "event_type": "session.result.persisted",
                     "status": "pending",
                     "attempts": 1,
                     "response_status": 1,
@@ -8406,7 +8406,7 @@
               {
                 "object": "event",
                 "id": "wevt_0123456789abcdef0123456789abcdef",
-                "type": "session.fingerprint.calculated",
+                "type": "session.result.persisted",
                 "subject": {
                   "type": "type",
                   "id": "sid_87wfetm98myh9awj0dpt28a3kc"
@@ -8420,7 +8420,7 @@
                     "id": "wdlv_0123456789abcdef0123456789abcdef",
                     "event_id": "wevt_0123456789abcdef0123456789abcdef",
                     "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                    "event_type": "session.fingerprint.calculated",
+                    "event_type": "session.result.persisted",
                     "status": "pending",
                     "attempts": 1,
                     "response_status": 1,
@@ -8454,7 +8454,7 @@
             {
               "object": "event",
               "id": "wevt_0123456789abcdef0123456789abcdef",
-              "type": "session.fingerprint.calculated",
+              "type": "session.result.persisted",
               "subject": {
                 "type": "type",
                 "id": "sid_87wfetm98myh9awj0dpt28a3kc"
@@ -8468,7 +8468,7 @@
                   "id": "wdlv_0123456789abcdef0123456789abcdef",
                   "event_id": "wevt_0123456789abcdef0123456789abcdef",
                   "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                  "event_type": "session.fingerprint.calculated",
+                  "event_type": "session.result.persisted",
                   "status": "pending",
                   "attempts": 1,
                   "response_status": 1,
@@ -8504,7 +8504,7 @@
             "example": {
               "object": "event",
               "id": "wevt_0123456789abcdef0123456789abcdef",
-              "type": "session.fingerprint.calculated",
+              "type": "session.result.persisted",
               "subject": {
                 "type": "type",
                 "id": "sid_87wfetm98myh9awj0dpt28a3kc"
@@ -8518,7 +8518,7 @@
                   "id": "wdlv_0123456789abcdef0123456789abcdef",
                   "event_id": "wevt_0123456789abcdef0123456789abcdef",
                   "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                  "event_type": "session.fingerprint.calculated",
+                  "event_type": "session.result.persisted",
                   "status": "pending",
                   "attempts": 1,
                   "response_status": 1,
@@ -8542,7 +8542,7 @@
           "data": {
             "object": "event",
             "id": "wevt_0123456789abcdef0123456789abcdef",
-            "type": "session.fingerprint.calculated",
+            "type": "session.result.persisted",
             "subject": {
               "type": "type",
               "id": "sid_87wfetm98myh9awj0dpt28a3kc"
@@ -8556,7 +8556,7 @@
                 "id": "wdlv_0123456789abcdef0123456789abcdef",
                 "event_id": "wevt_0123456789abcdef0123456789abcdef",
                 "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                "event_type": "session.fingerprint.calculated",
+                "event_type": "session.result.persisted",
                 "status": "pending",
                 "attempts": 1,
                 "response_status": 1,
@@ -9964,17 +9964,31 @@
             "example": {
               "id": "wevt_0123456789abcdef0123456789abcdef",
               "object": "webhook_event",
-              "type": "session.fingerprint.calculated",
+              "type": "session.result.persisted",
               "created": "2026-03-24T20:00:00.000Z",
               "data": {
-                "object": "session_fingerprint",
+                "object": "session_result",
                 "session": {
                   "id": "sid_87wfetm98myh9awj0dpt28a3kc"
                 },
+                "event": {
+                  "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
+                  "scoring_event_id": "scoring_event_id",
+                  "phase": "phase",
+                  "is_provisional": false,
+                  "persisted_at": "2026-03-24T20:00:05.000Z"
+                },
+                "decision": {
+                  "verdict": "human",
+                  "risk_score": 94,
+                  "score": 0.08,
+                  "manipulation": {
+                    "score": 1,
+                    "verdict": "none"
+                  }
+                },
                 "visitor_fingerprint": {
-                  "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-                  "confidence": 93,
-                  "identified_at": "2026-03-24T20:00:05.000Z"
+                  "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
                 },
                 "request": {
                   "url": "https://app.acme.co/signup",
@@ -9986,7 +10000,25 @@
                   "first_seen": "2026-03-01T18:22:11.000Z",
                   "risk_time": "2026-03-24T20:00:05.000Z"
                 },
-                "calculated_at": "2026-03-24T20:00:05.000Z"
+                "score_breakdown": {
+                  "categories": {
+                    "source": "signup_form"
+                  }
+                },
+                "signals": [
+                  {
+                    "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                    "category": "environment",
+                    "confidence": "exact",
+                    "score": 0.08,
+                    "role": "owner"
+                  }
+                ],
+                "attribution": {
+                  "bot": {
+                    "source": "signup_form"
+                  }
+                }
               }
             }
           }
@@ -15486,210 +15518,6 @@
           }
         }
       },
-      "SessionFingerprintCalculatedPayload": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "object",
-          "session",
-          "visitor_fingerprint",
-          "request",
-          "calculated_at"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "const": "session_fingerprint",
-            "example": "session_fingerprint"
-          },
-          "session": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "$ref": "#/components/schemas/SessionId",
-                "example": "sid_87wfetm98myh9awj0dpt28a3kc"
-              }
-            },
-            "example": {
-              "id": "sid_87wfetm98myh9awj0dpt28a3kc"
-            }
-          },
-          "visitor_fingerprint": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "id",
-              "confidence",
-              "identified_at"
-            ],
-            "properties": {
-              "id": {
-                "$ref": "#/components/schemas/FingerprintId",
-                "example": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
-              },
-              "confidence": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "minimum": 0,
-                "maximum": 100,
-                "example": 93
-              },
-              "identified_at": {
-                "type": "string",
-                "format": "date-time",
-                "example": "2026-03-24T20:00:05.000Z"
-              }
-            },
-            "example": {
-              "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-              "confidence": 93,
-              "identified_at": "2026-03-24T20:00:05.000Z"
-            }
-          },
-          "request": {
-            "$ref": "#/components/schemas/WebhookRequestSummary",
-            "example": {
-              "url": "https://app.acme.co/signup",
-              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-              "ip_address": "203.0.113.10",
-              "screen_size": "1440x900",
-              "is_touch_capable": true,
-              "platform": "macOS",
-              "first_seen": "2026-03-01T18:22:11.000Z",
-              "risk_time": "2026-03-24T20:00:05.000Z"
-            }
-          },
-          "calculated_at": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2026-03-24T20:00:05.000Z"
-          }
-        },
-        "example": {
-          "object": "session_fingerprint",
-          "session": {
-            "id": "sid_87wfetm98myh9awj0dpt28a3kc"
-          },
-          "visitor_fingerprint": {
-            "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-            "confidence": 93,
-            "identified_at": "2026-03-24T20:00:05.000Z"
-          },
-          "request": {
-            "url": "https://app.acme.co/signup",
-            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-            "ip_address": "203.0.113.10",
-            "screen_size": "1440x900",
-            "is_touch_capable": true,
-            "platform": "macOS",
-            "first_seen": "2026-03-01T18:22:11.000Z",
-            "risk_time": "2026-03-24T20:00:05.000Z"
-          },
-          "calculated_at": "2026-03-24T20:00:05.000Z"
-        }
-      },
-      "SessionFingerprintCalculatedWebhookEvent": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/WebhookEventEnvelope",
-            "example": {
-              "id": "wevt_0123456789abcdef0123456789abcdef",
-              "object": "webhook_event",
-              "type": "session.fingerprint.calculated",
-              "created": "2026-03-24T20:00:00.000Z",
-              "data": {
-                "object": "session_fingerprint",
-                "session": {
-                  "id": "sid_87wfetm98myh9awj0dpt28a3kc"
-                },
-                "visitor_fingerprint": {
-                  "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-                  "confidence": 93,
-                  "identified_at": "2026-03-24T20:00:05.000Z"
-                },
-                "request": {
-                  "url": "https://app.acme.co/signup",
-                  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-                  "ip_address": "203.0.113.10",
-                  "screen_size": "1440x900",
-                  "is_touch_capable": true,
-                  "platform": "macOS",
-                  "first_seen": "2026-03-01T18:22:11.000Z",
-                  "risk_time": "2026-03-24T20:00:05.000Z"
-                },
-                "calculated_at": "2026-03-24T20:00:05.000Z"
-              }
-            }
-          }
-        ],
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "session.fingerprint.calculated",
-            "example": "session.fingerprint.calculated"
-          },
-          "data": {
-            "$ref": "#/components/schemas/SessionFingerprintCalculatedPayload",
-            "example": {
-              "object": "session_fingerprint",
-              "session": {
-                "id": "sid_87wfetm98myh9awj0dpt28a3kc"
-              },
-              "visitor_fingerprint": {
-                "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-                "confidence": 93,
-                "identified_at": "2026-03-24T20:00:05.000Z"
-              },
-              "request": {
-                "url": "https://app.acme.co/signup",
-                "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-                "ip_address": "203.0.113.10",
-                "screen_size": "1440x900",
-                "is_touch_capable": true,
-                "platform": "macOS",
-                "first_seen": "2026-03-01T18:22:11.000Z",
-                "risk_time": "2026-03-24T20:00:05.000Z"
-              },
-              "calculated_at": "2026-03-24T20:00:05.000Z"
-            }
-          }
-        },
-        "example": {
-          "id": "wevt_0123456789abcdef0123456789abcdef",
-          "object": "webhook_event",
-          "type": "session.fingerprint.calculated",
-          "created": "2026-03-24T20:00:00.000Z",
-          "data": {
-            "object": "session_fingerprint",
-            "session": {
-              "id": "sid_87wfetm98myh9awj0dpt28a3kc"
-            },
-            "visitor_fingerprint": {
-              "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-              "confidence": 93,
-              "identified_at": "2026-03-24T20:00:05.000Z"
-            },
-            "request": {
-              "url": "https://app.acme.co/signup",
-              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-              "ip_address": "203.0.113.10",
-              "screen_size": "1440x900",
-              "is_touch_capable": true,
-              "platform": "macOS",
-              "first_seen": "2026-03-01T18:22:11.000Z",
-              "risk_time": "2026-03-24T20:00:05.000Z"
-            },
-            "calculated_at": "2026-03-24T20:00:05.000Z"
-          }
-        }
-      },
       "SessionHighlight": {
         "type": "object",
         "additionalProperties": false,
@@ -18412,17 +18240,31 @@
             "example": {
               "id": "wevt_0123456789abcdef0123456789abcdef",
               "object": "webhook_event",
-              "type": "session.fingerprint.calculated",
+              "type": "session.result.persisted",
               "created": "2026-03-24T20:00:00.000Z",
               "data": {
-                "object": "session_fingerprint",
+                "object": "session_result",
                 "session": {
                   "id": "sid_87wfetm98myh9awj0dpt28a3kc"
                 },
+                "event": {
+                  "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
+                  "scoring_event_id": "scoring_event_id",
+                  "phase": "phase",
+                  "is_provisional": false,
+                  "persisted_at": "2026-03-24T20:00:05.000Z"
+                },
+                "decision": {
+                  "verdict": "human",
+                  "risk_score": 94,
+                  "score": 0.08,
+                  "manipulation": {
+                    "score": 1,
+                    "verdict": "none"
+                  }
+                },
                 "visitor_fingerprint": {
-                  "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-                  "confidence": 93,
-                  "identified_at": "2026-03-24T20:00:05.000Z"
+                  "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
                 },
                 "request": {
                   "url": "https://app.acme.co/signup",
@@ -18434,7 +18276,25 @@
                   "first_seen": "2026-03-01T18:22:11.000Z",
                   "risk_time": "2026-03-24T20:00:05.000Z"
                 },
-                "calculated_at": "2026-03-24T20:00:05.000Z"
+                "score_breakdown": {
+                  "categories": {
+                    "source": "signup_form"
+                  }
+                },
+                "signals": [
+                  {
+                    "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                    "category": "environment",
+                    "confidence": "exact",
+                    "score": 0.08,
+                    "role": "owner"
+                  }
+                ],
+                "attribution": {
+                  "bot": {
+                    "source": "signup_form"
+                  }
+                }
               }
             }
           }
@@ -19106,10 +18966,10 @@
             "minItems": 1,
             "items": {
               "$ref": "#/components/schemas/WebhookEventType",
-              "example": "session.fingerprint.calculated"
+              "example": "session.result.persisted"
             },
             "example": [
-              "session.fingerprint.calculated"
+              "session.result.persisted"
             ]
           }
         },
@@ -19118,7 +18978,7 @@
           "url": "https://app.acme.co/signup",
           "status": "active",
           "event_types": [
-            "session.fingerprint.calculated"
+            "session.result.persisted"
           ]
         }
       },
@@ -20095,7 +19955,7 @@
           },
           "event_type": {
             "$ref": "#/components/schemas/WebhookDeliveryEventType",
-            "example": "session.fingerprint.calculated"
+            "example": "session.result.persisted"
           },
           "status": {
             "$ref": "#/components/schemas/WebhookDeliveryStatus",
@@ -20143,7 +20003,7 @@
           "id": "wdlv_0123456789abcdef0123456789abcdef",
           "event_id": "wevt_0123456789abcdef0123456789abcdef",
           "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-          "event_type": "session.fingerprint.calculated",
+          "event_type": "session.result.persisted",
           "status": "pending",
           "attempts": 1,
           "response_status": 1,
@@ -20156,12 +20016,11 @@
       "WebhookDeliveryEventType": {
         "type": "string",
         "enum": [
-          "session.fingerprint.calculated",
           "session.result.persisted",
           "gate.session.approved",
           "webhook.test"
         ],
-        "example": "session.fingerprint.calculated"
+        "example": "session.result.persisted"
       },
       "WebhookDeliveryId": {
         "type": "string",
@@ -20219,10 +20078,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/WebhookEventType",
-              "example": "session.fingerprint.calculated"
+              "example": "session.result.persisted"
             },
             "example": [
-              "session.fingerprint.calculated"
+              "session.result.persisted"
             ]
           },
           "signing_secret": {
@@ -20248,7 +20107,7 @@
           "url": "https://app.acme.co/signup",
           "status": "active",
           "event_types": [
-            "session.fingerprint.calculated"
+            "session.result.persisted"
           ],
           "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
           "created_at": "2026-03-24T20:00:00.000Z",
@@ -20280,7 +20139,7 @@
                 "url": "https://app.acme.co/signup",
                 "status": "active",
                 "event_types": [
-                  "session.fingerprint.calculated"
+                  "session.result.persisted"
                 ],
                 "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
                 "created_at": "2026-03-24T20:00:00.000Z",
@@ -20295,7 +20154,7 @@
                 "url": "https://app.acme.co/signup",
                 "status": "active",
                 "event_types": [
-                  "session.fingerprint.calculated"
+                  "session.result.persisted"
                 ],
                 "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
                 "created_at": "2026-03-24T20:00:00.000Z",
@@ -20327,7 +20186,7 @@
               "url": "https://app.acme.co/signup",
               "status": "active",
               "event_types": [
-                "session.fingerprint.calculated"
+                "session.result.persisted"
               ],
               "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
               "created_at": "2026-03-24T20:00:00.000Z",
@@ -20361,7 +20220,7 @@
               "url": "https://app.acme.co/signup",
               "status": "active",
               "event_types": [
-                "session.fingerprint.calculated"
+                "session.result.persisted"
               ],
               "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
               "created_at": "2026-03-24T20:00:00.000Z",
@@ -20383,7 +20242,7 @@
             "url": "https://app.acme.co/signup",
             "status": "active",
             "event_types": [
-              "session.fingerprint.calculated"
+              "session.result.persisted"
             ],
             "signing_secret": "whsec_0123456789abcdef0123456789abcdef",
             "created_at": "2026-03-24T20:00:00.000Z",
@@ -20424,7 +20283,7 @@
           },
           "type": {
             "$ref": "#/components/schemas/WebhookDeliveryEventType",
-            "example": "session.fingerprint.calculated"
+            "example": "session.result.persisted"
           },
           "created": {
             "type": "string",
@@ -20433,31 +20292,6 @@
           },
           "data": {
             "anyOf": [
-              {
-                "$ref": "#/components/schemas/SessionFingerprintCalculatedPayload",
-                "example": {
-                  "object": "session_fingerprint",
-                  "session": {
-                    "id": "sid_87wfetm98myh9awj0dpt28a3kc"
-                  },
-                  "visitor_fingerprint": {
-                    "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-                    "confidence": 93,
-                    "identified_at": "2026-03-24T20:00:05.000Z"
-                  },
-                  "request": {
-                    "url": "https://app.acme.co/signup",
-                    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-                    "ip_address": "203.0.113.10",
-                    "screen_size": "1440x900",
-                    "is_touch_capable": true,
-                    "platform": "macOS",
-                    "first_seen": "2026-03-01T18:22:11.000Z",
-                    "risk_time": "2026-03-24T20:00:05.000Z"
-                  },
-                  "calculated_at": "2026-03-24T20:00:05.000Z"
-                }
-              },
               {
                 "$ref": "#/components/schemas/SessionResultPersistedPayload",
                 "example": {
@@ -20548,14 +20382,28 @@
               }
             ],
             "example": {
-              "object": "session_fingerprint",
+              "object": "session_result",
               "session": {
                 "id": "sid_87wfetm98myh9awj0dpt28a3kc"
               },
+              "event": {
+                "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
+                "scoring_event_id": "scoring_event_id",
+                "phase": "phase",
+                "is_provisional": false,
+                "persisted_at": "2026-03-24T20:00:05.000Z"
+              },
+              "decision": {
+                "verdict": "human",
+                "risk_score": 94,
+                "score": 0.08,
+                "manipulation": {
+                  "score": 1,
+                  "verdict": "none"
+                }
+              },
               "visitor_fingerprint": {
-                "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-                "confidence": 93,
-                "identified_at": "2026-03-24T20:00:05.000Z"
+                "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
               },
               "request": {
                 "url": "https://app.acme.co/signup",
@@ -20567,24 +20415,56 @@
                 "first_seen": "2026-03-01T18:22:11.000Z",
                 "risk_time": "2026-03-24T20:00:05.000Z"
               },
-              "calculated_at": "2026-03-24T20:00:05.000Z"
+              "score_breakdown": {
+                "categories": {
+                  "source": "signup_form"
+                }
+              },
+              "signals": [
+                {
+                  "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                  "category": "environment",
+                  "confidence": "exact",
+                  "score": 0.08,
+                  "role": "owner"
+                }
+              ],
+              "attribution": {
+                "bot": {
+                  "source": "signup_form"
+                }
+              }
             }
           }
         },
         "example": {
           "id": "wevt_0123456789abcdef0123456789abcdef",
           "object": "webhook_event",
-          "type": "session.fingerprint.calculated",
+          "type": "session.result.persisted",
           "created": "2026-03-24T20:00:00.000Z",
           "data": {
-            "object": "session_fingerprint",
+            "object": "session_result",
             "session": {
               "id": "sid_87wfetm98myh9awj0dpt28a3kc"
             },
+            "event": {
+              "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
+              "scoring_event_id": "scoring_event_id",
+              "phase": "phase",
+              "is_provisional": false,
+              "persisted_at": "2026-03-24T20:00:05.000Z"
+            },
+            "decision": {
+              "verdict": "human",
+              "risk_score": 94,
+              "score": 0.08,
+              "manipulation": {
+                "score": 1,
+                "verdict": "none"
+              }
+            },
             "visitor_fingerprint": {
-              "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m",
-              "confidence": 93,
-              "identified_at": "2026-03-24T20:00:05.000Z"
+              "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
             },
             "request": {
               "url": "https://app.acme.co/signup",
@@ -20596,7 +20476,25 @@
               "first_seen": "2026-03-01T18:22:11.000Z",
               "risk_time": "2026-03-24T20:00:05.000Z"
             },
-            "calculated_at": "2026-03-24T20:00:05.000Z"
+            "score_breakdown": {
+              "categories": {
+                "source": "signup_form"
+              }
+            },
+            "signals": [
+              {
+                "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                "category": "environment",
+                "confidence": "exact",
+                "score": 0.08,
+                "role": "owner"
+              }
+            ],
+            "attribution": {
+              "bot": {
+                "source": "signup_form"
+              }
+            }
           }
         }
       },
@@ -20608,11 +20506,10 @@
       "WebhookEventType": {
         "type": "string",
         "enum": [
-          "session.fingerprint.calculated",
           "session.result.persisted",
           "gate.session.approved"
         ],
-        "example": "session.fingerprint.calculated"
+        "example": "session.result.persisted"
       },
       "WebhookRequestSummary": {
         "type": "object",
@@ -20724,7 +20621,7 @@
                   "id": "wdlv_0123456789abcdef0123456789abcdef",
                   "event_id": "wevt_0123456789abcdef0123456789abcdef",
                   "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                  "event_type": "session.fingerprint.calculated",
+                  "event_type": "session.result.persisted",
                   "status": "pending",
                   "attempts": 1,
                   "response_status": 1,
@@ -20744,7 +20641,7 @@
               "id": "wdlv_0123456789abcdef0123456789abcdef",
               "event_id": "wevt_0123456789abcdef0123456789abcdef",
               "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-              "event_type": "session.fingerprint.calculated",
+              "event_type": "session.result.persisted",
               "status": "pending",
               "attempts": 1,
               "response_status": 1,
@@ -20766,7 +20663,7 @@
             "id": "wdlv_0123456789abcdef0123456789abcdef",
             "event_id": "wevt_0123456789abcdef0123456789abcdef",
             "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-            "event_type": "session.fingerprint.calculated",
+            "event_type": "session.result.persisted",
             "status": "pending",
             "attempts": 1,
             "response_status": 1,
@@ -20835,7 +20732,7 @@
                 "id": "wdlv_0123456789abcdef0123456789abcdef",
                 "event_id": "wevt_0123456789abcdef0123456789abcdef",
                 "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-                "event_type": "session.fingerprint.calculated",
+                "event_type": "session.result.persisted",
                 "status": "pending",
                 "attempts": 1,
                 "response_status": 1,
@@ -20865,7 +20762,7 @@
               "id": "wdlv_0123456789abcdef0123456789abcdef",
               "event_id": "wevt_0123456789abcdef0123456789abcdef",
               "endpoint_id": "we_0123456789abcdef0123456789abcdef",
-              "event_type": "session.fingerprint.calculated",
+              "event_type": "session.result.persisted",
               "status": "pending",
               "attempts": 1,
               "response_status": 1,
@@ -20950,60 +20847,6 @@
           },
           "429": {
             "description": "Rate limited. Respect Retry-After before retrying the webhook."
-          },
-          "500": {
-            "description": "Internal error."
-          }
-        }
-      }
-    },
-    "session.fingerprint.calculated": {
-      "post": {
-        "tags": [
-          "Webhooks"
-        ],
-        "operationId": "sessionFingerprintCalculatedWebhook",
-        "summary": "Session fingerprint calculated webhook",
-        "description": "Foil sends a signed unified webhook envelope. Verify X-Foil-Timestamp and X-Foil-Signature against the raw request body using the endpoint signing secret.",
-        "parameters": [
-          {
-            "name": "X-Foil-Timestamp",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unix timestamp used in the webhook signature base string."
-          },
-          {
-            "name": "X-Foil-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "HMAC-SHA256 signature computed over `${timestamp}.${rawBody}`."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SessionFingerprintCalculatedWebhookEvent"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook accepted."
-          },
-          "400": {
-            "description": "Invalid payload."
-          },
-          "401": {
-            "description": "Invalid signature."
           },
           "500": {
             "description": "Internal error."
