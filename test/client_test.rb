@@ -18,10 +18,10 @@ class ClientTest < Minitest::Test
     ENV["FOIL_SECRET_KEY"] = original
   end
 
-  def test_missing_secret_raises
+  def test_missing_secret_defers_error_until_request
     original = ENV.delete("FOIL_SECRET_KEY")
     client = Foil::Server::Client.new
-    assert_respond_to client, :gate
+    assert_respond_to client, :sessions
   ensure
     ENV["FOIL_SECRET_KEY"] = original if original
   end
@@ -224,104 +224,5 @@ class ClientTest < Minitest::Test
       assert_equal fixture.fetch(:error).fetch(:code), error.code
       assert_equal fixture.fetch(:error).fetch(:request_id), error.request_id
     end
-  end
-
-  def test_gate_namespace_supports_public_bearer_and_secret_flows
-    registry_list = load_fixture("api/gate/registry-list.json")
-    registry_detail = load_fixture("api/gate/registry-detail.json")
-    services_list = load_fixture("api/gate/services-list.json")
-    service_detail = load_fixture("api/gate/service-detail.json")
-    service_create = load_fixture("api/gate/service-create.json")
-    service_update = load_fixture("api/gate/service-update.json")
-    service_disable = load_fixture("api/gate/service-disable.json")
-    session_create = load_fixture("api/gate/session-create.json")
-    session_poll = load_fixture("api/gate/session-poll.json")
-    session_ack = load_fixture("api/gate/session-ack.json")
-    login_create = load_fixture("api/gate/login-session-create.json")
-    login_consume = load_fixture("api/gate/login-session-consume.json")
-    agent_verify = load_fixture("api/gate/agent-token-verify.json")
-
-    client = Foil::Server::Client.new(
-      secret_key: "sk_live_test",
-      transport: lambda do |request|
-        auth = request[:headers]["Authorization"]
-        case [request[:method], request[:url]]
-        when ["GET", "https://api.usefoil.com/v1/gate/registry"]
-          assert_nil auth
-          [200, {}, JSON.dump(registry_list)]
-        when ["GET", "https://api.usefoil.com/v1/gate/registry/foil"]
-          assert_nil auth
-          [200, {}, JSON.dump(registry_detail)]
-        when ["GET", "https://api.usefoil.com/v1/gate/services"]
-          assert_equal "Bearer sk_live_test", auth
-          [200, {}, JSON.dump(services_list)]
-        when ["GET", "https://api.usefoil.com/v1/gate/services/foil"]
-          assert_equal "Bearer sk_live_test", auth
-          [200, {}, JSON.dump(service_detail)]
-        when ["POST", "https://api.usefoil.com/v1/gate/services"]
-          assert_equal "Bearer sk_live_test", auth
-          [201, {}, JSON.dump(service_create)]
-        when ["PATCH", "https://api.usefoil.com/v1/gate/services/acme_prod"]
-          assert_equal "Bearer sk_live_test", auth
-          [200, {}, JSON.dump(service_update)]
-        when ["DELETE", "https://api.usefoil.com/v1/gate/services/acme_prod"]
-          assert_equal "Bearer sk_live_test", auth
-          [200, {}, JSON.dump(service_disable)]
-        when ["POST", "https://api.usefoil.com/v1/gate/sessions"]
-          assert_nil auth
-          [201, {}, JSON.dump(session_create)]
-        when ["GET", "https://api.usefoil.com/v1/gate/sessions/gate_0123456789abcdefghjkmnpqrs"]
-          assert_equal "Bearer gtpoll_0123456789abcdefghjkmnpqrs", auth
-          [200, {}, JSON.dump(session_poll)]
-        when ["POST", "https://api.usefoil.com/v1/gate/sessions/gate_0123456789abcdefghjkmnpqrs/ack"]
-          assert_equal "Bearer gtpoll_0123456789abcdefghjkmnpqrs", auth
-          [200, {}, JSON.dump(session_ack)]
-        when ["POST", "https://api.usefoil.com/v1/gate/login-sessions"]
-          assert_equal "Bearer agt_0123456789abcdefghjkmnpqrs", auth
-          [201, {}, JSON.dump(login_create)]
-        when ["POST", "https://api.usefoil.com/v1/gate/login-sessions/consume"]
-          assert_equal "Bearer sk_live_test", auth
-          [200, {}, JSON.dump(login_consume)]
-        when ["POST", "https://api.usefoil.com/v1/gate/agent-tokens/verify"]
-          assert_equal "Bearer sk_live_test", auth
-          [200, {}, JSON.dump(agent_verify)]
-        when ["POST", "https://api.usefoil.com/v1/gate/agent-tokens/revoke"]
-          assert_equal "Bearer sk_live_test", auth
-          [204, {}, ""]
-        else
-          flunk("Unexpected request #{request[:method]} #{request[:url]}")
-        end
-      end
-    )
-
-    assert_equal "foil", client.gate.registry.list.first[:id]
-    assert_equal "foil", client.gate.registry.get("foil")[:id]
-    assert_equal "acme_prod", client.gate.services.list.first[:id]
-    assert_equal "acme_prod", client.gate.services.get("foil")[:id]
-    assert_equal "acme_prod", client.gate.services.create(
-      id: "acme_prod",
-      name: "Acme Production",
-      description: "Acme production signup flow",
-      website: "https://acme.example.com",
-      webhook_endpoint_id: "we_0123456789abcdef0123456789abcdef"
-    )[:id]
-    assert_equal true, client.gate.services.update("acme_prod", discoverable: true)[:discoverable]
-    assert_equal "disabled", client.gate.services.disable("acme_prod")[:status]
-    assert_equal "gate_0123456789abcdefghjkmnpqrs", client.gate.sessions.create(
-      service_id: "foil",
-      account_name: "my-project",
-      delivery: {
-        version: 1,
-        algorithm: "x25519-hkdf-sha256/aes-256-gcm",
-        key_id: "kid_integrator_0123456789abcdefgh",
-        public_key: "public_key_integrator"
-      }
-    )[:id]
-    assert_equal "approved", client.gate.sessions.poll("gate_0123456789abcdefghjkmnpqrs", poll_token: "gtpoll_0123456789abcdefghjkmnpqrs")[:status]
-    assert_equal "acknowledged", client.gate.sessions.acknowledge("gate_0123456789abcdefghjkmnpqrs", poll_token: "gtpoll_0123456789abcdefghjkmnpqrs", ack_token: "gtack_0123456789abcdefghjkmnpqrs")[:status]
-    assert_equal "gate_login_session", client.gate.login_sessions.create(service_id: "foil", agent_token: "agt_0123456789abcdefghjkmnpqrs")[:object]
-    assert_equal "gate_dashboard_login", client.gate.login_sessions.consume(code: "gate_code_0123456789abcdefghjkm")[:object]
-    assert_equal true, client.gate.agent_tokens.verify(agent_token: "agt_0123456789abcdefghjkmnpqrs")[:valid]
-    assert_nil client.gate.agent_tokens.revoke(agent_token: "agt_0123456789abcdefghjkmnpqrs")
   end
 end

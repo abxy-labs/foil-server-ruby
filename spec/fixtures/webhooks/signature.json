@@ -1,0 +1,9 @@
+{
+  "secret": "whsec_test",
+  "timestamp": "1735776000",
+  "expired_timestamp": "1735775400",
+  "now_seconds": 1735776000,
+  "raw_body": "{\"id\":\"wevt_0123456789abcdef0123456789abcdef\",\"object\":\"webhook_event\",\"type\":\"session.result.persisted\",\"created\":\"2026-01-02T00:00:00.000Z\",\"data\":{\"object\":\"session_result\",\"session\":{\"id\":\"sid_0123456789abcdefghjkmnpqrs\"}}}",
+  "signature": "bd76efe49c06ccb25ed39db7422fc3f58641337b57b6d73a2b5061dc4ea59192",
+  "invalid_signature": "0d76efe49c06ccb25ed39db7422fc3f58641337b57b6d73a2b5061dc4ea59192"
+}

@@ -6,7 +6,6 @@ It defines:
 
 - the supported server API surface
 - the shared sealed token verification behavior
-- the shared Gate delivery/webhook helper behavior
 - golden fixtures for success, error, pagination, and helper flows
 
 ## Scope
@@ -17,11 +16,6 @@ Server SDKs include only customer-facing APIs:
 - `/v1/fingerprints`
 - `/v1/organizations`
 - `/v1/organizations/:organizationId/api-keys`
-- `/v1/gate/registry`
-- `/v1/gate/services`
-- `/v1/gate/sessions`
-- `/v1/gate/login-sessions`
-- `/v1/gate/agent-tokens/*`
 
 Server SDKs do **not** include:
 
@@ -53,24 +47,9 @@ Every server SDK should expose these top-level capabilities:
   - list
   - revoke
   - rotate
-- Gate
-  - registry list/get
-  - services list/get/create/update/disable
-  - sessions create/poll/acknowledge
-  - login sessions create/consume
-  - agent tokens verify/revoke
 - sealed token helpers
   - strict verify
   - safe verify
-- Gate delivery/webhook helpers
-  - generate delivery keypair
-  - import/export delivery private key
-  - validate delivery request
-  - encrypt/decrypt delivery envelopes
-  - validate approved webhook payload
-  - verify webhook signature
-  - derive agent-token env keys
-  - check blocked/managed Gate env vars
 
 ## Shared Defaults
 
@@ -78,7 +57,6 @@ Every SDK should default to:
 
 - `base_url = https://api.usefoil.com`
 - `secret_key = env(FOIL_SECRET_KEY)`
-- support for public, bearer-token, and secret-key auth as required by the Gate surface
 - request timeout support
 - no automatic retries
 
@@ -119,16 +97,6 @@ Use both:
 - `fixtures/sealed-token/invalid.json`
 
 to validate correctness and failure behavior.
-
-## Gate Delivery Helper Coverage
-
-Use the shared fixtures in `fixtures/gate-delivery/` to validate:
-
-- delivery request validation and key-id derivation
-- envelope encrypt/decrypt roundtrips
-- approved webhook payload validation
-- webhook signature verification
-- Gate env-var policy helpers
 
 ## Sync Model
 

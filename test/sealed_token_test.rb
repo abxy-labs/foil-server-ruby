@@ -2,7 +2,7 @@ require_relative "test_helper"
 
 class SealedTokenTest < Minitest::Test
   def setup
-    require_gate_crypto_support!
+    require_crypto_support!
   end
 
   def test_verify_foil_token_with_plaintext_secret
