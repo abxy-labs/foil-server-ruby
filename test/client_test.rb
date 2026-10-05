@@ -158,7 +158,7 @@ class ClientTest < Minitest::Test
       id: "wdlv_0123456789abcdef0123456789abcdef",
       event_id: "wevt_0123456789abcdef0123456789abcdef",
       endpoint_id: "we_0123456789abcdef0123456789abcdef",
-      event_type: "session.fingerprint.calculated",
+      event_type: "session.result.persisted",
       status: "succeeded",
       attempts: 1,
       response_status: 200,
@@ -170,7 +170,7 @@ class ClientTest < Minitest::Test
     event = {
       object: "event",
       id: "wevt_0123456789abcdef0123456789abcdef",
-      type: "session.fingerprint.calculated",
+      type: "session.result.persisted",
       subject: { type: "session", id: "sid_0123456789abcdefghjkmnpqrs" },
       data: { source: "waitForFingerprint" },
       webhook_deliveries: [delivery],
@@ -182,7 +182,7 @@ class ClientTest < Minitest::Test
       transport: lambda do |request|
         assert_equal "Bearer sk_live_test", request[:headers]["Authorization"]
         case [request[:method], request[:url]]
-        when ["GET", "https://api.usefoil.com/v1/organizations/org_56789abcdefghjkmnpqrstvwxy/events?endpoint_id=we_0123456789abcdef0123456789abcdef&type=session.fingerprint.calculated&limit=25"]
+        when ["GET", "https://api.usefoil.com/v1/organizations/org_56789abcdefghjkmnpqrstvwxy/events?endpoint_id=we_0123456789abcdef0123456789abcdef&type=session.result.persisted&limit=25"]
           [200, {}, JSON.dump(data: [event], pagination: { limit: 25, has_more: false }, meta: { request_id: "req_0123456789abcdef0123456789abcdef" })]
         when ["GET", "https://api.usefoil.com/v1/organizations/org_56789abcdefghjkmnpqrstvwxy/events/wevt_0123456789abcdef0123456789abcdef"]
           [200, {}, JSON.dump(data: event, meta: { request_id: "req_0123456789abcdef0123456789abcdef" })]
@@ -195,12 +195,12 @@ class ClientTest < Minitest::Test
     events = client.webhooks.list_events(
       "org_56789abcdefghjkmnpqrstvwxy",
       endpoint_id: "we_0123456789abcdef0123456789abcdef",
-      type: "session.fingerprint.calculated",
+      type: "session.result.persisted",
       limit: 25
     )
     assert_equal "sid_0123456789abcdefghjkmnpqrs", events.items.first[:subject][:id]
     assert_equal "succeeded", events.items.first[:webhook_deliveries].first[:status]
-    assert_equal "session.fingerprint.calculated", client.webhooks.retrieve_event("org_56789abcdefghjkmnpqrstvwxy", "wevt_0123456789abcdef0123456789abcdef")[:type]
+    assert_equal "session.result.persisted", client.webhooks.retrieve_event("org_56789abcdefghjkmnpqrstvwxy", "wevt_0123456789abcdef0123456789abcdef")[:type]
   end
 
   def test_api_errors_are_parsed

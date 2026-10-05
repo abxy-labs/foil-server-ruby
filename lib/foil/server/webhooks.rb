@@ -5,7 +5,6 @@ module Foil
   module Server
     module Webhooks
       WEBHOOK_EVENT_TYPES = %w[
-        session.fingerprint.calculated
         session.result.persisted
         webhook.test
       ].freeze
@@ -13,6 +12,8 @@ module Foil
       module_function
 
       def verify_webhook_signature(secret:, timestamp:, raw_body:, signature:, max_age_seconds: 300, now_seconds: nil)
+        return false if secret.to_s.empty?
+
         parsed_timestamp = Integer(timestamp)
         current = now_seconds || Time.now.to_i
         return false if (current - parsed_timestamp).abs > max_age_seconds

@@ -28,6 +28,12 @@ class WebhooksTest < Minitest::Test
     refute verify(secret: "whsec_other")
   end
 
+  def test_empty_secret_is_rejected
+    signature = OpenSSL::HMAC.hexdigest("SHA256", "", "#{fixture["timestamp"]}.#{fixture["raw_body"]}")
+    refute verify(secret: "", signature: signature)
+    refute verify(secret: nil, signature: signature)
+  end
+
   def test_expired_and_malformed_timestamps_are_rejected
     refute verify(timestamp: fixture["expired_timestamp"])
     refute verify(timestamp: "not-a-timestamp")
@@ -69,6 +75,7 @@ class WebhooksTest < Minitest::Test
     }
 
     assert_raises(ArgumentError) { Foil::Server::Webhooks.parse_webhook_event(JSON.dump(base.merge(type: "unknown.event"))) }
+    assert_raises(ArgumentError) { Foil::Server::Webhooks.parse_webhook_event(JSON.dump(base.merge(type: "session.fingerprint.calculated"))) }
     assert_raises(ArgumentError) { Foil::Server::Webhooks.parse_webhook_event(JSON.dump(base.merge(object: "event"))) }
     assert_raises(ArgumentError) { Foil::Server::Webhooks.parse_webhook_event(JSON.dump(base.merge(data: []))) }
     assert_raises(ArgumentError) { Foil::Server::Webhooks.parse_webhook_event(JSON.dump([base])) }
