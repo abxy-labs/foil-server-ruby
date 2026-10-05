@@ -70,7 +70,7 @@ jobs:
             exit 1
           fi
 
-      - run: bundle exec ruby -Ilib:test -e 'Dir["test/{client,contract,sealed_token}_test.rb"].sort.each { |file| require File.expand_path(file) }'
+      - run: bundle exec ruby -Ilib:test -e 'Dir["test/{client,contract,sealed_token,webhooks}_test.rb"].sort.each { |file| require File.expand_path(file) }'
 
       - name: Build release artifact
         run: |

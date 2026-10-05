@@ -24,17 +24,6 @@ class ContractTest < Minitest::Test
     expected = [
       "/v1/fingerprints",
       "/v1/fingerprints/{visitorId}",
-      "/v1/gate/agent-tokens/revoke",
-      "/v1/gate/agent-tokens/verify",
-      "/v1/gate/login-sessions",
-      "/v1/gate/login-sessions/consume",
-      "/v1/gate/registry",
-      "/v1/gate/registry/{serviceId}",
-      "/v1/gate/services",
-      "/v1/gate/services/{serviceId}",
-      "/v1/gate/sessions",
-      "/v1/gate/sessions/{gateSessionId}",
-      "/v1/gate/sessions/{gateSessionId}/ack",
       "/v1/organizations",
       "/v1/organizations/{organizationId}",
       "/v1/organizations/{organizationId}/api-keys",
@@ -59,20 +48,6 @@ class ContractTest < Minitest::Test
       "api/sessions/detail.json",
       "api/fingerprints/list.json",
       "api/fingerprints/detail.json",
-      "api/gate/registry-list.json",
-      "api/gate/registry-detail.json",
-      "api/gate/services-list.json",
-      "api/gate/service-detail.json",
-      "api/gate/service-create.json",
-      "api/gate/service-update.json",
-      "api/gate/service-disable.json",
-      "api/gate/session-create.json",
-      "api/gate/session-poll.json",
-      "api/gate/session-ack.json",
-      "api/gate/login-session-create.json",
-      "api/gate/login-session-consume.json",
-      "api/gate/agent-token-verify.json",
-      "api/gate/agent-token-revoke.json",
       "api/organizations/organization.json",
       "api/organizations/organization-create.json",
       "api/organizations/organization-update.json",
@@ -134,8 +109,6 @@ class ContractTest < Minitest::Test
       assert_includes schemas.fetch("ApiKey").fetch("required"), field
     end
     assert_includes schemas.fetch("IssuedApiKey").fetch("required"), "revealed_key"
-    refute_includes schemas.fetch("GateManagedService").fetch("properties").keys, "team_id"
-    refute_includes schemas.fetch("GateManagedService").fetch("properties").keys, "webhook_secret"
     refute_includes schemas.keys, "CollectBatchResponse"
   end
 
@@ -152,11 +125,5 @@ class ContractTest < Minitest::Test
     assert_equal ["API Keys"], spec.fetch("paths").fetch("/v1/organizations/{organizationId}/api-keys/{keyId}").fetch("patch").fetch("tags")
     assert_equal "rotateOrganizationApiKey", spec.fetch("paths").fetch("/v1/organizations/{organizationId}/api-keys/{keyId}/rotations").fetch("post").fetch("operationId")
     assert_equal ["API Keys"], spec.fetch("paths").fetch("/v1/organizations/{organizationId}/api-keys/{keyId}/rotations").fetch("post").fetch("tags")
-    assert_equal "createManagedGateService", spec.fetch("paths").fetch("/v1/gate/services").fetch("post").fetch("operationId")
-    assert_equal ["Gate"], spec.fetch("paths").fetch("/v1/gate/services").fetch("post").fetch("tags")
-    assert_equal "pollGateSession", spec.fetch("paths").fetch("/v1/gate/sessions/{gateSessionId}").fetch("get").fetch("operationId")
-    assert_equal ["Gate"], spec.fetch("paths").fetch("/v1/gate/sessions/{gateSessionId}").fetch("get").fetch("tags")
-    assert_equal "revokeGateAgentToken", spec.fetch("paths").fetch("/v1/gate/agent-tokens/revoke").fetch("post").fetch("operationId")
-    assert_equal ["Gate"], spec.fetch("paths").fetch("/v1/gate/agent-tokens/revoke").fetch("post").fetch("tags")
   end
 end

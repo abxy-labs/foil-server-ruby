@@ -1,9 +1,0 @@
-{
-  "secret": "whsec_test",
-  "timestamp": "1735776000",
-  "expired_timestamp": "1735775400",
-  "now_seconds": 1735776000,
-  "raw_body": "{\"id\":\"wevt_0123456789abcdef0123456789abcdef\",\"object\":\"webhook_event\",\"type\":\"gate.session.approved\",\"created\":\"2026-01-02T00:00:00.000Z\",\"data\":{\"service_id\":\"foil\",\"gate_session_id\":\"gate_0123456789abcdefghjkmnpqrs\",\"gate_account_id\":\"gacct_0123456789abcdefghjkmnpqrs\",\"account_name\":\"Acme\",\"metadata\":{\"plan\":\"pro\"},\"foil\":{\"verdict\":\"human\",\"score\":0.12},\"delivery\":{\"version\":1,\"algorithm\":\"x25519-hkdf-sha256/aes-256-gcm\",\"key_id\":\"LyGqfpvB0SCaX4P0inVpMJTAjCNJVWq_3OE87it2ZYo\",\"public_key\":\"bn6szfMIS-7pLl01PqvssrrGRoW1SVTkUuqeg0hfrW0\"}}}",
-  "signature": "afef24484ba4275cca886460a61d1aa1cc0e5d78057d18013d124b22391b6ceb",
-  "invalid_signature": "0fef24484ba4275cca886460a61d1aa1cc0e5d78057d18013d124b22391b6ceb"
-}

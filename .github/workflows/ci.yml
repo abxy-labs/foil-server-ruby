@@ -20,7 +20,7 @@ jobs:
         with:
           ruby-version: "3.3"
           bundler-cache: true
-      - run: bundle exec ruby -Ilib:test -e 'Dir["test/{client,contract,sealed_token}_test.rb"].sort.each { |file| require File.expand_path(file) }'
+      - run: bundle exec ruby -Ilib:test -e 'Dir["test/{client,contract,sealed_token,webhooks}_test.rb"].sort.each { |file| require File.expand_path(file) }'
 
   spec-sync:
     runs-on: ubuntu-latest

@@ -6,7 +6,7 @@ It defines:
 
 - the supported server API surface
 - the shared sealed token verification behavior
-- the shared Gate delivery/webhook helper behavior
+- the shared webhook signature verification behavior
 - golden fixtures for success, error, pagination, and helper flows
 
 ## Scope
@@ -17,11 +17,6 @@ Server SDKs include only customer-facing APIs:
 - `/v1/fingerprints`
 - `/v1/organizations`
 - `/v1/organizations/:organizationId/api-keys`
-- `/v1/gate/registry`
-- `/v1/gate/services`
-- `/v1/gate/sessions`
-- `/v1/gate/login-sessions`
-- `/v1/gate/agent-tokens/*`
 
 Server SDKs do **not** include:
 
@@ -53,24 +48,13 @@ Every server SDK should expose these top-level capabilities:
   - list
   - revoke
   - rotate
-- Gate
-  - registry list/get
-  - services list/get/create/update/disable
-  - sessions create/poll/acknowledge
-  - login sessions create/consume
-  - agent tokens verify/revoke
 - sealed token helpers
   - strict verify
   - safe verify
-- Gate delivery/webhook helpers
-  - generate delivery keypair
-  - import/export delivery private key
-  - validate delivery request
-  - encrypt/decrypt delivery envelopes
-  - validate approved webhook payload
+- webhook helpers
   - verify webhook signature
-  - derive agent-token env keys
-  - check blocked/managed Gate env vars
+  - parse webhook event
+  - verify and parse webhook event
 
 ## Shared Defaults
 
@@ -78,7 +62,6 @@ Every SDK should default to:
 
 - `base_url = https://api.usefoil.com`
 - `secret_key = env(FOIL_SECRET_KEY)`
-- support for public, bearer-token, and secret-key auth as required by the Gate surface
 - request timeout support
 - no automatic retries
 
@@ -120,15 +103,17 @@ Use both:
 
 to validate correctness and failure behavior.
 
-## Gate Delivery Helper Coverage
+## Webhook Signature Verification
 
-Use the shared fixtures in `fixtures/gate-delivery/` to validate:
+Every Foil webhook delivery carries `X-Foil-Timestamp` and `X-Foil-Signature`. The signature is the lowercase hex HMAC-SHA256 of `${timestamp}.${rawBody}`, keyed with the endpoint's signing secret. SDK helpers must:
 
-- delivery request validation and key-id derivation
-- envelope encrypt/decrypt roundtrips
-- approved webhook payload validation
-- webhook signature verification
-- Gate env-var policy helpers
+- compute the HMAC over the raw request body bytes
+- compare signatures in constant time
+- reject a timestamp more than 300 seconds from the current time by default
+- reject an empty signing secret
+- parse only the event types in the spec's `WebhookDeliveryEventType` schema and reject any other type
+
+Use `fixtures/webhooks/signature.json` to validate the valid, tampered, expired and malformed cases.
 
 ## Sync Model
 
@@ -156,5 +141,6 @@ When changing any server SDK:
   - `next_cursor`
 - preserve structured API errors
 - keep sealed token golden-vector coverage
+- keep webhook signature fixture coverage
 - keep one live smoke suite per SDK
 - only update the vendored SDK `spec/` copies or the monorepo submodule pointer after the relevant CI is green

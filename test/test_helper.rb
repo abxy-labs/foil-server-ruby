@@ -15,7 +15,7 @@ end
 class Minitest::Test
   include FixtureHelper
 
-  def require_gate_crypto_support!
+  def require_crypto_support!
     return if Foil::Server::CryptoSupport.supported_runtime?
 
     skip(Foil::Server::CryptoSupport.unsupported_runtime_message)
