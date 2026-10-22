@@ -18,6 +18,8 @@ module Foil
       V2_RECIPIENT_BYTES = RECIPIENT_ID_BYTES + NONCE_BYTES + CONTENT_KEY_BYTES + TAG_BYTES
       V2_PAYLOAD_AAD_PREFIX = "foil-sealed-results-v2\0payload\0".b
       V2_WRAP_AAD_PREFIX = "foil-sealed-results-v2\0recipient\0".b
+      # Decompressed payloads are a few kilobytes; the cap bounds memory if a token decompresses to far more.
+      MAX_PAYLOAD_BYTES = 1024 * 1024
 
       module_function
 
@@ -30,7 +32,7 @@ module Foil
         raise TokenVerificationError, "Foil token is too short." if raw.bytesize < 29
 
         compressed = decrypt_payload(raw, resolved_secret)
-        payload = JSON.parse(Zlib::Inflate.inflate(compressed))
+        payload = JSON.parse(inflate_payload(compressed))
         deep_symbolize(payload)
       rescue ConfigurationError, TokenVerificationError
         raise
@@ -48,6 +50,21 @@ module Foil
         Digest::SHA256.digest("#{normalize_secret(secret_key_or_hash)}\0sealed-results")
       end
       private_class_method :derive_key
+
+      def inflate_payload(compressed)
+        inflater = Zlib::Inflate.new
+        payload = "".b
+        inflater.inflate(compressed) do |chunk|
+          payload << chunk
+          raise TokenVerificationError, "Foil token payload is too large." if payload.bytesize > MAX_PAYLOAD_BYTES
+        end
+        raise Zlib::BufError, "Foil token payload is truncated." unless inflater.finished?
+
+        payload
+      ensure
+        inflater&.close
+      end
+      private_class_method :inflate_payload
 
       def decrypt_gcm(ciphertext, key, nonce, tag, aad = "".b)
         cipher = OpenSSL::Cipher.new("aes-256-gcm")
