@@ -6,7 +6,7 @@ class LiveTest < Minitest::Test
 
     client = Foil::Server::Client.new(
       secret_key: require_env("FOIL_SMOKE_SECRET_KEY"),
-      base_url: ENV.fetch("FOIL_SMOKE_BASE_URL", "https://api.usefoil.com")
+      base_url: env_or_default("FOIL_SMOKE_BASE_URL", "https://api.usefoil.com")
     )
     organization_id = require_env("FOIL_SMOKE_ORGANIZATION_ID")
 
@@ -62,6 +62,11 @@ class LiveTest < Minitest::Test
     ENV.fetch(name)
   rescue KeyError
     raise "#{name} is required for the live smoke suite."
+  end
+
+  def env_or_default(name, fallback)
+    value = ENV[name]
+    value.nil? || value.empty? ? fallback : value
   end
 
   def find_api_key(client, organization_id, key_id)
