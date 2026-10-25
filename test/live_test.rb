@@ -35,7 +35,7 @@ class LiveTest < Minitest::Test
         environment: "test"
       )
       created_key_id = created_key.fetch(:id)
-      assert_operator created_key.fetch(:revealed_key), :start_with?, "sk_"
+      assert created_key.fetch(:revealed_key).start_with?("pk_test_"), "Created API key does not start with pk_test_."
 
       listed_key = find_api_key(client, organization_id, created_key_id)
       refute_nil listed_key, "Created API key should appear in the paginated list."
@@ -43,7 +43,7 @@ class LiveTest < Minitest::Test
 
       rotated_key = client.organizations.api_keys.rotate(organization_id, created_key_id)
       rotated_key_id = rotated_key.fetch(:id)
-      assert_operator rotated_key.fetch(:revealed_key), :start_with?, "sk_"
+      assert rotated_key.fetch(:revealed_key).start_with?("pk_test_"), "Rotated API key does not start with pk_test_."
 
       fixture = load_fixture("sealed-token/vector.v1.json")
       verified = Foil::Server.safe_verify_foil_token(fixture.fetch(:token), fixture.fetch(:secretKey))
