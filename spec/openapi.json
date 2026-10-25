@@ -80,6 +80,17 @@
               "type": "string",
               "example": "arm"
             }
+          },
+          {
+            "name": "client_user_id",
+            "in": "query",
+            "description": "Returns only sessions whose `client_user_id` is exactly this value, case-sensitive, after trimming surrounding whitespace.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "example": "user_123"
+            }
           }
         ],
         "responses": {
