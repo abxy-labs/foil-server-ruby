@@ -13395,6 +13395,7 @@
           "event",
           "decision",
           "visitor_fingerprint",
+          "device_cluster",
           "request",
           "score_breakdown",
           "signals",
@@ -13439,14 +13440,24 @@
               },
               "scoring_event_id": {
                 "type": "string",
-                "example": "scoring_event_id"
+                "example": "1842"
               },
               "phase": {
-                "type": [
-                  "string",
-                  "null"
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "snapshot",
+                      "behavioral"
+                    ],
+                    "example": "behavioral"
+                  },
+                  {
+                    "type": "null",
+                    "example": null
+                  }
                 ],
-                "example": "phase"
+                "example": "behavioral"
               },
               "is_provisional": {
                 "type": [
@@ -13463,8 +13474,8 @@
             },
             "example": {
               "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
-              "scoring_event_id": "scoring_event_id",
-              "phase": "phase",
+              "scoring_event_id": "1842",
+              "phase": "behavioral",
               "is_provisional": false,
               "persisted_at": "2026-03-24T20:00:05.000Z"
             }
@@ -13481,27 +13492,29 @@
             "properties": {
               "verdict": {
                 "$ref": "#/components/schemas/Verdict",
-                "example": "human"
+                "example": "bot"
               },
               "risk_score": {
                 "type": "integer",
                 "minimum": 0,
                 "maximum": 100,
-                "example": 94
+                "example": 94,
+                "description": "The risk score as an integer from 0 to 100."
               },
               "score": {
                 "type": "number",
                 "minimum": 0,
                 "maximum": 1,
-                "example": 0.08
+                "example": 0.94,
+                "description": "The same risk score as a number from 0 to 1."
               },
               "manipulation": {
                 "anyOf": [
                   {
                     "$ref": "#/components/schemas/ManipulationSummary",
                     "example": {
-                      "score": 1,
-                      "verdict": "none"
+                      "score": 18,
+                      "verdict": "low"
                     }
                   },
                   {
@@ -13510,18 +13523,18 @@
                   }
                 ],
                 "example": {
-                  "score": 1,
-                  "verdict": "none"
+                  "score": 18,
+                  "verdict": "low"
                 }
               }
             },
             "example": {
-              "verdict": "human",
+              "verdict": "bot",
               "risk_score": 94,
-              "score": 0.08,
+              "score": 0.94,
               "manipulation": {
-                "score": 1,
-                "verdict": "none"
+                "score": 18,
+                "verdict": "low"
               }
             }
           },
@@ -13552,6 +13565,81 @@
               "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
             }
           },
+          "device_cluster": {
+            "description": "The device cluster Foil linked the visitor to, or null when device-cluster results are not enabled.",
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "object",
+                  "id",
+                  "confidence",
+                  "matched_by"
+                ],
+                "properties": {
+                  "object": {
+                    "type": "string",
+                    "const": "device_cluster",
+                    "example": "device_cluster"
+                  },
+                  "id": {
+                    "type": "string",
+                    "example": "dcl_3k9vb7xq2m8n4c6p1r5t0wyzhe"
+                  },
+                  "confidence": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100,
+                        "example": 88
+                      },
+                      {
+                        "type": "null",
+                        "example": null
+                      }
+                    ],
+                    "example": 88
+                  },
+                  "matched_by": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "visitor_membership",
+                          "fingerprint",
+                          "new"
+                        ],
+                        "example": "fingerprint"
+                      },
+                      {
+                        "type": "null",
+                        "example": null
+                      }
+                    ],
+                    "example": "fingerprint"
+                  }
+                },
+                "example": {
+                  "object": "device_cluster",
+                  "id": "dcl_3k9vb7xq2m8n4c6p1r5t0wyzhe",
+                  "confidence": 88,
+                  "matched_by": "fingerprint"
+                }
+              },
+              {
+                "type": "null",
+                "example": null
+              }
+            ],
+            "example": {
+              "object": "device_cluster",
+              "id": "dcl_3k9vb7xq2m8n4c6p1r5t0wyzhe",
+              "confidence": 88,
+              "matched_by": "fingerprint"
+            }
+          },
           "request": {
             "$ref": "#/components/schemas/WebhookRequestSummary",
             "example": {
@@ -13559,42 +13647,61 @@
               "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
               "ip_address": "203.0.113.10",
               "screen_size": "1440x900",
-              "is_touch_capable": true,
+              "is_touch_capable": false,
               "platform": "macOS",
-              "first_seen": "2026-03-01T18:22:11.000Z",
+              "first_seen": "2026-03-24T19:59:58.000Z",
               "risk_time": "2026-03-24T20:00:05.000Z"
             }
           },
           "score_breakdown": {
             "type": "object",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "required": [
               "categories"
             ],
             "properties": {
               "categories": {
                 "type": "object",
-                "additionalProperties": true,
+                "description": "Each scoring category mapped to its score, an integer from 0 to 100.",
+                "additionalProperties": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100,
+                  "example": 60
+                },
                 "example": {
-                  "source": "signup_form"
+                  "environment": 60,
+                  "fingerprint": 30,
+                  "keyboard": 10
                 }
               }
             },
             "example": {
               "categories": {
-                "source": "signup_form"
+                "environment": 60,
+                "fingerprint": 30,
+                "keyboard": 10
               }
             }
           },
           "signals": {
             "type": "array",
+            "description": "The risk signals that fired for the decision. Shadow and telemetry-only signals are never included. Empty unless the organization's plan includes raw signals.",
             "items": {
               "type": "object",
-              "additionalProperties": true,
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "category",
+                "confidence",
+                "score",
+                "role"
+              ],
               "properties": {
                 "id": {
                   "type": "string",
-                  "example": "sid_87wfetm98myh9awj0dpt28a3kc"
+                  "description": "An opaque signal identifier.",
+                  "example": "E1"
                 },
                 "category": {
                   "type": "string",
@@ -13605,50 +13712,88 @@
                   "example": "exact"
                 },
                 "score": {
-                  "type": "number",
-                  "example": 0.08
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100,
+                  "description": "The signal's contribution as an integer from 0 to 100.",
+                  "example": 60
                 },
                 "role": {
                   "type": "string",
-                  "example": "owner"
+                  "const": "risk",
+                  "example": "risk"
                 }
               },
               "example": {
-                "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                "id": "E1",
                 "category": "environment",
                 "confidence": "exact",
-                "score": 0.08,
-                "role": "owner"
+                "score": 60,
+                "role": "risk"
               }
             },
             "example": [
               {
-                "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                "id": "E1",
                 "category": "environment",
                 "confidence": "exact",
-                "score": 0.08,
-                "role": "owner"
+                "score": 60,
+                "role": "risk"
               }
             ]
           },
           "attribution": {
             "type": "object",
-            "additionalProperties": true,
+            "additionalProperties": false,
+            "required": [
+              "bot"
+            ],
             "properties": {
               "bot": {
-                "type": [
-                  "object",
-                  "null"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/SessionAttribution",
+                    "example": {
+                      "labels": [
+                        {
+                          "kind": "actor",
+                          "value": "automation",
+                          "label": "Automation",
+                          "confidence": 97
+                        }
+                      ],
+                      "behaviors": []
+                    }
+                  },
+                  {
+                    "type": "null",
+                    "example": null
+                  }
                 ],
-                "additionalProperties": true,
                 "example": {
-                  "source": "signup_form"
+                  "labels": [
+                    {
+                      "kind": "actor",
+                      "value": "automation",
+                      "label": "Automation",
+                      "confidence": 97
+                    }
+                  ],
+                  "behaviors": []
                 }
               }
             },
             "example": {
               "bot": {
-                "source": "signup_form"
+                "labels": [
+                  {
+                    "kind": "actor",
+                    "value": "automation",
+                    "label": "Automation",
+                    "confidence": 97
+                  }
+                ],
+                "behaviors": []
               }
             }
           }
@@ -13660,50 +13805,61 @@
           },
           "event": {
             "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
-            "scoring_event_id": "scoring_event_id",
-            "phase": "phase",
+            "scoring_event_id": "1842",
+            "phase": "behavioral",
             "is_provisional": false,
             "persisted_at": "2026-03-24T20:00:05.000Z"
           },
           "decision": {
-            "verdict": "human",
+            "verdict": "bot",
             "risk_score": 94,
-            "score": 0.08,
+            "score": 0.94,
             "manipulation": {
-              "score": 1,
-              "verdict": "none"
+              "score": 18,
+              "verdict": "low"
             }
           },
           "visitor_fingerprint": {
             "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
           },
+          "device_cluster": null,
           "request": {
             "url": "https://app.acme.co/signup",
             "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
             "ip_address": "203.0.113.10",
             "screen_size": "1440x900",
-            "is_touch_capable": true,
+            "is_touch_capable": false,
             "platform": "macOS",
-            "first_seen": "2026-03-01T18:22:11.000Z",
+            "first_seen": "2026-03-24T19:59:58.000Z",
             "risk_time": "2026-03-24T20:00:05.000Z"
           },
           "score_breakdown": {
             "categories": {
-              "source": "signup_form"
+              "environment": 60,
+              "fingerprint": 30,
+              "keyboard": 10
             }
           },
           "signals": [
             {
-              "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+              "id": "E1",
               "category": "environment",
               "confidence": "exact",
-              "score": 0.08,
-              "role": "owner"
+              "score": 60,
+              "role": "risk"
             }
           ],
           "attribution": {
             "bot": {
-              "source": "signup_form"
+              "labels": [
+                {
+                  "kind": "actor",
+                  "value": "automation",
+                  "label": "Automation",
+                  "confidence": 97
+                }
+              ],
+              "behaviors": []
             }
           }
         }
@@ -13724,50 +13880,61 @@
                 },
                 "event": {
                   "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
-                  "scoring_event_id": "scoring_event_id",
-                  "phase": "phase",
+                  "scoring_event_id": "1842",
+                  "phase": "behavioral",
                   "is_provisional": false,
                   "persisted_at": "2026-03-24T20:00:05.000Z"
                 },
                 "decision": {
-                  "verdict": "human",
+                  "verdict": "bot",
                   "risk_score": 94,
-                  "score": 0.08,
+                  "score": 0.94,
                   "manipulation": {
-                    "score": 1,
-                    "verdict": "none"
+                    "score": 18,
+                    "verdict": "low"
                   }
                 },
                 "visitor_fingerprint": {
                   "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
                 },
+                "device_cluster": null,
                 "request": {
                   "url": "https://app.acme.co/signup",
                   "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                   "ip_address": "203.0.113.10",
                   "screen_size": "1440x900",
-                  "is_touch_capable": true,
+                  "is_touch_capable": false,
                   "platform": "macOS",
-                  "first_seen": "2026-03-01T18:22:11.000Z",
+                  "first_seen": "2026-03-24T19:59:58.000Z",
                   "risk_time": "2026-03-24T20:00:05.000Z"
                 },
                 "score_breakdown": {
                   "categories": {
-                    "source": "signup_form"
+                    "environment": 60,
+                    "fingerprint": 30,
+                    "keyboard": 10
                   }
                 },
                 "signals": [
                   {
-                    "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                    "id": "E1",
                     "category": "environment",
                     "confidence": "exact",
-                    "score": 0.08,
-                    "role": "owner"
+                    "score": 60,
+                    "role": "risk"
                   }
                 ],
                 "attribution": {
                   "bot": {
-                    "source": "signup_form"
+                    "labels": [
+                      {
+                        "kind": "actor",
+                        "value": "automation",
+                        "label": "Automation",
+                        "confidence": 97
+                      }
+                    ],
+                    "behaviors": []
                   }
                 }
               }
@@ -13790,50 +13957,61 @@
               },
               "event": {
                 "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
-                "scoring_event_id": "scoring_event_id",
-                "phase": "phase",
+                "scoring_event_id": "1842",
+                "phase": "behavioral",
                 "is_provisional": false,
                 "persisted_at": "2026-03-24T20:00:05.000Z"
               },
               "decision": {
-                "verdict": "human",
+                "verdict": "bot",
                 "risk_score": 94,
-                "score": 0.08,
+                "score": 0.94,
                 "manipulation": {
-                  "score": 1,
-                  "verdict": "none"
+                  "score": 18,
+                  "verdict": "low"
                 }
               },
               "visitor_fingerprint": {
                 "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
               },
+              "device_cluster": null,
               "request": {
                 "url": "https://app.acme.co/signup",
                 "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                 "ip_address": "203.0.113.10",
                 "screen_size": "1440x900",
-                "is_touch_capable": true,
+                "is_touch_capable": false,
                 "platform": "macOS",
-                "first_seen": "2026-03-01T18:22:11.000Z",
+                "first_seen": "2026-03-24T19:59:58.000Z",
                 "risk_time": "2026-03-24T20:00:05.000Z"
               },
               "score_breakdown": {
                 "categories": {
-                  "source": "signup_form"
+                  "environment": 60,
+                  "fingerprint": 30,
+                  "keyboard": 10
                 }
               },
               "signals": [
                 {
-                  "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                  "id": "E1",
                   "category": "environment",
                   "confidence": "exact",
-                  "score": 0.08,
-                  "role": "owner"
+                  "score": 60,
+                  "role": "risk"
                 }
               ],
               "attribution": {
                 "bot": {
-                  "source": "signup_form"
+                  "labels": [
+                    {
+                      "kind": "actor",
+                      "value": "automation",
+                      "label": "Automation",
+                      "confidence": 97
+                    }
+                  ],
+                  "behaviors": []
                 }
               }
             }
@@ -13851,50 +14029,61 @@
             },
             "event": {
               "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
-              "scoring_event_id": "scoring_event_id",
-              "phase": "phase",
+              "scoring_event_id": "1842",
+              "phase": "behavioral",
               "is_provisional": false,
               "persisted_at": "2026-03-24T20:00:05.000Z"
             },
             "decision": {
-              "verdict": "human",
+              "verdict": "bot",
               "risk_score": 94,
-              "score": 0.08,
+              "score": 0.94,
               "manipulation": {
-                "score": 1,
-                "verdict": "none"
+                "score": 18,
+                "verdict": "low"
               }
             },
             "visitor_fingerprint": {
               "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
             },
+            "device_cluster": null,
             "request": {
               "url": "https://app.acme.co/signup",
               "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
               "ip_address": "203.0.113.10",
               "screen_size": "1440x900",
-              "is_touch_capable": true,
+              "is_touch_capable": false,
               "platform": "macOS",
-              "first_seen": "2026-03-01T18:22:11.000Z",
+              "first_seen": "2026-03-24T19:59:58.000Z",
               "risk_time": "2026-03-24T20:00:05.000Z"
             },
             "score_breakdown": {
               "categories": {
-                "source": "signup_form"
+                "environment": 60,
+                "fingerprint": 30,
+                "keyboard": 10
               }
             },
             "signals": [
               {
-                "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                "id": "E1",
                 "category": "environment",
                 "confidence": "exact",
-                "score": 0.08,
-                "role": "owner"
+                "score": 60,
+                "role": "risk"
               }
             ],
             "attribution": {
               "bot": {
-                "source": "signup_form"
+                "labels": [
+                  {
+                    "kind": "actor",
+                    "value": "automation",
+                    "label": "Automation",
+                    "confidence": 97
+                  }
+                ],
+                "behaviors": []
               }
             }
           }
@@ -15652,50 +15841,61 @@
                   },
                   "event": {
                     "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
-                    "scoring_event_id": "scoring_event_id",
-                    "phase": "phase",
+                    "scoring_event_id": "1842",
+                    "phase": "behavioral",
                     "is_provisional": false,
                     "persisted_at": "2026-03-24T20:00:05.000Z"
                   },
                   "decision": {
-                    "verdict": "human",
+                    "verdict": "bot",
                     "risk_score": 94,
-                    "score": 0.08,
+                    "score": 0.94,
                     "manipulation": {
-                      "score": 1,
-                      "verdict": "none"
+                      "score": 18,
+                      "verdict": "low"
                     }
                   },
                   "visitor_fingerprint": {
                     "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
                   },
+                  "device_cluster": null,
                   "request": {
                     "url": "https://app.acme.co/signup",
                     "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                     "ip_address": "203.0.113.10",
                     "screen_size": "1440x900",
-                    "is_touch_capable": true,
+                    "is_touch_capable": false,
                     "platform": "macOS",
-                    "first_seen": "2026-03-01T18:22:11.000Z",
+                    "first_seen": "2026-03-24T19:59:58.000Z",
                     "risk_time": "2026-03-24T20:00:05.000Z"
                   },
                   "score_breakdown": {
                     "categories": {
-                      "source": "signup_form"
+                      "environment": 60,
+                      "fingerprint": 30,
+                      "keyboard": 10
                     }
                   },
                   "signals": [
                     {
-                      "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                      "id": "E1",
                       "category": "environment",
                       "confidence": "exact",
-                      "score": 0.08,
-                      "role": "owner"
+                      "score": 60,
+                      "role": "risk"
                     }
                   ],
                   "attribution": {
                     "bot": {
-                      "source": "signup_form"
+                      "labels": [
+                        {
+                          "kind": "actor",
+                          "value": "automation",
+                          "label": "Automation",
+                          "confidence": 97
+                        }
+                      ],
+                      "behaviors": []
                     }
                   }
                 }
@@ -15706,7 +15906,8 @@
                   "object": "webhook_test",
                   "endpoint": {
                     "id": "we_0123456789abcdef0123456789abcdef"
-                  }
+                  },
+                  "message": "This is a Foil webhook test event."
                 }
               }
             ],
@@ -15717,50 +15918,61 @@
               },
               "event": {
                 "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
-                "scoring_event_id": "scoring_event_id",
-                "phase": "phase",
+                "scoring_event_id": "1842",
+                "phase": "behavioral",
                 "is_provisional": false,
                 "persisted_at": "2026-03-24T20:00:05.000Z"
               },
               "decision": {
-                "verdict": "human",
+                "verdict": "bot",
                 "risk_score": 94,
-                "score": 0.08,
+                "score": 0.94,
                 "manipulation": {
-                  "score": 1,
-                  "verdict": "none"
+                  "score": 18,
+                  "verdict": "low"
                 }
               },
               "visitor_fingerprint": {
                 "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
               },
+              "device_cluster": null,
               "request": {
                 "url": "https://app.acme.co/signup",
                 "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                 "ip_address": "203.0.113.10",
                 "screen_size": "1440x900",
-                "is_touch_capable": true,
+                "is_touch_capable": false,
                 "platform": "macOS",
-                "first_seen": "2026-03-01T18:22:11.000Z",
+                "first_seen": "2026-03-24T19:59:58.000Z",
                 "risk_time": "2026-03-24T20:00:05.000Z"
               },
               "score_breakdown": {
                 "categories": {
-                  "source": "signup_form"
+                  "environment": 60,
+                  "fingerprint": 30,
+                  "keyboard": 10
                 }
               },
               "signals": [
                 {
-                  "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                  "id": "E1",
                   "category": "environment",
                   "confidence": "exact",
-                  "score": 0.08,
-                  "role": "owner"
+                  "score": 60,
+                  "role": "risk"
                 }
               ],
               "attribution": {
                 "bot": {
-                  "source": "signup_form"
+                  "labels": [
+                    {
+                      "kind": "actor",
+                      "value": "automation",
+                      "label": "Automation",
+                      "confidence": 97
+                    }
+                  ],
+                  "behaviors": []
                 }
               }
             }
@@ -15778,50 +15990,61 @@
             },
             "event": {
               "id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
-              "scoring_event_id": "scoring_event_id",
-              "phase": "phase",
+              "scoring_event_id": "1842",
+              "phase": "behavioral",
               "is_provisional": false,
               "persisted_at": "2026-03-24T20:00:05.000Z"
             },
             "decision": {
-              "verdict": "human",
+              "verdict": "bot",
               "risk_score": 94,
-              "score": 0.08,
+              "score": 0.94,
               "manipulation": {
-                "score": 1,
-                "verdict": "none"
+                "score": 18,
+                "verdict": "low"
               }
             },
             "visitor_fingerprint": {
               "id": "vid_7cyvmdfjs3rzznf8m65v3bv51m"
             },
+            "device_cluster": null,
             "request": {
               "url": "https://app.acme.co/signup",
               "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
               "ip_address": "203.0.113.10",
               "screen_size": "1440x900",
-              "is_touch_capable": true,
+              "is_touch_capable": false,
               "platform": "macOS",
-              "first_seen": "2026-03-01T18:22:11.000Z",
+              "first_seen": "2026-03-24T19:59:58.000Z",
               "risk_time": "2026-03-24T20:00:05.000Z"
             },
             "score_breakdown": {
               "categories": {
-                "source": "signup_form"
+                "environment": 60,
+                "fingerprint": 30,
+                "keyboard": 10
               }
             },
             "signals": [
               {
-                "id": "sid_87wfetm98myh9awj0dpt28a3kc",
+                "id": "E1",
                 "category": "environment",
                 "confidence": "exact",
-                "score": 0.08,
-                "role": "owner"
+                "score": 60,
+                "role": "risk"
               }
             ],
             "attribution": {
               "bot": {
-                "source": "signup_form"
+                "labels": [
+                  {
+                    "kind": "actor",
+                    "value": "automation",
+                    "label": "Automation",
+                    "confidence": 97
+                  }
+                ],
+                "behaviors": []
               }
             }
           }
@@ -16004,10 +16227,11 @@
       },
       "WebhookTestEventPayload": {
         "type": "object",
-        "additionalProperties": true,
+        "additionalProperties": false,
         "required": [
           "object",
-          "endpoint"
+          "endpoint",
+          "message"
         ],
         "properties": {
           "object": {
@@ -16030,13 +16254,18 @@
             "example": {
               "id": "we_0123456789abcdef0123456789abcdef"
             }
+          },
+          "message": {
+            "type": "string",
+            "example": "This is a Foil webhook test event."
           }
         },
         "example": {
           "object": "webhook_test",
           "endpoint": {
             "id": "we_0123456789abcdef0123456789abcdef"
-          }
+          },
+          "message": "This is a Foil webhook test event."
         }
       },
       "WebhookTestResponse": {
