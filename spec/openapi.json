@@ -327,7 +327,7 @@
                           "accuracy_radius_km": 10
                         },
                         "routing": {
-                          "asn": "64512",
+                          "asn": "AS64512",
                           "organization": "SPECTRANET LIMITED"
                         },
                         "anonymity": {
@@ -357,7 +357,7 @@
                           "client_types": [
                             "consumer"
                           ],
-                          "client_count": 1
+                          "client_count": null
                         },
                         "evaluated_at": "2026-03-24T20:00:05.000Z"
                       },
@@ -567,7 +567,8 @@
                         "lifecycle": {
                           "first_seen_at": "2026-03-01T18:22:11.000Z",
                           "last_seen_at": "2026-03-24T20:00:05.000Z",
-                          "seen_count": 1
+                          "seen_count": 1,
+                          "resolution_count": 1
                         }
                       },
                       "connection_fingerprint": {
@@ -685,7 +686,7 @@
                       "signals_fired": [
                         {
                           "signal": "webdriver_detected",
-                          "role": "owner",
+                          "role": "risk",
                           "category": "environment",
                           "strength": "definitive",
                           "signal_score": 100
@@ -722,9 +723,9 @@
                         },
                         "canvas": {
                           "hash": 1234567890,
-                          "geometry_hash": 1234567890,
+                          "geometry_hash": null,
                           "text_hash": 1234567890,
-                          "winding": true,
+                          "winding": null,
                           "noise_detected": true,
                           "offscreen_consistent": true
                         },
@@ -737,6 +738,7 @@
                             "parameters_hash": "01234567",
                             "extensions_hash": 1234567890,
                             "extension_parameters_hash": "01234567",
+                            "webgl2_parameters_hash": "01234567",
                             "shader_precision_hash": 1234567890
                           },
                           "webgpu": {
@@ -1067,23 +1069,23 @@
                           "first_seen_at": "2026-03-01T18:22:11.000Z",
                           "last_seen_at": "2026-03-24T20:00:05.000Z",
                           "seen_count": 14,
-                          "expires_at": "2026-03-24T20:00:05.000Z"
+                          "expires_at": "9999-12-31T00:00:00.000Z"
                         },
                         "latest_request": {
                           "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                           "ip_address": "203.0.113.10"
                         },
                         "storage": {
-                          "cookies": true,
-                          "local_storage": true,
-                          "indexed_db": true,
-                          "service_worker": true,
-                          "window_name": true
+                          "cookies": false,
+                          "local_storage": false,
+                          "indexed_db": false,
+                          "service_worker": false,
+                          "window_name": false
                         },
                         "anchors": {
-                          "webgl_hash": "123456789",
-                          "parameters_hash": "-1234567890",
-                          "audio_hash": "1234567890"
+                          "webgl_hash": null,
+                          "parameters_hash": null,
+                          "audio_hash": null
                         }
                       }
                     ],
@@ -1245,28 +1247,26 @@
                         "first_seen_at": "2026-03-01T18:22:11.000Z",
                         "last_seen_at": "2026-03-24T20:00:05.000Z",
                         "seen_count": 14,
-                        "expires_at": "2026-03-24T20:00:05.000Z"
+                        "expires_at": "9999-12-31T00:00:00.000Z"
                       },
                       "latest_request": {
                         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                         "ip_address": "203.0.113.10"
                       },
                       "storage": {
-                        "cookies": true,
-                        "local_storage": true,
-                        "indexed_db": true,
-                        "service_worker": true,
-                        "window_name": true
+                        "cookies": false,
+                        "local_storage": false,
+                        "indexed_db": false,
+                        "service_worker": false,
+                        "window_name": false
                       },
                       "anchors": {
-                        "webgl_hash": "123456789",
-                        "parameters_hash": "-1234567890",
-                        "audio_hash": "1234567890"
+                        "webgl_hash": null,
+                        "parameters_hash": null,
+                        "audio_hash": null
                       },
                       "components": {
-                        "vector": [
-                          1.5
-                        ]
+                        "vector": []
                       },
                       "activity": {
                         "sessions": [
@@ -5340,11 +5340,25 @@
             "example": 94
           },
           "phase": {
-            "$ref": "#/components/schemas/Phase",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Phase",
+                "example": "snapshot"
+              },
+              {
+                "type": "null",
+                "example": null
+              }
+            ],
+            "description": "Null when the decision did not record it.",
             "example": "snapshot"
           },
           "is_provisional": {
-            "type": "boolean",
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Null when the decision did not record it.",
             "example": false
           },
           "manipulation": {
@@ -5367,8 +5381,18 @@
             }
           },
           "evaluation_duration_ms": {
-            "type": "integer",
-            "minimum": 0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "example": 123
+              },
+              {
+                "type": "null",
+                "example": null
+              }
+            ],
+            "description": "Null when the decision did not record it.",
             "example": 123
           },
           "evaluated_at": {
@@ -5390,6 +5414,16 @@
           "evaluation_duration_ms": 123,
           "evaluated_at": "2026-03-24T20:00:05.000Z"
         }
+      },
+      "DeviceClass": {
+        "type": "string",
+        "enum": [
+          "desktop",
+          "phone",
+          "tablet",
+          "unknown"
+        ],
+        "example": "desktop"
       },
       "Event": {
         "type": "object",
@@ -6647,6 +6681,12 @@
           },
           "engine": {
             "type": "string",
+            "enum": [
+              "blink",
+              "gecko",
+              "webkit",
+              "unknown"
+            ],
             "example": "blink"
           },
           "app_name": {
@@ -6718,9 +6758,9 @@
             "$ref": "#/components/schemas/SessionRawDeviceCanvas",
             "example": {
               "hash": 1234567890,
-              "geometry_hash": 1234567890,
+              "geometry_hash": null,
               "text_hash": 1234567890,
-              "winding": true,
+              "winding": null,
               "noise_detected": true,
               "offscreen_consistent": true
             }
@@ -6736,6 +6776,7 @@
                 "parameters_hash": "01234567",
                 "extensions_hash": 1234567890,
                 "extension_parameters_hash": "01234567",
+                "webgl2_parameters_hash": "01234567",
                 "shader_precision_hash": 1234567890
               },
               "webgpu": {
@@ -6816,9 +6857,9 @@
           },
           "canvas": {
             "hash": 1234567890,
-            "geometry_hash": 1234567890,
+            "geometry_hash": null,
             "text_hash": 1234567890,
-            "winding": true,
+            "winding": null,
             "noise_detected": true,
             "offscreen_consistent": true
           },
@@ -6831,6 +6872,7 @@
               "parameters_hash": "01234567",
               "extensions_hash": 1234567890,
               "extension_parameters_hash": "01234567",
+              "webgl2_parameters_hash": "01234567",
               "shader_precision_hash": 1234567890
             },
             "webgpu": {
@@ -6906,6 +6948,18 @@
                   "string",
                   "null"
                 ],
+                "enum": [
+                  "chrome",
+                  "firefox",
+                  "safari",
+                  "nodejs",
+                  "python",
+                  "go",
+                  "curl",
+                  "unknown",
+                  null
+                ],
+                "description": "Client the TLS fingerprint most resembles.",
                 "example": "chrome"
               },
               "family": {
@@ -6913,6 +6967,19 @@
                   "string",
                   "null"
                 ],
+                "enum": [
+                  "chromium",
+                  "firefox",
+                  "webkit",
+                  "nodejs",
+                  "python",
+                  "go",
+                  "curl",
+                  "middlebox",
+                  "unknown",
+                  null
+                ],
+                "description": "TLS stack family the JA4 fingerprint matches. `middlebox` means a TLS-intercepting proxy or security appliance.",
                 "example": "chromium"
               },
               "product": {
@@ -6927,6 +6994,14 @@
                   "string",
                   "null"
                 ],
+                "enum": [
+                  "exact",
+                  "strong",
+                  "heuristic",
+                  "unknown",
+                  null
+                ],
+                "description": "How closely the JA4 fingerprint matched a known client.",
                 "example": "exact"
               },
               "match_source": {
@@ -6934,6 +7009,15 @@
                   "string",
                   "null"
                 ],
+                "enum": [
+                  "full_ja4",
+                  "bc_hash",
+                  "cipher_hash",
+                  "prefix",
+                  "unknown",
+                  null
+                ],
+                "description": "Which part of the JA4 fingerprint produced the match: the full fingerprint, the cipher and extension hashes, the cipher hash alone, or the prefix.",
                 "example": "full_ja4"
               },
               "deterministic": {
@@ -6967,6 +7051,10 @@
                       },
                       "source": {
                         "type": "string",
+                        "enum": [
+                          "master_db",
+                          "heuristic"
+                        ],
                         "example": "master_db"
                       },
                       "protocol": {
@@ -7030,7 +7118,11 @@
                         }
                       },
                       "sample_size": {
-                        "type": "integer",
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "description": "Number of observations behind the reference. Null when the source does not report one.",
                         "example": 63
                       },
                       "verified": {
@@ -7133,6 +7225,19 @@
                   "string",
                   "null"
                 ],
+                "enum": [
+                  "chrome",
+                  "firefox",
+                  "safari",
+                  "edge",
+                  "nodejs",
+                  "python",
+                  "go",
+                  "curl",
+                  "unknown",
+                  null
+                ],
+                "description": "Client the HTTP/2 fingerprint most resembles.",
                 "example": "chrome"
               }
             },
@@ -7333,7 +7438,7 @@
                 "accuracy_radius_km": 10
               },
               "routing": {
-                "asn": "64512",
+                "asn": "AS64512",
                 "organization": "SPECTRANET LIMITED"
               },
               "anonymity": {
@@ -7363,7 +7468,7 @@
                 "client_types": [
                   "consumer"
                 ],
-                "client_count": 1
+                "client_count": null
               },
               "evaluated_at": "2026-03-24T20:00:05.000Z"
             }
@@ -7825,7 +7930,8 @@
                   "lifecycle": {
                     "first_seen_at": "2026-03-01T18:22:11.000Z",
                     "last_seen_at": "2026-03-24T20:00:05.000Z",
-                    "seen_count": 1
+                    "seen_count": 1,
+                    "resolution_count": 1
                   }
                 }
               },
@@ -7846,7 +7952,8 @@
               "lifecycle": {
                 "first_seen_at": "2026-03-01T18:22:11.000Z",
                 "last_seen_at": "2026-03-24T20:00:05.000Z",
-                "seen_count": 1
+                "seen_count": 1,
+                "resolution_count": 1
               }
             }
           },
@@ -7997,7 +8104,7 @@
               "$ref": "#/components/schemas/SessionSignalFired",
               "example": {
                 "signal": "webdriver_detected",
-                "role": "owner",
+                "role": "risk",
                 "category": "environment",
                 "strength": "definitive",
                 "signal_score": 100
@@ -8006,7 +8113,7 @@
             "example": [
               {
                 "signal": "webdriver_detected",
-                "role": "owner",
+                "role": "risk",
                 "category": "environment",
                 "strength": "definitive",
                 "signal_score": 100
@@ -8046,9 +8153,9 @@
               },
               "canvas": {
                 "hash": 1234567890,
-                "geometry_hash": 1234567890,
+                "geometry_hash": null,
                 "text_hash": 1234567890,
-                "winding": true,
+                "winding": null,
                 "noise_detected": true,
                 "offscreen_consistent": true
               },
@@ -8061,6 +8168,7 @@
                   "parameters_hash": "01234567",
                   "extensions_hash": 1234567890,
                   "extension_parameters_hash": "01234567",
+                  "webgl2_parameters_hash": "01234567",
                   "shader_precision_hash": 1234567890
                 },
                 "webgpu": {
@@ -8222,7 +8330,7 @@
               "accuracy_radius_km": 10
             },
             "routing": {
-              "asn": "64512",
+              "asn": "AS64512",
               "organization": "SPECTRANET LIMITED"
             },
             "anonymity": {
@@ -8252,7 +8360,7 @@
               "client_types": [
                 "consumer"
               ],
-              "client_count": 1
+              "client_count": null
             },
             "evaluated_at": "2026-03-24T20:00:05.000Z"
           },
@@ -8462,7 +8570,8 @@
             "lifecycle": {
               "first_seen_at": "2026-03-01T18:22:11.000Z",
               "last_seen_at": "2026-03-24T20:00:05.000Z",
-              "seen_count": 1
+              "seen_count": 1,
+              "resolution_count": 1
             }
           },
           "connection_fingerprint": {
@@ -8580,7 +8689,7 @@
           "signals_fired": [
             {
               "signal": "webdriver_detected",
-              "role": "owner",
+              "role": "risk",
               "category": "environment",
               "strength": "definitive",
               "signal_score": 100
@@ -8617,9 +8726,9 @@
             },
             "canvas": {
               "hash": 1234567890,
-              "geometry_hash": 1234567890,
+              "geometry_hash": null,
               "text_hash": 1234567890,
-              "winding": true,
+              "winding": null,
               "noise_detected": true,
               "offscreen_consistent": true
             },
@@ -8632,6 +8741,7 @@
                 "parameters_hash": "01234567",
                 "extensions_hash": 1234567890,
                 "extension_parameters_hash": "01234567",
+                "webgl2_parameters_hash": "01234567",
                 "shader_precision_hash": 1234567890
               },
               "webgpu": {
@@ -8877,6 +8987,7 @@
               "machine_speed",
               "scripted_cadence",
               "filled_instantly",
+              "burst_fill",
               "changed",
               "visited_no_entry",
               "unknown"
@@ -9234,7 +9345,7 @@
                   "accuracy_radius_km": 10
                 },
                 "routing": {
-                  "asn": "64512",
+                  "asn": "AS64512",
                   "organization": "SPECTRANET LIMITED"
                 },
                 "anonymity": {
@@ -9264,7 +9375,7 @@
                   "client_types": [
                     "consumer"
                   ],
-                  "client_count": 1
+                  "client_count": null
                 },
                 "evaluated_at": "2026-03-24T20:00:05.000Z"
               },
@@ -9474,7 +9585,8 @@
                 "lifecycle": {
                   "first_seen_at": "2026-03-01T18:22:11.000Z",
                   "last_seen_at": "2026-03-24T20:00:05.000Z",
-                  "seen_count": 1
+                  "seen_count": 1,
+                  "resolution_count": 1
                 }
               },
               "connection_fingerprint": {
@@ -9592,7 +9704,7 @@
               "signals_fired": [
                 {
                   "signal": "webdriver_detected",
-                  "role": "owner",
+                  "role": "risk",
                   "category": "environment",
                   "strength": "definitive",
                   "signal_score": 100
@@ -9629,9 +9741,9 @@
                 },
                 "canvas": {
                   "hash": 1234567890,
-                  "geometry_hash": 1234567890,
+                  "geometry_hash": null,
                   "text_hash": 1234567890,
-                  "winding": true,
+                  "winding": null,
                   "noise_detected": true,
                   "offscreen_consistent": true
                 },
@@ -9644,6 +9756,7 @@
                     "parameters_hash": "01234567",
                     "extensions_hash": 1234567890,
                     "extension_parameters_hash": "01234567",
+                    "webgl2_parameters_hash": "01234567",
                     "shader_precision_hash": 1234567890
                   },
                   "webgpu": {
@@ -9766,7 +9879,7 @@
                 "accuracy_radius_km": 10
               },
               "routing": {
-                "asn": "64512",
+                "asn": "AS64512",
                 "organization": "SPECTRANET LIMITED"
               },
               "anonymity": {
@@ -9796,7 +9909,7 @@
                 "client_types": [
                   "consumer"
                 ],
-                "client_count": 1
+                "client_count": null
               },
               "evaluated_at": "2026-03-24T20:00:05.000Z"
             },
@@ -10006,7 +10119,8 @@
               "lifecycle": {
                 "first_seen_at": "2026-03-01T18:22:11.000Z",
                 "last_seen_at": "2026-03-24T20:00:05.000Z",
-                "seen_count": 1
+                "seen_count": 1,
+                "resolution_count": 1
               }
             },
             "connection_fingerprint": {
@@ -10124,7 +10238,7 @@
             "signals_fired": [
               {
                 "signal": "webdriver_detected",
-                "role": "owner",
+                "role": "risk",
                 "category": "environment",
                 "strength": "definitive",
                 "signal_score": 100
@@ -10161,9 +10275,9 @@
               },
               "canvas": {
                 "hash": 1234567890,
-                "geometry_hash": 1234567890,
+                "geometry_hash": null,
                 "text_hash": 1234567890,
-                "winding": true,
+                "winding": null,
                 "noise_detected": true,
                 "offscreen_consistent": true
               },
@@ -10176,6 +10290,7 @@
                   "parameters_hash": "01234567",
                   "extensions_hash": 1234567890,
                   "extension_parameters_hash": "01234567",
+                  "webgl2_parameters_hash": "01234567",
                   "shader_precision_hash": 1234567890
                 },
                 "webgpu": {
@@ -10306,15 +10421,12 @@
                 "enum": [
                   "continuity",
                   "fingerprint",
-                  "fingerprint_evolution",
                   "new",
                   "native_persistent",
                   "native_new",
-                  "existing",
-                  "unknown",
                   null
                 ],
-                "description": "The evidence that resolved this session to the visitor ID. Null when the session predates resolution tracking.",
+                "description": "The evidence that resolved this session to the visitor ID: `continuity` for an identifier saved in an earlier session, `fingerprint` for a fingerprint match, `new` for a first sighting, and `native_persistent` or `native_new` for iOS and Android SDK sessions. Null when the session predates resolution tracking.",
                 "example": "continuity"
               },
               "basis": {
@@ -10341,7 +10453,8 @@
             "example": {
               "first_seen_at": "2026-03-01T18:22:11.000Z",
               "last_seen_at": "2026-03-24T20:00:05.000Z",
-              "seen_count": 1
+              "seen_count": 1,
+              "resolution_count": 1
             }
           }
         },
@@ -10357,7 +10470,8 @@
           "lifecycle": {
             "first_seen_at": "2026-03-01T18:22:11.000Z",
             "last_seen_at": "2026-03-24T20:00:05.000Z",
-            "seen_count": 1
+            "seen_count": 1,
+            "resolution_count": 1
           }
         }
       },
@@ -10367,7 +10481,8 @@
         "required": [
           "first_seen_at",
           "last_seen_at",
-          "seen_count"
+          "seen_count",
+          "resolution_count"
         ],
         "properties": {
           "first_seen_at": {
@@ -10398,14 +10513,33 @@
                 "example": null
               }
             ],
+            "deprecated": true,
+            "description": "Deprecated. Same value as `resolution_count`. It does not match `seen_count` from `GET /v1/fingerprints/{visitorId}`, which counts sessions.",
             "example": 1
+          },
+          "resolution_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "example": 14
+              },
+              {
+                "type": "null",
+                "example": null
+              }
+            ],
+            "description": "Number of times Foil resolved a page load or app launch to this visitor ID across the organization, including both environments. One session can count more than once.",
+            "example": 14
           }
         },
         "example": {
           "first_seen_at": "2026-03-01T18:22:11.000Z",
           "last_seen_at": "2026-03-24T20:00:05.000Z",
-          "seen_count": 1
-        }
+          "seen_count": 1,
+          "resolution_count": 1
+        },
+        "description": "Lifecycle of the visitor ID across the organization, including both environments."
       },
       "SessionDevice": {
         "type": "object",
@@ -10420,7 +10554,7 @@
         ],
         "properties": {
           "form_factor": {
-            "type": "string",
+            "$ref": "#/components/schemas/DeviceClass",
             "example": "desktop"
           },
           "operating_system": {
@@ -12155,6 +12289,7 @@
               "string",
               "null"
             ],
+            "description": "Client IP address. Null when Foil did not capture one.",
             "example": "203.0.113.10"
           },
           "ip_version": {
@@ -12212,6 +12347,7 @@
                 "example": null
               }
             ],
+            "description": "Location of the IP address. Null when the lookup found none.",
             "example": {
               "city": "San Francisco",
               "region": "California",
@@ -12237,7 +12373,8 @@
                   "string",
                   "null"
                 ],
-                "example": "64512"
+                "description": "Autonomous system number with an `AS` prefix.",
+                "example": "AS64512"
               },
               "organization": {
                 "type": [
@@ -12248,7 +12385,7 @@
               }
             },
             "example": {
-              "asn": "64512",
+              "asn": "AS64512",
               "organization": "SPECTRANET LIMITED"
             }
           },
@@ -12292,6 +12429,8 @@
               },
               "callback_proxy": {
                 "type": "boolean",
+                "deprecated": true,
+                "description": "Always `false` for sessions evaluated since July 30, 2026. The current IP intelligence source has no callback-proxy classification.",
                 "example": false
               },
               "provider": {
@@ -12338,6 +12477,8 @@
               },
               "suspicious_network": {
                 "type": "boolean",
+                "deprecated": true,
+                "description": "Always `false` for sessions evaluated since July 30, 2026. The current IP intelligence source has no suspicious-network classification.",
                 "example": false
               }
             },
@@ -12401,7 +12542,9 @@
                     "example": null
                   }
                 ],
-                "example": 1
+                "deprecated": true,
+                "description": "Always `null` for sessions evaluated since July 30, 2026. The current IP intelligence source does not count clients behind an address.",
+                "example": null
               }
             },
             "example": {
@@ -12414,7 +12557,7 @@
               "client_types": [
                 "consumer"
               ],
-              "client_count": 1
+              "client_count": null
             }
           },
           "evaluated_at": {
@@ -12443,7 +12586,7 @@
             "accuracy_radius_km": 10
           },
           "routing": {
-            "asn": "64512",
+            "asn": "AS64512",
             "organization": "SPECTRANET LIMITED"
           },
           "anonymity": {
@@ -12473,7 +12616,7 @@
             "client_types": [
               "consumer"
             ],
-            "client_count": 1
+            "client_count": null
           },
           "evaluated_at": "2026-03-24T20:00:05.000Z"
         }
@@ -12620,7 +12763,8 @@
               "null"
             ],
             "minimum": 0,
-            "example": 3
+            "description": "The `maxChannelCount` of the audio output. Null when the browser did not report it.",
+            "example": 2
           },
           "voice_count": {
             "type": [
@@ -12681,7 +12825,9 @@
           },
           "geometry_hash": {
             "$ref": "#/components/schemas/ObservationHash",
-            "example": 1234567890
+            "deprecated": true,
+            "description": "Always null. Foil stopped measuring canvas geometry in July 2026.",
+            "example": null
           },
           "text_hash": {
             "$ref": "#/components/schemas/ObservationHash",
@@ -12692,7 +12838,9 @@
               "boolean",
               "null"
             ],
-            "example": true
+            "deprecated": true,
+            "description": "Always null. No Foil probe measures canvas winding.",
+            "example": null
           },
           "noise_detected": {
             "type": [
@@ -12711,9 +12859,9 @@
         },
         "example": {
           "hash": 1234567890,
-          "geometry_hash": 1234567890,
+          "geometry_hash": null,
           "text_hash": 1234567890,
-          "winding": true,
+          "winding": null,
           "noise_detected": true,
           "offscreen_consistent": true
         }
@@ -12736,6 +12884,7 @@
               "null"
             ],
             "minimum": 0,
+            "description": "Number of tested fonts that are installed.",
             "example": 3
           },
           "tested_count": {
@@ -12744,7 +12893,8 @@
               "null"
             ],
             "minimum": 0,
-            "example": 3
+            "description": "Number of fonts in the panel Foil tested. Null when the font probe returned no usable measurement.",
+            "example": 41
           },
           "enumeration_hash": {
             "$ref": "#/components/schemas/ObservationHash",
@@ -12760,7 +12910,8 @@
           },
           "emoji_hash": {
             "$ref": "#/components/schemas/ObservationHash",
-            "example": 1234567890
+            "description": "Hash of the rendered dimensions of a fixed set of emoji. Null when the browser could not measure them.",
+            "example": "5f0e2a71"
           }
         },
         "example": {
@@ -12790,6 +12941,7 @@
               "parameters_hash": "01234567",
               "extensions_hash": 1234567890,
               "extension_parameters_hash": "01234567",
+              "webgl2_parameters_hash": "01234567",
               "shader_precision_hash": 1234567890
             }
           },
@@ -12814,6 +12966,7 @@
             "parameters_hash": "01234567",
             "extensions_hash": 1234567890,
             "extension_parameters_hash": "01234567",
+            "webgl2_parameters_hash": "01234567",
             "shader_precision_hash": 1234567890
           },
           "webgpu": {
@@ -12837,6 +12990,7 @@
           "parameters_hash",
           "extensions_hash",
           "extension_parameters_hash",
+          "webgl2_parameters_hash",
           "shader_precision_hash"
         ],
         "properties": {
@@ -12878,6 +13032,13 @@
           },
           "extension_parameters_hash": {
             "$ref": "#/components/schemas/ObservationHash",
+            "deprecated": true,
+            "description": "Deprecated misnomer for `webgl2_parameters_hash`, which carries the same value. This field never described extension parameters.",
+            "example": "01234567"
+          },
+          "webgl2_parameters_hash": {
+            "$ref": "#/components/schemas/ObservationHash",
+            "description": "Hash of the WebGL2 context parameters. Null when WebGL2 is unavailable.",
             "example": "01234567"
           },
           "shader_precision_hash": {
@@ -12893,6 +13054,7 @@
           "parameters_hash": "01234567",
           "extensions_hash": 1234567890,
           "extension_parameters_hash": "01234567",
+          "webgl2_parameters_hash": "01234567",
           "shader_precision_hash": 1234567890
         }
       },
@@ -13156,6 +13318,7 @@
       "SessionRawDeviceStorage": {
         "type": "object",
         "additionalProperties": false,
+        "description": "Whether each storage API is available to the page. A field is `true` when a probe found the API or Foil read its own identifier back from that store, `false` only when a probe found the API missing, and `null` when nothing measured it. A missing identifier is not evidence that the store is unavailable.",
         "required": [
           "cookies",
           "local_storage",
@@ -13170,6 +13333,7 @@
               "boolean",
               "null"
             ],
+            "description": "From `navigator.cookieEnabled`. Otherwise `true` when Foil read its cookie back, and `null`.",
             "example": true
           },
           "local_storage": {
@@ -13177,6 +13341,7 @@
               "boolean",
               "null"
             ],
+            "description": "Whether `window.localStorage` is reachable. Otherwise `true` when Foil read its identifier back, and `null`.",
             "example": true
           },
           "session_storage": {
@@ -13184,6 +13349,7 @@
               "boolean",
               "null"
             ],
+            "description": "Whether `window.sessionStorage` is reachable. Otherwise `true` when Foil read its identifier back, and `null`.",
             "example": true
           },
           "indexed_db": {
@@ -13191,6 +13357,7 @@
               "boolean",
               "null"
             ],
+            "description": "`true` when Foil read its identifier back from IndexedDB, otherwise `null`. No probe tests IndexedDB directly, so this field is never `false`.",
             "example": true
           },
           "service_worker": {
@@ -13198,6 +13365,7 @@
               "boolean",
               "null"
             ],
+            "description": "Whether `navigator.serviceWorker` exists. Null when the probe did not run.",
             "example": true
           },
           "window_name": {
@@ -13205,6 +13373,7 @@
               "boolean",
               "null"
             ],
+            "description": "`true` when Foil read its identifier back from `window.name`, otherwise `null`. This field is never `false`.",
             "example": true
           }
         },
@@ -13856,14 +14025,33 @@
           },
           "role": {
             "type": "string",
-            "example": "owner"
+            "enum": [
+              "risk"
+            ],
+            "description": "Always `risk`: only signals that counted toward the risk score are listed.",
+            "example": "risk"
           },
           "category": {
             "type": "string",
+            "enum": [
+              "environment",
+              "eventTrust",
+              "fingerprint",
+              "mouse",
+              "keyboard",
+              "timing",
+              "touch"
+            ],
             "example": "environment"
           },
           "strength": {
             "type": "string",
+            "enum": [
+              "definitive",
+              "strong",
+              "behavioral",
+              "weak"
+            ],
             "example": "definitive"
           },
           "signal_score": {
@@ -13875,7 +14063,7 @@
         },
         "example": {
           "signal": "webdriver_detected",
-          "role": "owner",
+          "role": "risk",
           "category": "environment",
           "strength": "definitive",
           "signal_score": 100
@@ -13997,6 +14185,14 @@
               "string",
               "null"
             ],
+            "enum": [
+              "verified",
+              "invalid",
+              "error",
+              "absent",
+              null
+            ],
+            "description": "Result of checking the request's Web Bot Auth signature. `absent` means the request carried no signature.",
             "example": "verified"
           },
           "domain": {
@@ -14351,6 +14547,8 @@
       "VisitorFingerprintAnchors": {
         "type": "object",
         "additionalProperties": false,
+        "deprecated": true,
+        "description": "Always `null` from `/v1/fingerprints`. The identity record behind this field spans both environments, so `/v1/fingerprints` cannot attribute it to your key's environment.",
         "required": [
           "webgl_hash",
           "parameters_hash",
@@ -14380,9 +14578,9 @@
           }
         },
         "example": {
-          "webgl_hash": "123456789",
-          "parameters_hash": "-1234567890",
-          "audio_hash": "1234567890"
+          "webgl_hash": null,
+          "parameters_hash": null,
+          "audio_hash": null
         }
       },
       "VisitorFingerprintComponents": {
@@ -14398,15 +14596,13 @@
               "type": "number",
               "example": 1.5
             },
-            "example": [
-              1.5
-            ]
+            "deprecated": true,
+            "description": "Always empty from `/v1/fingerprints`. The identity record behind this field spans both environments, so `/v1/fingerprints` cannot attribute it to your key's environment.",
+            "example": []
           }
         },
         "example": {
-          "vector": [
-            1.5
-          ]
+          "vector": []
         }
       },
       "VisitorFingerprintDetail": {
@@ -14437,7 +14633,7 @@
               "first_seen_at": "2026-03-01T18:22:11.000Z",
               "last_seen_at": "2026-03-24T20:00:05.000Z",
               "seen_count": 14,
-              "expires_at": "2026-03-24T20:00:05.000Z"
+              "expires_at": "9999-12-31T00:00:00.000Z"
             }
           },
           "latest_request": {
@@ -14460,17 +14656,15 @@
           "anchors": {
             "$ref": "#/components/schemas/VisitorFingerprintAnchors",
             "example": {
-              "webgl_hash": "123456789",
-              "parameters_hash": "-1234567890",
-              "audio_hash": "1234567890"
+              "webgl_hash": null,
+              "parameters_hash": null,
+              "audio_hash": null
             }
           },
           "components": {
             "$ref": "#/components/schemas/VisitorFingerprintComponents",
             "example": {
-              "vector": [
-                1.5
-              ]
+              "vector": []
             }
           },
           "activity": {
@@ -14516,28 +14710,26 @@
             "first_seen_at": "2026-03-01T18:22:11.000Z",
             "last_seen_at": "2026-03-24T20:00:05.000Z",
             "seen_count": 14,
-            "expires_at": "2026-03-24T20:00:05.000Z"
+            "expires_at": "9999-12-31T00:00:00.000Z"
           },
           "latest_request": {
             "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
             "ip_address": "203.0.113.10"
           },
           "storage": {
-            "cookies": true,
-            "local_storage": true,
-            "indexed_db": true,
-            "service_worker": true,
-            "window_name": true
+            "cookies": false,
+            "local_storage": false,
+            "indexed_db": false,
+            "service_worker": false,
+            "window_name": false
           },
           "anchors": {
-            "webgl_hash": "123456789",
-            "parameters_hash": "-1234567890",
-            "audio_hash": "1234567890"
+            "webgl_hash": null,
+            "parameters_hash": null,
+            "audio_hash": null
           },
           "components": {
-            "vector": [
-              1.5
-            ]
+            "vector": []
           },
           "activity": {
             "sessions": [
@@ -14590,28 +14782,26 @@
                 "first_seen_at": "2026-03-01T18:22:11.000Z",
                 "last_seen_at": "2026-03-24T20:00:05.000Z",
                 "seen_count": 14,
-                "expires_at": "2026-03-24T20:00:05.000Z"
+                "expires_at": "9999-12-31T00:00:00.000Z"
               },
               "latest_request": {
                 "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                 "ip_address": "203.0.113.10"
               },
               "storage": {
-                "cookies": true,
-                "local_storage": true,
-                "indexed_db": true,
-                "service_worker": true,
-                "window_name": true
+                "cookies": false,
+                "local_storage": false,
+                "indexed_db": false,
+                "service_worker": false,
+                "window_name": false
               },
               "anchors": {
-                "webgl_hash": "123456789",
-                "parameters_hash": "-1234567890",
-                "audio_hash": "1234567890"
+                "webgl_hash": null,
+                "parameters_hash": null,
+                "audio_hash": null
               },
               "components": {
-                "vector": [
-                  1.5
-                ]
+                "vector": []
               },
               "activity": {
                 "sessions": [
@@ -14662,28 +14852,26 @@
               "first_seen_at": "2026-03-01T18:22:11.000Z",
               "last_seen_at": "2026-03-24T20:00:05.000Z",
               "seen_count": 14,
-              "expires_at": "2026-03-24T20:00:05.000Z"
+              "expires_at": "9999-12-31T00:00:00.000Z"
             },
             "latest_request": {
               "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
               "ip_address": "203.0.113.10"
             },
             "storage": {
-              "cookies": true,
-              "local_storage": true,
-              "indexed_db": true,
-              "service_worker": true,
-              "window_name": true
+              "cookies": false,
+              "local_storage": false,
+              "indexed_db": false,
+              "service_worker": false,
+              "window_name": false
             },
             "anchors": {
-              "webgl_hash": "123456789",
-              "parameters_hash": "-1234567890",
-              "audio_hash": "1234567890"
+              "webgl_hash": null,
+              "parameters_hash": null,
+              "audio_hash": null
             },
             "components": {
-              "vector": [
-                1.5
-              ]
+              "vector": []
             },
             "activity": {
               "sessions": [
@@ -14768,19 +14956,22 @@
           "seen_count": {
             "type": "integer",
             "minimum": 0,
+            "description": "Number of sessions linked to this visitor ID in your key's environment.",
             "example": 14
           },
           "expires_at": {
             "type": "string",
             "format": "date-time",
-            "example": "2026-03-24T20:00:05.000Z"
+            "deprecated": true,
+            "description": "Always `9999-12-31T00:00:00.000Z`. Visitor IDs do not expire.",
+            "example": "9999-12-31T00:00:00.000Z"
           }
         },
         "example": {
           "first_seen_at": "2026-03-01T18:22:11.000Z",
           "last_seen_at": "2026-03-24T20:00:05.000Z",
           "seen_count": 14,
-          "expires_at": "2026-03-24T20:00:05.000Z"
+          "expires_at": "9999-12-31T00:00:00.000Z"
         }
       },
       "VisitorFingerprintLink": {
@@ -14852,23 +15043,23 @@
                   "first_seen_at": "2026-03-01T18:22:11.000Z",
                   "last_seen_at": "2026-03-24T20:00:05.000Z",
                   "seen_count": 14,
-                  "expires_at": "2026-03-24T20:00:05.000Z"
+                  "expires_at": "9999-12-31T00:00:00.000Z"
                 },
                 "latest_request": {
                   "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                   "ip_address": "203.0.113.10"
                 },
                 "storage": {
-                  "cookies": true,
-                  "local_storage": true,
-                  "indexed_db": true,
-                  "service_worker": true,
-                  "window_name": true
+                  "cookies": false,
+                  "local_storage": false,
+                  "indexed_db": false,
+                  "service_worker": false,
+                  "window_name": false
                 },
                 "anchors": {
-                  "webgl_hash": "123456789",
-                  "parameters_hash": "-1234567890",
-                  "audio_hash": "1234567890"
+                  "webgl_hash": null,
+                  "parameters_hash": null,
+                  "audio_hash": null
                 }
               }
             },
@@ -14880,23 +15071,23 @@
                   "first_seen_at": "2026-03-01T18:22:11.000Z",
                   "last_seen_at": "2026-03-24T20:00:05.000Z",
                   "seen_count": 14,
-                  "expires_at": "2026-03-24T20:00:05.000Z"
+                  "expires_at": "9999-12-31T00:00:00.000Z"
                 },
                 "latest_request": {
                   "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                   "ip_address": "203.0.113.10"
                 },
                 "storage": {
-                  "cookies": true,
-                  "local_storage": true,
-                  "indexed_db": true,
-                  "service_worker": true,
-                  "window_name": true
+                  "cookies": false,
+                  "local_storage": false,
+                  "indexed_db": false,
+                  "service_worker": false,
+                  "window_name": false
                 },
                 "anchors": {
-                  "webgl_hash": "123456789",
-                  "parameters_hash": "-1234567890",
-                  "audio_hash": "1234567890"
+                  "webgl_hash": null,
+                  "parameters_hash": null,
+                  "audio_hash": null
                 }
               }
             ]
@@ -14925,23 +15116,23 @@
                 "first_seen_at": "2026-03-01T18:22:11.000Z",
                 "last_seen_at": "2026-03-24T20:00:05.000Z",
                 "seen_count": 14,
-                "expires_at": "2026-03-24T20:00:05.000Z"
+                "expires_at": "9999-12-31T00:00:00.000Z"
               },
               "latest_request": {
                 "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
                 "ip_address": "203.0.113.10"
               },
               "storage": {
-                "cookies": true,
-                "local_storage": true,
-                "indexed_db": true,
-                "service_worker": true,
-                "window_name": true
+                "cookies": false,
+                "local_storage": false,
+                "indexed_db": false,
+                "service_worker": false,
+                "window_name": false
               },
               "anchors": {
-                "webgl_hash": "123456789",
-                "parameters_hash": "-1234567890",
-                "audio_hash": "1234567890"
+                "webgl_hash": null,
+                "parameters_hash": null,
+                "audio_hash": null
               }
             }
           ],
@@ -14958,6 +15149,8 @@
       "VisitorFingerprintStorage": {
         "type": "object",
         "additionalProperties": false,
+        "deprecated": true,
+        "description": "Always `false` from `/v1/fingerprints`. The identity record behind this field spans both environments, so `/v1/fingerprints` cannot attribute it to your key's environment. Treat the flags as unavailable, not as evidence that a store was absent.",
         "required": [
           "cookies",
           "local_storage",
@@ -15021,7 +15214,7 @@
               "first_seen_at": "2026-03-01T18:22:11.000Z",
               "last_seen_at": "2026-03-24T20:00:05.000Z",
               "seen_count": 14,
-              "expires_at": "2026-03-24T20:00:05.000Z"
+              "expires_at": "9999-12-31T00:00:00.000Z"
             }
           },
           "latest_request": {
@@ -15044,9 +15237,9 @@
           "anchors": {
             "$ref": "#/components/schemas/VisitorFingerprintAnchors",
             "example": {
-              "webgl_hash": "123456789",
-              "parameters_hash": "-1234567890",
-              "audio_hash": "1234567890"
+              "webgl_hash": null,
+              "parameters_hash": null,
+              "audio_hash": null
             }
           }
         },
@@ -15057,23 +15250,23 @@
             "first_seen_at": "2026-03-01T18:22:11.000Z",
             "last_seen_at": "2026-03-24T20:00:05.000Z",
             "seen_count": 14,
-            "expires_at": "2026-03-24T20:00:05.000Z"
+            "expires_at": "9999-12-31T00:00:00.000Z"
           },
           "latest_request": {
             "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
             "ip_address": "203.0.113.10"
           },
           "storage": {
-            "cookies": true,
-            "local_storage": true,
-            "indexed_db": true,
-            "service_worker": true,
-            "window_name": true
+            "cookies": false,
+            "local_storage": false,
+            "indexed_db": false,
+            "service_worker": false,
+            "window_name": false
           },
           "anchors": {
-            "webgl_hash": "123456789",
-            "parameters_hash": "-1234567890",
-            "audio_hash": "1234567890"
+            "webgl_hash": null,
+            "parameters_hash": null,
+            "audio_hash": null
           }
         }
       },
