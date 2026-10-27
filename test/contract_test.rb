@@ -80,12 +80,27 @@ class ContractTest < Minitest::Test
       },
       strip_examples(schemas.fetch("SessionSummary").fetch("properties").fetch("client_user_id"))
     )
+    assert_equal(
+      {
+        "type" => ["string", "null"],
+        "maxLength" => 256,
+        "description" => "Customer-supplied identifier for the application or organization on your platform that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}."
+      },
+      strip_examples(schemas.fetch("SessionSummary").fetch("properties").fetch("client_application_id"))
+    )
+    assert_includes schemas.fetch("SessionSummary").fetch("required"), "client_application_id"
+    assert_includes schemas.fetch("UpdateSessionRequest").fetch("properties").keys, "client_user_id"
+    assert_includes schemas.fetch("UpdateSessionRequest").fetch("properties").keys, "client_application_id"
+    list_sessions_params = spec.fetch("paths").fetch("/v1/sessions").fetch("get").fetch("parameters").map { |parameter| parameter.fetch("name") }
+    %w[limit cursor verdict search client_user_id client_application_id].each do |name|
+      assert_includes list_sessions_params, name
+    end
     assert_equal({ "$ref" => "#/components/schemas/OrganizationStatus" }, strip_examples(schemas.fetch("Organization").fetch("properties").fetch("status")))
     assert_equal({ "$ref" => "#/components/schemas/ApiKeyStatus" }, strip_examples(schemas.fetch("ApiKey").fetch("properties").fetch("status")))
     assert_equal "#/components/schemas/KnownPublicErrorCode", schemas.fetch("PublicError").fetch("properties").fetch("code").fetch("x-foil-known-values-ref")
     assert_equal ["active", "suspended", "deleted"], schemas.fetch("OrganizationStatus").fetch("enum")
     assert_equal ["active", "rotating", "revoked"], schemas.fetch("ApiKeyStatus").fetch("enum")
-    %w[client_user_id decision highlights attribution web_bot_auth network runtime_integrity visitor_fingerprint connection_fingerprint previous_decisions request browser device analysis_coverage signals_fired client_telemetry].each do |field|
+    %w[client_user_id client_application_id decision highlights attribution web_bot_auth network runtime_integrity visitor_fingerprint connection_fingerprint previous_decisions request browser device analysis_coverage signals_fired client_telemetry].each do |field|
       assert_includes schemas.fetch("SessionDetail").fetch("required"), field
     end
     assert_equal(

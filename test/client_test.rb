@@ -64,6 +64,38 @@ class ClientTest < Minitest::Test
     assert_equal 5, client.timeout
   end
 
+  def test_sessions_list_and_iter_filter_by_client_ids
+    first_page = load_fixture("api/sessions/list.json")
+    second_page = first_page.merge(pagination: { limit: 50, has_more: false })
+    observed_urls = []
+
+    client = Foil::Server::Client.new(
+      secret_key: "sk_live_test",
+      base_url: "https://example.foil.dev",
+      transport: lambda do |request|
+        observed_urls << request[:url]
+        page = request[:url].include?("cursor=") ? second_page : first_page
+        [200, { "content-type" => "application/json" }, JSON.dump(page)]
+      end
+    )
+
+    page = client.sessions.list(client_user_id: "user_123", client_application_id: "app_123", limit: 10)
+    assert_equal "app_123", page.items.first[:client_application_id]
+    assert_equal ["https://example.foil.dev/v1/sessions?limit=10&client_user_id=user_123&client_application_id=app_123"], observed_urls
+
+    observed_urls.clear
+    client.sessions.list(client_application_id: "app_123")
+    assert_equal ["https://example.foil.dev/v1/sessions?client_application_id=app_123"], observed_urls
+
+    observed_urls.clear
+    client.sessions.iter(client_user_id: "user_123", client_application_id: "app_123").to_a
+    assert_equal 2, observed_urls.length
+    observed_urls.each do |url|
+      assert_includes url, "client_user_id=user_123"
+      assert_includes url, "client_application_id=app_123"
+    end
+  end
+
   def test_sessions_fingerprints_organizations_and_api_keys
     session_list = load_fixture("api/sessions/list.json")
     session_detail = load_fixture("api/sessions/detail.json")
@@ -76,7 +108,7 @@ class ClientTest < Minitest::Test
     api_key_list = load_fixture("api/organizations/api-key-list.json")
     api_key_update = load_fixture("api/organizations/api-key-update.json")
     api_key_rotate = load_fixture("api/organizations/api-key-rotate.json")
-    client_user_patch_bodies = []
+    session_patch_bodies = []
 
     client = Foil::Server::Client.new(
       secret_key: "sk_live_test",
@@ -107,7 +139,7 @@ class ClientTest < Minitest::Test
         when ["GET", "https://api.usefoil.com/v1/sessions/sid_0123456789abcdefghjkmnpqrs"]
           [200, {}, JSON.dump(session_detail)]
         when ["PATCH", "https://api.usefoil.com/v1/sessions/sid_0123456789abcdefghjkmnpqrs"]
-          client_user_patch_bodies << JSON.parse(request[:body])
+          session_patch_bodies << JSON.parse(request[:body])
           [200, {}, JSON.dump(session_detail)]
         when ["GET", "https://api.usefoil.com/v1/fingerprints"]
           [200, {}, JSON.dump(fingerprint_list)]
@@ -139,7 +171,18 @@ class ClientTest < Minitest::Test
     assert_equal "user_123", client.sessions.get("sid_0123456789abcdefghjkmnpqrs")[:client_user_id]
     assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.attach_client_user("sid_0123456789abcdefghjkmnpqrs", "user_123")[:id]
     assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.clear_client_user("sid_0123456789abcdefghjkmnpqrs")[:id]
-    assert_equal [{ "client_user_id" => "user_123" }, { "client_user_id" => nil }], client_user_patch_bodies
+    assert_equal "app_123", client.sessions.get("sid_0123456789abcdefghjkmnpqrs")[:client_application_id]
+    assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.attach_client_application("sid_0123456789abcdefghjkmnpqrs", "app_123")[:id]
+    assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.clear_client_application("sid_0123456789abcdefghjkmnpqrs")[:id]
+    assert_equal(
+      [
+        { "client_user_id" => "user_123" },
+        { "client_user_id" => nil },
+        { "client_application_id" => "app_123" },
+        { "client_application_id" => nil }
+      ],
+      session_patch_bodies
+    )
     assert_equal ["sid_0123456789abcdefghjkmnpqrs", "sid_123456789abcdefghjkmnpqrst"], client.sessions.iter.map { |item| item[:id] }
     assert_equal "vid_456789abcdefghjkmnpqrstvwx", client.fingerprints.get("vid_456789abcdefghjkmnpqrstvwx")[:id]
     assert_equal "org_56789abcdefghjkmnpqrstvwxy", client.organizations.get("org_56789abcdefghjkmnpqrstvwxy")[:id]
