@@ -151,12 +151,14 @@ module Foil
     end
 
     class SessionsResource < BaseResource
-      def list(limit: nil, cursor: nil, verdict: nil, search: nil)
+      def list(limit: nil, cursor: nil, verdict: nil, search: nil, client_user_id: nil, client_application_id: nil)
         payload = @client.request_json("GET", "/v1/sessions", query: {
           limit: limit,
           cursor: cursor,
           verdict: verdict,
-          search: search
+          search: search,
+          client_user_id: client_user_id,
+          client_application_id: client_application_id
         })
         list_result(payload)
       end
@@ -177,11 +179,30 @@ module Foil
         })[:data]
       end
 
-      def iter(limit: nil, verdict: nil, search: nil)
+      def attach_client_application(session_id, client_application_id)
+        @client.request_json("PATCH", "/v1/sessions/#{CGI.escape(session_id)}", body: {
+          client_application_id: client_application_id
+        })[:data]
+      end
+
+      def clear_client_application(session_id)
+        @client.request_json("PATCH", "/v1/sessions/#{CGI.escape(session_id)}", body: {
+          client_application_id: nil
+        })[:data]
+      end
+
+      def iter(limit: nil, verdict: nil, search: nil, client_user_id: nil, client_application_id: nil)
         Enumerator.new do |yielder|
           cursor = nil
           loop do
-            page = list(limit: limit, cursor: cursor, verdict: verdict, search: search)
+            page = list(
+              limit: limit,
+              cursor: cursor,
+              verdict: verdict,
+              search: search,
+              client_user_id: client_user_id,
+              client_application_id: client_application_id
+            )
             page.items.each { |item| yielder << item }
             break unless page.has_more && page.next_cursor
 
