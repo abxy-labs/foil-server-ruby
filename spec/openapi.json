@@ -6640,10 +6640,12 @@
           },
           "value": {
             "type": "string",
+            "description": "What the label names. The values it can take depend on `kind`. For `actor`, it is `automation`, `ai-agent`, `crawler`, `verified-bot`, or `unknown`. For `provider`, it names the hosted browser or scraping service, such as `meta-muse` or `instinct`. `product` and `organization` are open sets. Every value for each kind is listed at https://usefoil.com/docs/attribution. Foil adds values without a version change, so handle values you don't recognize.",
             "example": "automation"
           },
           "label": {
             "type": "string",
+            "description": "A display name for `value`.",
             "example": "Automation"
           },
           "confidence": {
