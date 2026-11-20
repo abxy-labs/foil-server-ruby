@@ -144,6 +144,16 @@
         "postal_code": "94103",
         "accuracy_radius_km": 10
       },
+      "real_location": {
+        "status": "elsewhere",
+        "country_code": "CA",
+        "city": "Vancouver"
+      },
+      "consistency": {
+        "timezone": "match",
+        "language_region": "match",
+        "real_country": "mismatch"
+      },
       "routing": {
         "asn": "AS64512",
         "organization": "Example Networks"
