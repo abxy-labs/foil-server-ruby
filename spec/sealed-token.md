@@ -129,7 +129,11 @@ The payload is aligned to the same public vocabulary as the Sessions API:
 - `score_breakdown`
   - `categories`
 - `attribution`
-  - `bot`
+  - `bot`: `null`, or a `SessionAttribution` object from `openapi.json`, the same object as `attribution` in the session detail and `attribution.bot` in the `session.result.persisted` webhook
+    - `labels[]`: `kind`, `value`, `label`, `confidence`
+    - `behaviors[]`: `channel`, `value`, `label`, `confidence`
+
+Every score and confidence in the payload is an integer from `0` to `100`: `decision.risk_score`, `visitor_fingerprint.confidence`, `signals[].score`, `score_breakdown.categories`, and the attribution confidences. Tokens issued before November 2026 carried attribution confidence as a number from `0` to `1` and had no `label` strings.
 
 Public SDKs should treat the payload as forward-compatible:
 
@@ -138,6 +142,10 @@ Public SDKs should treat the payload as forward-compatible:
 
 ## Fixtures
 
-Golden vectors live under `fixtures/sealed-token/`.
+Golden vectors live under `fixtures/sealed-token/`:
 
-Every language SDK must verify the shared vectors successfully and reject the invalid vectors it ships with.
+- `vector.v1.json`: a version `0x01` token with a human verdict
+- `vector.v2.json`: a version `0x02` token for two recipients, with a human verdict and no attribution
+- `vector.v2.bot.json`: a version `0x02` token with a bot verdict, attribution labels and behaviors
+
+Every language SDK must verify the shared vectors successfully and reject the invalid vectors it ships with. An SDK that types the payload must parse `vector.v2.bot.json` into its attribution type and read the confidences as integers.
