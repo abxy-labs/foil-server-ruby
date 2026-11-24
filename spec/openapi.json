@@ -102,6 +102,17 @@
               "maxLength": 256,
               "example": "app_123"
             }
+          },
+          {
+            "name": "client_session_id",
+            "in": "query",
+            "description": "Returns only sessions whose `client_session_id` is exactly this value, case-sensitive, after trimming surrounding whitespace.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "example": "sess_123"
+            }
           }
         ],
         "responses": {
@@ -119,6 +130,7 @@
                         "created_at": "2026-03-24T20:00:00.000Z",
                         "client_user_id": "user_123",
                         "client_application_id": "app_123",
+                        "client_session_id": "sess_123",
                         "latest_decision": {
                           "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                           "verdict": "human",
@@ -297,6 +309,7 @@
                       "created_at": "2026-03-24T20:00:00.000Z",
                       "client_user_id": "user_123",
                       "client_application_id": "app_123",
+                      "client_session_id": "sess_123",
                       "decision": {
                         "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                         "automation_status": "automated",
@@ -1025,7 +1038,7 @@
             }
           }
         },
-        "description": "Set or clear the customer-supplied `client_user_id`, `client_application_id`, or both for a session. At least one key is required, a key you omit keeps its current value, and `null` clears it. Requires the `sessions:update` secret-key scope."
+        "description": "Set or clear the customer-supplied `client_user_id`, `client_application_id` and `client_session_id` for a session, in any combination. At least one key is required, a key you omit keeps its current value, and `null` clears it. Requires the `sessions:update` secret-key scope."
       }
     },
     "/v1/fingerprints": {
@@ -7355,6 +7368,7 @@
           "client_telemetry",
           "client_user_id",
           "client_application_id",
+          "client_session_id",
           "behavior"
         ],
         "properties": {
@@ -7391,6 +7405,15 @@
             "maxLength": 256,
             "description": "Customer-supplied identifier for the application or organization on your platform that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
             "example": "app_123"
+          },
+          "client_session_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 256,
+            "description": "Customer-supplied identifier for the session, checkout or visit in your own system that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
+            "example": "sess_123"
           },
           "decision": {
             "$ref": "#/components/schemas/SessionDetailDecision",
@@ -8333,6 +8356,7 @@
           "created_at": "2026-03-24T20:00:00.000Z",
           "client_user_id": "user_123",
           "client_application_id": "app_123",
+          "client_session_id": "sess_123",
           "decision": {
             "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
             "automation_status": "automated",
@@ -9359,6 +9383,7 @@
               "created_at": "2026-03-24T20:00:00.000Z",
               "client_user_id": "user_123",
               "client_application_id": "app_123",
+              "client_session_id": "sess_123",
               "decision": {
                 "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                 "automation_status": "automated",
@@ -9904,6 +9929,7 @@
             "created_at": "2026-03-24T20:00:00.000Z",
             "client_user_id": "user_123",
             "client_application_id": "app_123",
+            "client_session_id": "sess_123",
             "decision": {
               "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
               "automation_status": "automated",
@@ -11152,6 +11178,7 @@
                 "created_at": "2026-03-24T20:00:00.000Z",
                 "client_user_id": "user_123",
                 "client_application_id": "app_123",
+                "client_session_id": "sess_123",
                 "latest_decision": {
                   "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                   "verdict": "human",
@@ -11180,6 +11207,7 @@
                 "created_at": "2026-03-24T20:00:00.000Z",
                 "client_user_id": "user_123",
                 "client_application_id": "app_123",
+                "client_session_id": "sess_123",
                 "latest_decision": {
                   "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                   "verdict": "human",
@@ -11225,6 +11253,7 @@
               "created_at": "2026-03-24T20:00:00.000Z",
               "client_user_id": "user_123",
               "client_application_id": "app_123",
+              "client_session_id": "sess_123",
               "latest_decision": {
                 "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                 "verdict": "human",
@@ -14481,7 +14510,8 @@
           "latest_decision",
           "visitor_fingerprint",
           "client_user_id",
-          "client_application_id"
+          "client_application_id",
+          "client_session_id"
         ],
         "properties": {
           "object": {
@@ -14517,6 +14547,15 @@
             "maxLength": 256,
             "description": "Customer-supplied identifier for the application or organization on your platform that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
             "example": "app_123"
+          },
+          "client_session_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 256,
+            "description": "Customer-supplied identifier for the session, checkout or visit in your own system that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
+            "example": "sess_123"
           },
           "latest_decision": {
             "$ref": "#/components/schemas/Decision",
@@ -14564,6 +14603,7 @@
           "created_at": "2026-03-24T20:00:00.000Z",
           "client_user_id": "user_123",
           "client_application_id": "app_123",
+          "client_session_id": "sess_123",
           "latest_decision": {
             "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
             "verdict": "human",
@@ -14708,7 +14748,7 @@
         "type": "object",
         "additionalProperties": false,
         "minProperties": 1,
-        "description": "Send `client_user_id`, `client_application_id`, or both. At least one is required. A key you omit keeps its current value, and `null` clears it.",
+        "description": "Send any of `client_user_id`, `client_application_id` and `client_session_id`. At least one is required. A key you omit keeps its current value, and `null` clears it.",
         "properties": {
           "client_user_id": {
             "type": [
@@ -14727,11 +14767,21 @@
             "maxLength": 256,
             "description": "Customer-supplied identifier for the application or organization on your platform that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
             "example": "app_123"
+          },
+          "client_session_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 256,
+            "description": "Customer-supplied identifier for the session, checkout or visit in your own system that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
+            "example": "sess_123"
           }
         },
         "example": {
           "client_user_id": "user_123",
-          "client_application_id": "app_123"
+          "client_application_id": "app_123",
+          "client_session_id": "sess_123"
         }
       },
       "UpdateWebhookEndpointRequest": {
