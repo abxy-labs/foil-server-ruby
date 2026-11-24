@@ -40,6 +40,21 @@ class SealedTokenTest < Minitest::Test
     end
   end
 
+  def test_bot_token_attribution_uses_session_detail_shape
+    fixture = load_fixture("sealed-token/vector.v2.bot.json")
+    verified = Foil::Server.verify_foil_token(fixture.fetch(:token), fixture.fetch(:secretKeys).first)
+    bot = verified.fetch(:attribution).fetch(:bot)
+
+    assert_equal "bot", verified.fetch(:decision).fetch(:verdict)
+    assert_equal({ kind: "actor", value: "automation", label: "Automation", confidence: 100 }, bot.fetch(:labels).first)
+    entries = bot.fetch(:labels) + bot.fetch(:behaviors)
+    assert_operator entries.length, :>, 1
+    entries.each do |entry|
+      assert_kind_of Integer, entry.fetch(:confidence)
+      assert_includes 0..100, entry.fetch(:confidence)
+    end
+  end
+
   def test_safe_verify_foil_token_invalid_fixture
     fixture = load_fixture("sealed-token/invalid.json")
     result = Foil::Server.safe_verify_foil_token(fixture.fetch(:token), "sk_live_fixture_secret")
