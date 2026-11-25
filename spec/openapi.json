@@ -102,6 +102,17 @@
               "maxLength": 256,
               "example": "app_123"
             }
+          },
+          {
+            "name": "client_session_id",
+            "in": "query",
+            "description": "Returns only sessions whose `client_session_id` is exactly this value, case-sensitive, after trimming surrounding whitespace.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "example": "sess_123"
+            }
           }
         ],
         "responses": {
@@ -119,6 +130,7 @@
                         "created_at": "2026-03-24T20:00:00.000Z",
                         "client_user_id": "user_123",
                         "client_application_id": "app_123",
+                        "client_session_id": "sess_123",
                         "latest_decision": {
                           "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                           "verdict": "human",
@@ -297,6 +309,7 @@
                       "created_at": "2026-03-24T20:00:00.000Z",
                       "client_user_id": "user_123",
                       "client_application_id": "app_123",
+                      "client_session_id": "sess_123",
                       "decision": {
                         "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                         "automation_status": "automated",
@@ -338,6 +351,16 @@
                           "timezone": "America/Los_Angeles",
                           "postal_code": "94103",
                           "accuracy_radius_km": 10
+                        },
+                        "real_location": {
+                          "status": "elsewhere",
+                          "country_code": "CA",
+                          "city": "Vancouver"
+                        },
+                        "consistency": {
+                          "timezone": "match",
+                          "language_region": "match",
+                          "real_country": "mismatch"
                         },
                         "routing": {
                           "asn": "AS64512",
@@ -1015,7 +1038,7 @@
             }
           }
         },
-        "description": "Set or clear the customer-supplied `client_user_id`, `client_application_id`, or both for a session. At least one key is required, a key you omit keeps its current value, and `null` clears it. Requires the `sessions:update` secret-key scope."
+        "description": "Set or clear the customer-supplied `client_user_id`, `client_application_id` and `client_session_id` for a session, in any combination. At least one key is required, a key you omit keeps its current value, and `null` clears it. Requires the `sessions:update` secret-key scope."
       }
     },
     "/v1/fingerprints": {
@@ -6640,10 +6663,12 @@
           },
           "value": {
             "type": "string",
+            "description": "What the label names. The values it can take depend on `kind`. For `actor`, it is `automation`, `ai-agent`, `crawler`, or `unknown`. A verified signature adds `trust: verified`, and the actor comes from what the signer is, such as `ai-agent` for an AI agent's signing domain. For `provider`, it names the hosted browser or scraping service, such as `meta-muse` or `instinct`. `product` and `organization` are open sets. Every value for each kind is listed at https://usefoil.com/docs/attribution. Foil adds values without a version change, so handle values you don't recognize.",
             "example": "automation"
           },
           "label": {
             "type": "string",
+            "description": "A display name for `value`.",
             "example": "Automation"
           },
           "confidence": {
@@ -7343,6 +7368,7 @@
           "client_telemetry",
           "client_user_id",
           "client_application_id",
+          "client_session_id",
           "behavior"
         ],
         "properties": {
@@ -7379,6 +7405,15 @@
             "maxLength": 256,
             "description": "Customer-supplied identifier for the application or organization on your platform that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
             "example": "app_123"
+          },
+          "client_session_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 256,
+            "description": "Customer-supplied identifier for the session, checkout or visit in your own system that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
+            "example": "sess_123"
           },
           "decision": {
             "$ref": "#/components/schemas/SessionDetailDecision",
@@ -7459,6 +7494,16 @@
                 "timezone": "America/Los_Angeles",
                 "postal_code": "94103",
                 "accuracy_radius_km": 10
+              },
+              "real_location": {
+                "status": "elsewhere",
+                "country_code": "CA",
+                "city": "Vancouver"
+              },
+              "consistency": {
+                "timezone": "match",
+                "language_region": "match",
+                "real_country": "mismatch"
               },
               "routing": {
                 "asn": "AS64512",
@@ -8311,6 +8356,7 @@
           "created_at": "2026-03-24T20:00:00.000Z",
           "client_user_id": "user_123",
           "client_application_id": "app_123",
+          "client_session_id": "sess_123",
           "decision": {
             "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
             "automation_status": "automated",
@@ -8352,6 +8398,16 @@
               "timezone": "America/Los_Angeles",
               "postal_code": "94103",
               "accuracy_radius_km": 10
+            },
+            "real_location": {
+              "status": "elsewhere",
+              "country_code": "CA",
+              "city": "Vancouver"
+            },
+            "consistency": {
+              "timezone": "match",
+              "language_region": "match",
+              "real_country": "mismatch"
             },
             "routing": {
               "asn": "AS64512",
@@ -9327,6 +9383,7 @@
               "created_at": "2026-03-24T20:00:00.000Z",
               "client_user_id": "user_123",
               "client_application_id": "app_123",
+              "client_session_id": "sess_123",
               "decision": {
                 "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                 "automation_status": "automated",
@@ -9368,6 +9425,16 @@
                   "timezone": "America/Los_Angeles",
                   "postal_code": "94103",
                   "accuracy_radius_km": 10
+                },
+                "real_location": {
+                  "status": "elsewhere",
+                  "country_code": "CA",
+                  "city": "Vancouver"
+                },
+                "consistency": {
+                  "timezone": "match",
+                  "language_region": "match",
+                  "real_country": "mismatch"
                 },
                 "routing": {
                   "asn": "AS64512",
@@ -9862,6 +9929,7 @@
             "created_at": "2026-03-24T20:00:00.000Z",
             "client_user_id": "user_123",
             "client_application_id": "app_123",
+            "client_session_id": "sess_123",
             "decision": {
               "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
               "automation_status": "automated",
@@ -9903,6 +9971,16 @@
                 "timezone": "America/Los_Angeles",
                 "postal_code": "94103",
                 "accuracy_radius_km": 10
+              },
+              "real_location": {
+                "status": "elsewhere",
+                "country_code": "CA",
+                "city": "Vancouver"
+              },
+              "consistency": {
+                "timezone": "match",
+                "language_region": "match",
+                "real_country": "mismatch"
               },
               "routing": {
                 "asn": "AS64512",
@@ -11100,6 +11178,7 @@
                 "created_at": "2026-03-24T20:00:00.000Z",
                 "client_user_id": "user_123",
                 "client_application_id": "app_123",
+                "client_session_id": "sess_123",
                 "latest_decision": {
                   "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                   "verdict": "human",
@@ -11128,6 +11207,7 @@
                 "created_at": "2026-03-24T20:00:00.000Z",
                 "client_user_id": "user_123",
                 "client_application_id": "app_123",
+                "client_session_id": "sess_123",
                 "latest_decision": {
                   "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                   "verdict": "human",
@@ -11173,6 +11253,7 @@
               "created_at": "2026-03-24T20:00:00.000Z",
               "client_user_id": "user_123",
               "client_application_id": "app_123",
+              "client_session_id": "sess_123",
               "latest_decision": {
                 "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
                 "verdict": "human",
@@ -12306,6 +12387,8 @@
           "status",
           "summary",
           "location",
+          "real_location",
+          "consistency",
           "routing",
           "anonymity",
           "reputation",
@@ -12387,6 +12470,36 @@
               "timezone": "America/Los_Angeles",
               "postal_code": "94103",
               "accuracy_radius_km": 10
+            }
+          },
+          "real_location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SessionNetworkRealLocation",
+                "example": {
+                  "status": "elsewhere",
+                  "country_code": "CA",
+                  "city": "Vancouver"
+                }
+              },
+              {
+                "type": "null",
+                "example": null
+              }
+            ],
+            "description": "Where the device itself is, as the network edge probe placed it. It can differ from `location` when the device connects through a VPN, proxy, or relay. Null when the probe did not run or placed nothing, and always null unless raw signal access is enabled for your organization.",
+            "example": {
+              "status": "elsewhere",
+              "country_code": "CA",
+              "city": "Vancouver"
+            }
+          },
+          "consistency": {
+            "$ref": "#/components/schemas/SessionNetworkConsistency",
+            "example": {
+              "timezone": "match",
+              "language_region": "match",
+              "real_country": "mismatch"
             }
           },
           "routing": {
@@ -12614,6 +12727,16 @@
             "postal_code": "94103",
             "accuracy_radius_km": 10
           },
+          "real_location": {
+            "status": "elsewhere",
+            "country_code": "CA",
+            "city": "Vancouver"
+          },
+          "consistency": {
+            "timezone": "match",
+            "language_region": "match",
+            "real_country": "mismatch"
+          },
           "routing": {
             "asn": "AS64512",
             "organization": "SPECTRANET LIMITED"
@@ -12648,6 +12771,52 @@
             "client_count": null
           },
           "evaluated_at": "2026-03-24T20:00:05.000Z"
+        }
+      },
+      "SessionNetworkConsistency": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "timezone",
+          "language_region",
+          "real_country"
+        ],
+        "properties": {
+          "timezone": {
+            "type": "string",
+            "enum": [
+              "match",
+              "mismatch",
+              "unknown"
+            ],
+            "description": "The device's time zone (`device.locale.timezone`) against the IP address's. Time zones are compared by area, the part before the first slash: `America/New_York` and `America/Chicago` match, `Europe/Berlin` and `America/New_York` do not, and UTC matches only UTC. `unknown` when either time zone is missing.",
+            "example": "match"
+          },
+          "language_region": {
+            "type": "string",
+            "enum": [
+              "match",
+              "mismatch",
+              "unknown"
+            ],
+            "description": "The country in the device's locale, such as `US` in `en-US`, against the IP address's country (`network.location.country_code`). `unknown` when the locale names no country, as in `en` or `es-419`, or the IP address's country is missing.",
+            "example": "match"
+          },
+          "real_country": {
+            "type": "string",
+            "enum": [
+              "match",
+              "mismatch",
+              "unknown"
+            ],
+            "description": "`network.real_location.country_code` against the IP address's country (`network.location.country_code`). `unknown` when either is missing, including whenever `network.real_location` is null.",
+            "example": "mismatch"
+          }
+        },
+        "example": {
+          "timezone": "match",
+          "language_region": "match",
+          "real_country": "mismatch"
         }
       },
       "SessionNetworkLocation": {
@@ -12759,6 +12928,50 @@
           "timezone": "America/Los_Angeles",
           "postal_code": "94103",
           "accuracy_radius_km": 10
+        }
+      },
+      "SessionNetworkRealLocation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "country_code",
+          "city"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "elsewhere",
+              "behind",
+              "ip",
+              "hidden",
+              "datacenter"
+            ],
+            "description": "`elsewhere`: the device's own traffic came from another country than its IP address. `behind`: the device was found past a relay, VPN, or proxy, in the IP address's country. `ip`: a direct connection, so the IP address's location is the device's. `hidden`: something stands in front of the device and nothing showed past it. `datacenter`: the device's own address, or its direct one, belongs to a data center.",
+            "example": "elsewhere"
+          },
+          "country_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "ISO 3166-1 alpha-2 country code. Null when `status` is `hidden`.",
+            "example": "CA"
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Null when `status` is `hidden`, or when only the device's DNS server placed it, since a DNS server names a country but not a city.",
+            "example": "Vancouver"
+          }
+        },
+        "example": {
+          "status": "elsewhere",
+          "country_code": "CA",
+          "city": "Vancouver"
         }
       },
       "SessionRawDeviceAudio": {
@@ -14297,7 +14510,8 @@
           "latest_decision",
           "visitor_fingerprint",
           "client_user_id",
-          "client_application_id"
+          "client_application_id",
+          "client_session_id"
         ],
         "properties": {
           "object": {
@@ -14333,6 +14547,15 @@
             "maxLength": 256,
             "description": "Customer-supplied identifier for the application or organization on your platform that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
             "example": "app_123"
+          },
+          "client_session_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 256,
+            "description": "Customer-supplied identifier for the session, checkout or visit in your own system that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
+            "example": "sess_123"
           },
           "latest_decision": {
             "$ref": "#/components/schemas/Decision",
@@ -14380,6 +14603,7 @@
           "created_at": "2026-03-24T20:00:00.000Z",
           "client_user_id": "user_123",
           "client_application_id": "app_123",
+          "client_session_id": "sess_123",
           "latest_decision": {
             "event_id": "evt_srwqc0yqhz4bxvtrdtf69q7vkr",
             "verdict": "human",
@@ -14524,7 +14748,7 @@
         "type": "object",
         "additionalProperties": false,
         "minProperties": 1,
-        "description": "Send `client_user_id`, `client_application_id`, or both. At least one is required. A key you omit keeps its current value, and `null` clears it.",
+        "description": "Send any of `client_user_id`, `client_application_id` and `client_session_id`. At least one is required. A key you omit keeps its current value, and `null` clears it.",
         "properties": {
           "client_user_id": {
             "type": [
@@ -14543,11 +14767,21 @@
             "maxLength": 256,
             "description": "Customer-supplied identifier for the application or organization on your platform that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
             "example": "app_123"
+          },
+          "client_session_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 256,
+            "description": "Customer-supplied identifier for the session, checkout or visit in your own system that this Foil session belongs to. Set with PATCH /v1/sessions/{sessionId}.",
+            "example": "sess_123"
           }
         },
         "example": {
           "client_user_id": "user_123",
-          "client_application_id": "app_123"
+          "client_application_id": "app_123",
+          "client_session_id": "sess_123"
         }
       },
       "UpdateWebhookEndpointRequest": {

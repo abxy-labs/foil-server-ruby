@@ -79,20 +79,26 @@ class ClientTest < Minitest::Test
       end
     )
 
-    page = client.sessions.list(client_user_id: "user_123", client_application_id: "app_123", limit: 10)
+    page = client.sessions.list(client_user_id: "user_123", client_application_id: "app_123", client_session_id: "sess_123", limit: 10)
     assert_equal "app_123", page.items.first[:client_application_id]
-    assert_equal ["https://example.foil.dev/v1/sessions?limit=10&client_user_id=user_123&client_application_id=app_123"], observed_urls
+    assert_equal "sess_123", page.items.first[:client_session_id]
+    assert_equal ["https://example.foil.dev/v1/sessions?limit=10&client_user_id=user_123&client_application_id=app_123&client_session_id=sess_123"], observed_urls
 
     observed_urls.clear
     client.sessions.list(client_application_id: "app_123")
     assert_equal ["https://example.foil.dev/v1/sessions?client_application_id=app_123"], observed_urls
 
     observed_urls.clear
-    client.sessions.iter(client_user_id: "user_123", client_application_id: "app_123").to_a
+    client.sessions.list(client_session_id: "sess_123")
+    assert_equal ["https://example.foil.dev/v1/sessions?client_session_id=sess_123"], observed_urls
+
+    observed_urls.clear
+    client.sessions.iter(client_user_id: "user_123", client_application_id: "app_123", client_session_id: "sess_123").to_a
     assert_equal 2, observed_urls.length
     observed_urls.each do |url|
       assert_includes url, "client_user_id=user_123"
       assert_includes url, "client_application_id=app_123"
+      assert_includes url, "client_session_id=sess_123"
     end
   end
 
@@ -174,12 +180,17 @@ class ClientTest < Minitest::Test
     assert_equal "app_123", client.sessions.get("sid_0123456789abcdefghjkmnpqrs")[:client_application_id]
     assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.attach_client_application("sid_0123456789abcdefghjkmnpqrs", "app_123")[:id]
     assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.clear_client_application("sid_0123456789abcdefghjkmnpqrs")[:id]
+    assert_equal "sess_123", client.sessions.get("sid_0123456789abcdefghjkmnpqrs")[:client_session_id]
+    assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.attach_client_session("sid_0123456789abcdefghjkmnpqrs", "sess_123")[:id]
+    assert_equal "sid_0123456789abcdefghjkmnpqrs", client.sessions.clear_client_session("sid_0123456789abcdefghjkmnpqrs")[:id]
     assert_equal(
       [
         { "client_user_id" => "user_123" },
         { "client_user_id" => nil },
         { "client_application_id" => "app_123" },
-        { "client_application_id" => nil }
+        { "client_application_id" => nil },
+        { "client_session_id" => "sess_123" },
+        { "client_session_id" => nil }
       ],
       session_patch_bodies
     )
